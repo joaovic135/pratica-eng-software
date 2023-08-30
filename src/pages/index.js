@@ -18,9 +18,10 @@ export default function Home() {
       return router.push('/auth/login')
     },
   })
+  console.log(session)
   if (session) {
     if (session.user.usuario.tipoUsuario === 'admin') {
-      router.push('/auth/admin/');
+      router.push('/admin');
     }
   }
 

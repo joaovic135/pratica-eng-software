@@ -6,7 +6,7 @@ import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typograph
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
-export default function SignIn() {
+export default function SignUp() {
   const router = useRouter()
   const [error, setError] = useState(null);
   const [nome, setName] = useState([]);

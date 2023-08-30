@@ -1,3 +1,4 @@
+import { genSalt, hash } from 'bcrypt';
 import db from '../../models/index';
 db.sequelize.sync();
 const Usuario = db.Usuario;
@@ -16,11 +17,15 @@ export default async function handler(req, res) {
       const user = req.body
       try{
         console.log("teste")
+        const salt = await genSalt(10);
+        const senha = await hash(user.senha, salt);
+
+
         const novoUsuario = await Usuario.create({
           nome: user.nome,
           email: user.email,
-          senhaHash: user.senha,
-          tipoUsuario: 'usuario'
+          senhaHash: senha,
+          tipoUsuario: 'admin'
         });
         const id = novoUsuario.id;
       }catch(e){console.log(e)}
