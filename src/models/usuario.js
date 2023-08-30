@@ -40,6 +40,14 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: 'Email não pode ser nulo' },
         notEmpty: { msg: 'Email não pode ser vazio' }
       },
+    },
+    tipoUsuario: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Tipo de usuário não pode ser nulo' },
+        notEmpty: { msg: 'Tipo de usuário não pode ser vazio' }
+      },
     }
   },{
     sequelize,

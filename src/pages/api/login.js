@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         if(!(await usuario.isTheUserPassword(senhaInserida))){
           throw new Error('Senha incorreta')
         }
-        return res.status(200).json({usuario});
+        return res.json({usuario});
       }catch(e){
         return res.status(401).json({error: e.message})
       }

@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { Avatar, Box, Button, CssBaseline, Grid, Input, Paper, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ErrorTypography from '@/components/error';
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 
 
 export default function Login() {
+  const router = useRouter()
 
   const [email, setEmail] = useState([]);
   const [senha, setSenha] = useState([]);
@@ -15,13 +16,19 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("----------------------------------'")
+    console.log(email)
+    console.log(senha)
+    console.log("----------------------------------'")
     const result = await signIn("credentials", {
-      email : email,
-      senha: senha,
-      redirect:true,
-      callbackUrl: '/'
-    })
+      email: email,
+      password: senha,
+      redirect: true, 
+      callbackUrl: "/" 
+    });
+    
 
+    
 
     /*
     const response = await fetch("http://localhost:3000/api/login",{
