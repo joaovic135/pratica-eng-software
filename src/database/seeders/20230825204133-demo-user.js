@@ -16,7 +16,7 @@ module.exports = {
       nome: 'Usuario Comprador Teste',
       email: 'Email@email.com',
       senhaHash: '$2a$12$8T7iExFehnA52apHy4ux3.ILtp41fcNq/aFuJ6OtxGZaAee5sGvNa',
-      tipoUsuario: "usuario",
+      TipoUsuario: "usuario",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
