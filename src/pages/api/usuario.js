@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         const novoUsuario = await Usuario.create({
           nome: user.nome,
           email: user.email,
-          senhaHash: senha,
+          senhaHash: user.senha,
           tipoUsuario: 'usuario'
         });
         const id = novoUsuario.id;
