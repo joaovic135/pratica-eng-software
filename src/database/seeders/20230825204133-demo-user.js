@@ -16,9 +16,19 @@ module.exports = {
       nome: 'Usuario Comprador Teste',
       email: 'Email@email.com',
       senhaHash: '$2a$12$8T7iExFehnA52apHy4ux3.ILtp41fcNq/aFuJ6OtxGZaAee5sGvNa',
+      TipoUsuario: "usuario",
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
+    },{
+      nome: 'Usuario Admin Teste',
+      email: 'admin@email.com',
+      senhaHash: '$2a$12$8T7iExFehnA52apHy4ux3.ILtp41fcNq/aFuJ6OtxGZaAee5sGvNa',
+      TipoUsuario: "admin",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  
+  ]);
   },
 
   async down (queryInterface, Sequelize) {
