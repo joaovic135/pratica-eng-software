@@ -10,6 +10,7 @@ export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
+      id: 'credentials',
       name: 'Credentials',
 
       credentials:{
@@ -34,6 +35,38 @@ export default NextAuth({
         }
         return null
 
+      }
+    }),
+    CredentialsProvider({
+      id: 'admin',
+      name: 'Admin',
+      async authorize(credentials, req) {
+        try{
+          const res = await fetch("http://localhost:3000/api/admin/login", {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: credentials.email,
+              senha: credentials.password
+            }),
+          });
+          
+          const user = await res.json();
+          console.log(user)
+          console.log("linha56")
+          if (res.ok && user) {
+            return user
+          }else{
+            throw new Error(user.error)
+          }
+
+        }catch(e){
+          console.log(e.message)
+          const errorMessage = e.message
+          throw new Error(errorMessage)
+        }
+        
+        
       }
     })
     // ...add more providers here
