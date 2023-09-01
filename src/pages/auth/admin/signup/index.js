@@ -77,6 +77,12 @@ export default function AdminSignUp() {
           </Box>
         </>
       )
+    }else{
+      return (
+        <>
+          <Forbidden/>
+        </>
+      )
     }
   } else {
     return (

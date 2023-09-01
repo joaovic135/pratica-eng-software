@@ -1,5 +1,5 @@
 import { genSalt, hash } from 'bcrypt';
-import db from '../../models/index';
+import db from '../../../models/index';
 db.sequelize.sync();
 const Usuario = db.Usuario;
 
