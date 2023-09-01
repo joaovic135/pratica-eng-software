@@ -18,11 +18,7 @@ export default function Home() {
       return router.push('/auth/login')
     },
   })
-  if (session) {
-    if (session.user.usuario.tipoUsuario === 'admin') {
-      router.push('/auth/admin/');
-    }
-  }
+
 
   if(status === 'loading'||status === 'authenticated'){
     return (
