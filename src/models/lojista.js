@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
   class Lojista extends Model {
     /**
@@ -15,14 +16,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Lojista.init({
     nome: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      validate:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
         notNull: { msg: 'Nome não pode ser nulo' },
         notEmpty: { msg: 'Nome não pode ser vazio' }
       },
     },
-      senhaHash: {
+    senha: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -30,37 +31,37 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'Este campo não pode ser vazio' },
       },
     },
-    email:{ type: DataTypes.STRING,
-      allowNull:false,
-      validate:{
-        notNull:{msg:'Email não pode ser nulo'},
-        notEmpty:{msg:'Email não pode ser vazio'}
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Email não pode ser nulo' },
+        notEmpty: { msg: 'Email não pode ser vazio' }
       },
     },
-    numero:{ 
-      type:DataTypes.INTEGER,
+    numero: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: { msg: 'Este campo não pode ser vazio' },
         notEmpty: { msg: 'Este campo não pode ser vazio' },
       },
     },
-    descricao:{ type: DataTypes.STRING,
-      allowNull:false,
-      validate:{
-        notNull:{msg:'Este campo não pode ser nulo'},
-        notEmpty:{msg:'Este campo não pode ser vazio'}
+    descricao: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Este campo não pode ser nulo' },
+        notEmpty: { msg: 'Este campo não pode ser vazio' }
       },
     },
-    termos: DataTypes.STRING,
-    file: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Lojista',
     tableName: 'Lojista'
   });
-    Lojista.prototype.isTheUserPassword = async function (senhaInput) {
-    return await bcrypt.compare(senhaInput, this.senhaHash);
+  Lojista.prototype.isTheUserPassword = async function (senhaInput) {
+    return await bcrypt.compare(senhaInput, this.senha);
   };
   return Lojista;
 };
