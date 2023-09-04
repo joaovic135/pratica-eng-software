@@ -27,12 +27,8 @@ export default async function handler(req, res) {
           tipoUsuario: 'usuario',
           telefone: user.telefone,
           endereco: user.endereco,
-          cidade: user.cidade,
           cep: user.cep
         });
-        const id = novoUsuario.id;
-      }catch(e){console.log(e)}
-        res.status(200).json({ name: 'erro J' });
       break;
 
   }
