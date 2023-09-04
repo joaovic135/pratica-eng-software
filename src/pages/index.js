@@ -15,7 +15,7 @@ import BannerLayout from '@/components/bannerLayout';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Container from '@mui/material/Container';
-import Typography from '@/components/Typography';
+import Typography from '@/components/typography';
 import { styled } from '@mui/material/styles';
 
 const inter = Inter({ subsets: ['latin'] })
