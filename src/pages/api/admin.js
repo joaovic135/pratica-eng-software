@@ -20,12 +20,12 @@ export default async function handler(req, res) {
         const salt = await genSalt(10);
         const senha = await hash(user.senha, salt);
 
-        
+
         const novoUsuario = await Usuario.create({
           nome: user.nome,
           email: user.email,
           senhaHash: senha,
-          tipoUsuario: 'usuario'
+          tipoUsuario: 'admin'
         });
         const id = novoUsuario.id;
       }catch(e){console.log(e)}
