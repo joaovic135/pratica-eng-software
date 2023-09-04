@@ -23,17 +23,10 @@ module.exports = {
       },
       numero: {
         allowNull:false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       descricao: {
         allowNull:false,
-        type: Sequelize.STRING
-      },
-      termos: {
-        allowNull:false,
-        type: Sequelize.STRING
-      },
-      file: {
         type: Sequelize.STRING
       },
       createdAt: {

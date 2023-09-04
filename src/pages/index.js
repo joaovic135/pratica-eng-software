@@ -124,7 +124,6 @@ export default function Home() {
     },
   })
 
-
   if(status === 'loading'||status === 'authenticated'){
     return (
       <>

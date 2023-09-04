@@ -20,7 +20,7 @@ export default function Login() {
     console.log(email)
     console.log(senha)
     console.log("----------------------------------'")
-    const result = await signIn("credentials", {
+    const result = await signIn("lojista", {
       email: email,
       password: senha,
       redirect: true, 
@@ -84,7 +84,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant='h5'>
-              Entrar na conta
+                Entrar na conta
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -127,7 +127,7 @@ export default function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/auth/signup" variant="body2">
+                  <Link href="/auth/lojista/signup" variant="body2">
                     Não tem uma conta? Crie uma
                   </Link>
                 </Grid>
@@ -143,5 +143,4 @@ export default function Login() {
 
   )
 }
-
 
