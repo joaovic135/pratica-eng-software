@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'Nome não pode ser vazio' }
       },
     },
-      senhaHash: {
+      senha: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     numero:{ 
-      type:DataTypes.INTEGER,
+      type:DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: { msg: 'Este campo não pode ser vazio' },
@@ -53,15 +53,13 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg:'Este campo não pode ser vazio'}
       },
     },
-    termos: DataTypes.STRING,
-    file: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Lojista',
     tableName: 'Lojista'
   });
     Lojista.prototype.isTheUserPassword = async function (senhaInput) {
-    return await bcrypt.compare(senhaInput, this.senhaHash);
+    return await bcrypt.compare(senhaInput, this.senha);
   };
   return Lojista;
 };
