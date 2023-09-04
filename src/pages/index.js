@@ -7,15 +7,15 @@ import { Inter } from 'next/font/google';
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 
-import AppAppBar from '@/components/appAppBar'
+import AppAppBar from '@/components/AppAppBar'
 import AppFooter from '@/components/appFooter'
 import * as React from 'react';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import BannerLayout from '@/components/bannerLayout';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Container from '@mui/material/Container';
-import Typography from '@/components/typography';
+import Typography from '@/components/Typography';
 import { styled } from '@mui/material/styles';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -72,42 +72,46 @@ const ImageIconButton = styled(ButtonBase)(({ theme }) => ({
 
 const images = [
   {
-    url: 'latex_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/2.2-Foto-Alexandre-Noronha-SECOM-ACRE-2.jpg',
     title: 'Látex',
     width: '40%',
   },
   {
-    url: 'fribras_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/renda-da-bananeira-100-natural-fibra-patwork.jpg',
     title: 'Fribras',
     width: '20%',
   },
   {
-    url: 'coquinho_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/Como-e-representado-o-artesanato-da-regiao-Norte.jpg',
     title: 'Coquinho',
     width: '40%',
   },
   {
-    url: 'ceramica_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/tipos-de-artesanato-da-regiao-norte.jpg',
     title: 'Cerâmica',
     width: '38%',
   },
   {
-    url: 'artesanado_barro_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/IMG_2357.jpg',
     title: 'Artesanato em barro',
     width: '38%',
   },
   {
-    url: 'artesanato_madeira_exemplo.jpg',
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/7ac6bf835c133201b220a1420bd81c36.jpg',
     title: 'Artesanato em madeira',
     width: '24%',
   },
   {
+<<<<<<< HEAD
     url: 'couro-peixe-exemplo.jpg',
-    title: 'Couro',
-    width: '40%',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/couro-peixe-600x400-1.jpg',
   },
-  {
+<<<<<<< HEAD
     url: 'artesanato-da-regiao-norte_exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/artesanato-da-regiao-norte-do-brasil.jpg',
+>>>>>>> cb1a198 (Semi-finalizado)
     title: 'Mais +',
     width: '60%',
   },
