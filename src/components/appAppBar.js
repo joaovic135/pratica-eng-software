@@ -13,7 +13,7 @@ const rightLink = {
 function AppAppBar() {
   return (
     <div>
-      <MuiAppBar elevation={0} position="fixed">
+      <MuiAppBar elevation={0} position="fixed" {...props}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box sx={{ flex: 1 }} />
           <Link
