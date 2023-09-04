@@ -87,27 +87,43 @@ const images = [
     width: '40%',
   },
   {
+<<<<<<< HEAD
     url: 'ceramica_exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/tipos-de-artesanato-da-regiao-norte.jpg',
     title: 'Cerâmica',
-    width: '38%',
-  },
-  {
+<<<<<<< HEAD
     url: 'artesanado_barro_exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/IMG_2357.jpg',
+>>>>>>> cb1a198 (Semi-finalizado)
     title: 'Artesanato em barro',
     width: '38%',
   },
   {
+<<<<<<< HEAD
     url: 'artesanato_madeira_exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/7ac6bf835c133201b220a1420bd81c36.jpg',
+>>>>>>> cb1a198 (Semi-finalizado)
     title: 'Artesanato em madeira',
     width: '24%',
   },
   {
+<<<<<<< HEAD
     url: 'couro-peixe-exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/couro-peixe-600x400-1.jpg',
+>>>>>>> cb1a198 (Semi-finalizado)
     title: 'Couro',
     width: '40%',
   },
   {
+<<<<<<< HEAD
     url: 'artesanato-da-regiao-norte_exemplo.jpg',
+=======
+    url: 'https://www.artesanatopassoapassoja.com.br/wp-content/uploads/2021/09/artesanato-da-regiao-norte-do-brasil.jpg',
+>>>>>>> cb1a198 (Semi-finalizado)
     title: 'Mais +',
     width: '60%',
   },
