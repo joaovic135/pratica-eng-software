@@ -24,7 +24,11 @@ export default async function handler(req, res) {
           nome: user.nome,
           email: user.email,
           senhaHash: senha,
-          tipoUsuario: 'usuario'
+          tipoUsuario: 'usuario',
+          telefone: user.telefone,
+          endereco: user.endereco,
+          cidade: user.cidade,
+          cep: user.cep
         });
         const id = novoUsuario.id;
       }catch(e){console.log(e)}

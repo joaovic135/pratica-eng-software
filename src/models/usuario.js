@@ -48,15 +48,48 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: 'Tipo de usuário não pode ser nulo' },
         notEmpty: { msg: 'Tipo de usuário não pode ser vazio' }
       },
-    }
-  },{
-    sequelize,
-    moduleName: 'Usuario',
-    tableName: 'Usuario'
-  });
+    },
+    telefone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Telefone não pode ser nulo' },
+        notEmpty: { msg: 'Telefone não pode ser vazio' }
+      },
+    },
+    endereco: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Endereço não pode ser nulo' },
+        notEmpty: { msg: 'Endereço não pode ser vazio' }
+      },
+    },
+    cidade: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'Cidade não pode ser nulo' },
+        notEmpty: { msg: 'Cidade não pode ser vazio' }
+      },
+    },
+    cep: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'CEP não pode ser nulo' },
+        notEmpty: { msg: 'CEP não pode ser vazio' }
+      },
+    },
+  }
+  }, {
+  sequelize,
+  moduleName: 'Usuario',
+  tableName: 'Usuario'
+});
 
-  Usuario.prototype.isTheUserPassword = async function (senhaInput) {
-    return await bcrypt.compare(senhaInput, this.senhaHash);
-  };
-  return Usuario;
+Usuario.prototype.isTheUserPassword = async function (senhaInput) {
+  return await bcrypt.compare(senhaInput, this.senhaHash);
+};
+return Usuario;
 };
