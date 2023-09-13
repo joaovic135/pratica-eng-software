@@ -81,7 +81,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'CEP não pode ser vazio' }
       },
     },
-  }
   }, {
   sequelize,
   moduleName: 'Usuario',

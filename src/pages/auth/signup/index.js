@@ -44,7 +44,6 @@ export default function SignUp() {
     router.push('/')
   }
   return (
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -166,6 +165,7 @@ export default function SignUp() {
                 </Link>
               </Grid>
             </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
