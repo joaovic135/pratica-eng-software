@@ -17,6 +17,10 @@ module.exports = {
       email: 'Email@email.com',
       senhaHash: '$2a$12$8T7iExFehnA52apHy4ux3.ILtp41fcNq/aFuJ6OtxGZaAee5sGvNa',
       TipoUsuario: "usuario",
+      telefone: "999999999",
+      endereco:'Rua Teste',
+      cidade: 'Cidade Teste',
+      cep: '99999999',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -24,6 +28,10 @@ module.exports = {
       email: 'admin@email.com',
       senhaHash: '$2a$12$8T7iExFehnA52apHy4ux3.ILtp41fcNq/aFuJ6OtxGZaAee5sGvNa',
       TipoUsuario: "admin",
+      telefone: "999999999",
+      endereco:'Rua Teste',
+      cidade: 'Cidade Teste',
+      cep: '99999999',
       createdAt: new Date(),
       updatedAt: new Date()
     }

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     
     case 'GET':
 
-      const users = await Usuario.findAll({where: {tipoUsuario: 'usuario'}});
+      const users = await Usuario.findAll();
       res.status(200).json(users);
       break;
 
