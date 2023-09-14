@@ -12,6 +12,11 @@ export default function SignUp() {
   const [nome, setName] = useState([]);
   const [email, setEmail] = useState([]);
   const [senha, setSenha] = useState([]);
+  const [telefone, setTelefone] = useState([]);
+  const [endereco, setEndereco] = useState([]);
+  const [cidade, setCidade] = useState([]);
+  const [cep, setCep] = useState([]);
+
   /*
   const res = await fetch("http://localhost:3000/api/login", {
             method: 'POST',
@@ -29,7 +34,7 @@ export default function SignUp() {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome,email, senha })
+      body: JSON.stringify({ nome, email, senha })
     })
     const data = await response.json()
     const { error } = data
@@ -39,7 +44,6 @@ export default function SignUp() {
     router.push('/')
   }
   return (
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -69,7 +73,7 @@ export default function SignUp() {
                 id="nome"
                 label="Nome"
                 autoFocus
-                value = {nome}
+                value={nome}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -98,20 +102,68 @@ export default function SignUp() {
                 onChange={(e) => setSenha(e.target.value)}
               />
             </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link href="/auth/login" variant="body2">
-                Ja tem uma conta? Entre
-              </Link>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="telefon"
+                label="Telefone"
+                name="telefone"
+                autoComplete="telefone"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="endereco"
+                label="Endereço"
+                name="endereco"
+                autoComplete="endereco"
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="cidade"
+                label="Cidade"
+                name="cidade"
+                autoComplete="cidade"
+                value={cidade}
+                onChange={(e) => setCidade(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="cep"
+                label="CEP"
+                name="cep"
+                autoComplete="cep"
+                value={cep}
+                onChange={(e) => setCep(e.target.value)}
+              />
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/auth/login" variant="body2">
+                  Ja tem uma conta? Entre
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Box>

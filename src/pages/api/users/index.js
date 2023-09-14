@@ -1,5 +1,6 @@
 import { genSalt, hash } from 'bcrypt';
-import db from '../../models/index';
+import db from '../../../models/index';
+import { where } from 'sequelize';
 db.sequelize.sync();
 const Usuario = db.Usuario;
 
@@ -10,7 +11,9 @@ export default async function handler(req, res) {
   switch (req.method) {
     
     case 'GET':
-      res.status(200).json({ name: 'Usuario Ja' });
+
+      const users = await Usuario.findAll();
+      res.status(200).json(users);
       break;
 
     case 'POST':
@@ -25,11 +28,7 @@ export default async function handler(req, res) {
           nome: user.nome,
           email: user.email,
           senhaHash: senha,
-          tipoUsuario: 'usuario',
-          telefone: user.telefone,
-          endereco: user.endereco,
-          cidade: user.cidade,
-          cep: user.cep
+          tipoUsuario: 'usuario'
         });
         const id = novoUsuario.id;
       }catch(e){console.log(e)}
