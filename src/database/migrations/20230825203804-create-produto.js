@@ -9,6 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      idLojista:{
+        allowNull:false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Lojista',
+          key: 'id'
+        },
+        onDelete: 'restrict',
+        onUpdate: 'restrict'
+      },
       nome: {
         allowNull:false,
         type: Sequelize.STRING
