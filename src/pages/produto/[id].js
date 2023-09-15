@@ -1,3 +1,5 @@
+import { Button, Card, CardContent, Typography } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
@@ -5,29 +7,69 @@ import { useState } from "react";
 
 export default function Produto() {
   const router = useRouter()
-  const [name, setName] = useState([]);
+  const [produto, setProduto] = useState([]);
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      return router.push('/auth/lojista/login')
+    },
+  })
+  console.log(session)
+
+  const idLojista = session.user.lojista.id
+  const { id } = router.query
+
+  console.log(id)
+
+
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:3000/api/produto")
-      const { name } = await response.json()
-      setName(name)
-    }
-    fetchData()
+    fetch("http://localhost:3000/api/produto/?id=" + id + "&idLojista=" + idLojista, {
+      method: 'GET',
+    })
+      .then(resp => resp.json())
+      .then(json => { setProduto(json) })
   }, [])
 
 
+  const handleEditClick = () => {
+    // Implemente a lógica para editar o produto aqui
+  };
+
+  const handleDeleteClick = () => {
+    // Implemente a lógica para deletar o produto aqui
+  };
+  
+  console.log(produto)
 
   return (
 
     <>
-      <p>{name}</p>
-      <p>Produto: {router.query.id}</p>
-      
-      <Link href="/">Link Para Home</Link> <br />
-      <button onClick={() => router.push('/')}>
-        Link Alternativo para Home
-      </button>
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            {produto.nome}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Descrição: {produto.descricao}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Preço: R${produto.preco}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Categoria: {produto.categoria}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Estoque: {produto.estoque}
+          </Typography>
+          <Button variant="contained" color="primary" onClick={handleEditClick}>
+            Editar
+          </Button>
+          <Button variant="contained" color="error" onClick={handleDeleteClick}>
+            Deletar
+          </Button>
+        </CardContent>
+      </Card>
 
     </>
 
@@ -35,3 +77,4 @@ export default function Produto() {
 }
 
 
+Produto.auth = true

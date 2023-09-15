@@ -24,7 +24,7 @@ export default function Login() {
       email: email,
       password: senha,
       redirect: true, 
-      callbackUrl: "/" 
+      callbackUrl: "/auth/lojista" 
     });
     
 

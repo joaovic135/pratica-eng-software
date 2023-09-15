@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-
+import { jwtConfig } from './jwt-config.js';
 import db from '../../../models/index';
 db.sequelize.sync();
 const Usuario = db.Usuario;
@@ -8,6 +8,7 @@ const Usuario = db.Usuario;
 
 export default NextAuth({
   // Configure one or more authentication providers
+  secret : jwtConfig.signingKey,
   providers: [
     CredentialsProvider({
       id: 'credentials',
@@ -108,7 +109,7 @@ export default NextAuth({
     maxAge: 30 * 24 * 60 * 60,
   },
   jwt: {
-    signingKey: "TESTEDECHAVE",
+    signingKey: jwtConfig.signingKey,
   },
   callbacks: {
     async session({ session, token }) {
