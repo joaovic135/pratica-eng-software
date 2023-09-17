@@ -31,6 +31,9 @@ export default async function handler(req, res) {
           cidade: user.cidade,
           cep: user.cep
         });
+        const id = novoUsuario.id;
+      }catch(e){console.log(e)}
+        res.status(200).json({ name: 'erro J' });
       break;
 
   }

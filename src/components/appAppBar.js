@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Toolbar from './Toolbar';
+import Toolbar from './toolbar';
 import SignOut from './signOut';
 import MuiAppBar from '@mui/material/AppBar';
 const rightLink = {
