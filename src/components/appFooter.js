@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
-import Typography from './Typography';
-
+import Typography from './typography';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
 function Copyright() {
   return (
     <React.Fragment>
@@ -48,16 +49,18 @@ export default function AppFooter() {
             >
               <Grid item sx={{ display: 'flex' }}>
                 <Box component="a" href="https://mui.com/" sx={iconStyle}>
-                  <img
+                  {/* <img
                     src="/static/themes/onepirate/appFooterFacebook.png"
                     alt="Facebook"
-                  />
+                  /> */}
+                  <FacebookIcon/>
                 </Box>
                 <Box component="a" href="https://twitter.com/MUI_hq" sx={iconStyle}>
-                  <img
+                  {/* <img
                     src="/static/themes/onepirate/appFooterTwitter.png"
                     alt="Twitter"
-                  />
+                  /> */}
+                  <TwitterIcon/>
                 </Box>
               </Grid>
               <Grid item>
