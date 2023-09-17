@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import ButtonListarCompradores from "@/components/ButtonListarCompradores"
 import AppAppBar from '@/components/appAppBar'
+import ButtonListarLojistas from "@/components/ButtonListarLojistas"
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -20,6 +21,7 @@ export default function AdminDashboard() {
           <AppAppBar></AppAppBar>
           <ButtonAdminCadastro />
           <ButtonListarCompradores />
+          <ButtonListarLojistas />
         </>
       )
     }else {
