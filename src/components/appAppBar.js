@@ -10,7 +10,7 @@ const rightLink = {
   ml: 3,
 };
 
-function appAppBar() {
+function AppAppBar() {
   return (
     <div>
       <MuiAppBar elevation={0} position="fixed">
@@ -52,4 +52,4 @@ function appAppBar() {
   );
 }
 
-export default appAppBar;
+export default AppAppBar;
