@@ -43,7 +43,7 @@ export default function Cadastrar() {
     console.log("-------------------------------------------------------------------------------------")
     if (response.status === 401) return setError(error)
 
-    router.push('/')
+    router.push('/auth/lojista')
   }
   return (
 

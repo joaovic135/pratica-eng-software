@@ -21,9 +21,14 @@ export default function LojistaDashboard() {
       <>
         <AppAppBar></AppAppBar>
         <h1>Painel do Lojista</h1>
-        <Link href="/"> {/* Este é o link para a página de lista de produtos */}
+        <Link href="/produtos/lojista"> {/* Este é o link para a página de lista de produtos */}
           <Button variant="contained" color="primary">
             Listar Produtos
+          </Button>
+        </Link>
+        <Link href="/produto/cadastrar"> {/* Este é o link para a página de lista de produtos */}
+          <Button variant="contained" color="primary">
+            Cadastrar Produto
           </Button>
         </Link>
       </>
