@@ -11,7 +11,7 @@ Second, run the comands, only once (if the docker image is build) is to populate
 ```bash
 npx sequelize-cli db:migrate
 
-npx sequelize-cli sb:seed:all
+npx sequelize-cli db:seed:all
 ```
 
 Then, run the development server, in a second terminal:
