@@ -8,12 +8,14 @@ import AppAppBar from '@/components/appAppBar'
 
 export default function LojistaDashboard() {
   const router = useRouter()
-  //const { data: session } = useSession()
-  //console.log(session)
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      return router.push('/auth/lojista/login')
+    },
+  })
+  console.log(session)
 
-
-
-  //if (session) {
 
     return (
       <>
