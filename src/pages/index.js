@@ -123,7 +123,7 @@ export default function Home() {
       return router.push('/auth/login')
     },
   })
-
+  console.log(session)
   if(status === 'loading'||status === 'authenticated'){
     return (
       <>

@@ -34,7 +34,7 @@ export default NextAuth({
         if (res.ok && user) {
           return user
         }
-        return null
+        throw new Error('Usuário não encontrado. Verifique o email e tente novamente.');
 
       }
     }),

@@ -1,7 +1,7 @@
 import AppAppBar from '@/components/appAppBar'
 import AppFooter from '@/components/appFooter'
 import * as React from 'react';
-import { FormControlLabel, Button, IconButton } from '@mui/material';
+import { FormControlLabel, Button, IconButton, Link } from '@mui/material';
 import Forbidden from '@/components/Forbidden';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router'
@@ -13,8 +13,9 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
-    { field: 'idLojista', headerName: 'Lojista', flex: 1.5, minWidth: 150 },
-    { field: 'nome', headerName: 'Nome', flex: 1, minWidth: 150 },
+    { field: 'nome', headerName: 'Nome ', flex: 1, minWidth: 150  ,renderCell: (params) => (
+        <Link href={`/produto/${params.row.id}`}>{params.value}</Link>
+      )},
     { field: 'descricao', headerName: 'Descrição', flex: 1, minWidth: 150 },
     { field: 'preco', headerName: 'Preço', flex: 1, minWidth: 150 },
     { field: 'categoria', headerName: 'Categoria', flex: 1, minWidth: 150 },
@@ -44,7 +45,7 @@ export default function Produtos() {
 
     console.log(session) 
     if (session) {
-        if (session.user.lojista) {
+        if (session.user.lojista != null) {
             return (
                 <div style={{ height: 400, width: '100%' }}>
                     <AppAppBar></AppAppBar>
@@ -59,7 +60,6 @@ export default function Produtos() {
                             },
                         }}
                         pageSizeOptions={[5, 10]}
-                        checkboxSelection
                     />
                 </div>
                 /* <AppFooter></AppFooter> */
@@ -71,11 +71,6 @@ export default function Produtos() {
                 </>
             )
         }
-    } else {
-        return (
-            <>
-                <Forbidden />
-            </>
-        )
-    }
+    } 
 }
+Produtos.auth = true

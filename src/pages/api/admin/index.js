@@ -25,10 +25,17 @@ export default async function handler(req, res) {
           nome: user.nome,
           email: user.email,
           senhaHash: senha,
+          telefone: user.telefone,
+          endereco: user.endereco,
+          cidade: user.cidade,
+          cep: user.cep,
           tipoUsuario: 'admin'
         });
         const id = novoUsuario.id;
-      }catch(e){console.log(e)}
+      }catch(e){
+        res.status(400).json({ name: 'erro J' });
+        console.log(e)
+      }
         res.status(200).json({ name: 'erro J' });
       break;
 

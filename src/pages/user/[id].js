@@ -24,4 +24,4 @@ export default function User() {
   )
 }
 
-
+User.auth = true

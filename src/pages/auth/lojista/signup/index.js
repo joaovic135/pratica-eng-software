@@ -1,47 +1,117 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-
 export default function SignIn() {
   const router = useRouter()
   const [error, setError] = useState(null);
-  const [nome, setName] = useState([]);
-  const [email, setEmail] = useState([]);
-  const [senha, setSenha] = useState([]);
-  const [numero,setNumero]= useState([]);
-  const [descricao,setDescricao]= useState([]);
-  /*
-  const res = await fetch("http://localhost:3000/api/login", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: credentials?.email,
-              senha: credentials?.senha
-            }),
-          });
-  */
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [numero, setNumero] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+  const isPasswordSecure = (password) => {
+    // Pelo menos 8 caracteres
+    if (password.length < 8) {
+      return false;
+    }
+
+    // Pelo menos uma letra maiúscula
+    if (!/[A-Z]/.test(password)) {
+      return false;
+    }
+
+    // Pelo menos uma letra minúscula
+    if (!/[a-z]/.test(password)) {
+      return false;
+    }
+
+    // Pelo menos um número
+    if (!/[0-9]/.test(password)) {
+      return false;
+    }
+
+    // Pelo menos um caractere especial (por exemplo, !@#$%^&*)
+    if (!/[!@#$%^&*]/.test(password)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const isEmailValid = (email) => {
+    // Expressão regular para verificar o formato do email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  };
+
+  const formatPhoneNumber = (value) => {
+    // Remove todos os caracteres não numéricos
+    const phoneNumber = value.replace(/\D/g, '');
+
+    // Formata o número de telefone no formato brasileiro
+    const formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+
+    return formattedPhoneNumber;
+  };
+
+  const handleTelefoneChange = (e) => {
+    setNumero(formatPhoneNumber(e.target.value));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Validar os campos
+    if (nome.trim() === '') {
+      setError('O campo Nome é obrigatório.');
+      return;
+    }
+
+    if (email.trim() === '' || !isEmailValid(email)) {
+      setError('O campo Email deve ser preenchido com um email válido.');
+      return;
+    }
+
+    if (senha.trim() === '') {
+      setError('O campo Senha é obrigatório.');
+      return;
+    }
+
+    if (!isPasswordSecure(senha)) {
+      setError('A senha deve conter pelo menos 8 caracteres, incluindo maiúsculas, minúsculas, números e caracteres especiais.');
+      return;
+    }
+
+    if (numero.trim() === '') {
+      setError('O campo Telefone é obrigatório.');
+      return;
+    }
+
+    if (descricao.trim() === '') {
+      setError('O campo Descrição é obrigatório.');
+      return;
+    }
 
     const response = await fetch("http://localhost:3000/api/lojista", {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome,email,senha,numero,descricao })
+      body: JSON.stringify({ nome, email, senha, numero, descricao })
     })
     const data = await response.json()
-    const { error } = data
+    const {error}  = data
+    console.log(response.status)
     console.log("-------------------------------------------------------------------------------------")
-    if (response.status === 401) return setError(error)
+    if (response.status === 400) return setError("Email já cadastrado")
 
-    router.push('/')
+    router.push('/auth/lojista/login')
   }
-  return (
 
+  return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -62,7 +132,7 @@ export default function SignIn() {
 
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               <TextField
                 autoComplete="nome-dado"
                 name="nome"
@@ -71,8 +141,8 @@ export default function SignIn() {
                 id="nome"
                 label="Nome"
                 autoFocus
-                value = {nome}
-                onChange={(e) => setName(e.target.value)}
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,18 +171,18 @@ export default function SignIn() {
               />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="numero"
-                label="Número"
+                label="Telefone"
                 name="numero"
                 value={numero}
-                onChange={(e) => setNumero(e.target.value)}
-                />
+                onChange={handleTelefoneChange}
+              />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="descricao"
@@ -123,9 +193,8 @@ export default function SignIn() {
                 maxRows={20}
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                />
+              />
             </Grid>
-            
           </Grid>
           <Button
             type="submit"
@@ -135,30 +204,20 @@ export default function SignIn() {
           >
             Sign Up
           </Button>
+        {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/auth/lojista/login" variant="body2">
-                Ja tem uma conta? Entre
+                Já tem uma conta? Entre
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
     </Container>
-
-
-
-
-    /*
-        <>
-          <p>Essa é a pagina de SignIn</p>
-          <Link href="/">Link Para Home</Link> <br />
-          <button onClick={() => router.push('/')}>
-            Link Para Home
-          </button>
-    
-        </>
-    */
   )
 }
-

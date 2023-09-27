@@ -5,54 +5,59 @@ import { Avatar, Box, Button, CssBaseline, Grid, Input, Paper, TextField, Typogr
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ErrorTypography from '@/components/error';
 import { signIn, useSession } from "next-auth/react"
-
+import bg from '../../../../public/ceramica_exemplo.jpg'
 
 export default function Login() {
   const router = useRouter()
 
-  const [email, setEmail] = useState([]);
-  const [senha, setSenha] = useState([]);
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const [error, setError] = useState(null);
+
+  const isEmailValid = (email) => {
+    // Expressão regular para verificar o formato do email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("----------------------------------'")
-    console.log(email)
-    console.log(senha)
-    console.log("----------------------------------'")
+
+    // Validar os campos
+    if (email.trim() === '') {
+      setError('O campo Email é obrigatório.');
+      return;
+    }
+
+    if (!isEmailValid(email)) {
+      setError('O campo Email deve ser preenchido com um email válido.');
+      return;
+    }
+
+    if (senha.trim() === '') {
+      setError('O campo Senha é obrigatório.');
+      return;
+    }
+
+    // Tente fazer o login
     const result = await signIn("credentials", {
       email: email,
       password: senha,
-      redirect: true, 
-      callbackUrl: "/" 
+      redirect: false,
     });
-    
 
-    
-
-    /*
-    const response = await fetch("http://localhost:3000/api/login",{
-      credentials: 'include',
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({email,senha})
-    })
-    const data = await response.json()
-
-    const {error} = data
-    if(response.status === 401) return setError(error)
-    
-    router.push('/')  
-    */
+    // Verifique o resultado do login
+    if (result.error === 'Usuario não encontrado') {
+      // Se o erro for "Usuário não encontrado", defina o erro correspondente
+      setError('Usuário não encontrado. Verifique o email e tente novamente.');
+    } else {
+      // Redirecione ou faça alguma outra ação de sucesso
+      router.push('/');
+    }
   };
 
-
-
   return (
-
     <>
-
-
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -61,7 +66,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage:`url(${bg.src})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -69,7 +74,6 @@ export default function Login() {
             backgroundPosition: 'center',
           }}
         />
-
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -84,7 +88,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant='h5'>
-              Criar conta
+              Bem vindo(a)
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -96,8 +100,8 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value = { email }
-                onChange = {(e) => setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -108,8 +112,8 @@ export default function Login() {
                 type='password'
                 id='senha'
                 autoComplete='current-password'
-                value = { senha }
-                onChange = {(e) => setSenha(e.target.value)}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
               />
               <Button
                 type="submit"
@@ -117,10 +121,10 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Login in
+                Login
               </Button>
-              {error && <ErrorTypography text = {error}/>}
-              <Grid container>
+              {error && <ErrorTypography text={error} />}
+              <Grid container justifyContent="flex-end">
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Esqueceu a Senha?
@@ -128,20 +132,19 @@ export default function Login() {
                 </Grid>
                 <Grid item>
                   <Link href="/auth/signup" variant="body2">
-                    Não tem uma conta? Crie uma
+                    Não tem uma conta? Cadastre-se
                   </Link>
                 </Grid>
+              </Grid>
+              <Grid item>
+                <Link href="/auth/lojista/login" variant="body2">
+                  Entrar como Lojista
+                </Link>
               </Grid>
             </Box>
           </Box>
         </Grid>
-
-
       </Grid>
-
     </>
-
   )
 }
-
-
