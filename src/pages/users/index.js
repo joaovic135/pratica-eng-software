@@ -8,26 +8,56 @@ import { DataGrid } from '@mui/x-data-grid';
 import AppAppBar from '@/components/appAppBar'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 
 
-const MatEdit = ({ index }) => {
-
-  const handleEditClick = () => {
-    // some action
-  }
+const MatEdit = ({ id }) => {
+  const router = useRouter();
 
 
-  return <FormControlLabel
+  const handleDeleteClick = (event) => {
+    event.stopPropagation();
+    fetch(`http://localhost:3000/api/users/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          window.location.reload();
+
+        } 
+        else {
+      }
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir usuario:', error);
+      });
+  };
+  const handleEditClick = (event) => {
+    event.stopPropagation();
+    router.push(`/users/edit/${id}`);
+  };
+
+  return (
+<>
+  <FormControlLabel
     control={
-      <IconButton color="secondary" aria-label="add an alarm" onClick={handleEditClick} >
+      <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
+        <DeleteIcon style={{ color: blue[500] }} />
+      </IconButton>
+    }
+  />
+  <FormControlLabel
+    control={
+      <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
         <EditIcon style={{ color: blue[500] }} />
       </IconButton>
     }
   />
-};
+</>
+  );
+}
 
 
 const columns = [
@@ -41,14 +71,14 @@ const columns = [
   { field: 'tipoUsuario', headerName: 'Tipo de usuário', flex: 0.5, minWidth: 130 },
   {
     field: "actions",
-    headerName: "Actions",
+    headerName: "Ações",
     sortable: false,
     width: 140,
     disableClickEventBubbling: true,
     renderCell: (params) => {
       return (
         <div className="d-flex justify-content-between align-items-center" style={{ cursor: "pointer" }}>
-          <MatEdit index={params.row.id} />
+          <MatEdit id={params.row.id} />
         </div>
       );
     }

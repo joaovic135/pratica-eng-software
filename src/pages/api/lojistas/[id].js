@@ -2,6 +2,7 @@ import { genSalt, hash } from 'bcrypt';
 import db from '../../../models/index';
 db.sequelize.sync();
 const Lojista = db.Lojista;
+const Produto = db.Produto;
 
 
 export default async function handler(req, res) {
@@ -36,19 +37,36 @@ export default async function handler(req, res) {
     case 'PUT':
       try {
         const params = req.query;
-        await Lojista.update(req.body, { where: { id: params.id, idLojista: params.idLojista } })
-
-      } catch (e) { console.log(e) }
-      res.status(200).json({ name: 'erro J' });
+        const { nome, email, numero, descricao } = req.body;
+        await Lojista.update(
+          { nome, email, numero, descricao },
+          { where: { id: params.id } }
+        );
+        res.status(200).json({ message: 'Atualização bem-sucedida' });
+      } catch (e) {
+        console.error('Erro ao editar lojista:', e);
+        res.status(500).json({ message: 'Erro ao editar lojista' });
+      }
       break;
 
     case 'DELETE':
       try {
         const params = req.query;
-        await Lojista.destroy({ where: { id: params.id, idLojista: params.idLojista } })
-      } catch (e) { console.log(e) }
-      res.status(200).json({ name: 'erro J' });
+
+        const produtos = await Produto.findAll({ where: { idLojista: params.id } });
+
+        for (const produto of produtos) {
+          await produto.destroy();
+        }
+        await Lojista.destroy({ where: { id: params.id } });
+
+        res.status(200).json({ message: 'Lojista e produtos excluídos com sucesso' });
+      } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: 'Ocorreu um erro ao excluir o lojista e seus produtos' });
+      }
       break;
+
 
   }
 }
