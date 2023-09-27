@@ -46,7 +46,9 @@ export default async function handler(req, res) {
           descricao: user.descricao,
         });
         const id = novoLojista.id;
-      } catch (e) { console.log(e) }
+      } catch (e) { 
+        res.status(400).json({ name: 'erro J' });
+        console.log(e) }
       res.status(200).json({ name: 'erro J' });
       break;
 

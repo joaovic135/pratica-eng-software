@@ -6,6 +6,9 @@ import { useRouter } from "next/router"
 import ButtonListarCompradores from "@/components/ButtonListarCompradores"
 import AppAppBar from '@/components/appAppBar'
 import ButtonListarLojistas from "@/components/ButtonListarLojistas"
+import ButtonListarProdutos from "@/components/ButtonListarProdutos"
+import AppSidebar from "@/components/AppSidebar"
+import AppHeader from "@/components/AppHeader"
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -15,23 +18,36 @@ export default function AdminDashboard() {
 
 
   if (session) {
-    if(session.user.usuario.tipoUsuario === 'admin'){
+    if (session.user.usuario.tipoUsuario === 'admin') {
       return (
         <>
-          <AppAppBar></AppAppBar>
-          <ButtonAdminCadastro />
-          <ButtonListarCompradores />
-          <ButtonListarLojistas />
+
+          <div>
+            <AppSidebar />
+            <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+              <AppHeader />
+              <div className="body flex-grow-1 px-3">
+                <ButtonAdminCadastro />
+                <ButtonListarCompradores />
+                <ButtonListarLojistas />
+                <ButtonListarProdutos />
+              </div>
+              {/* O FOOTER */}
+            </div>
+
+          </div>
+
+
         </>
       )
-    }else {
+    } else {
       return (
         <>
           <Forbidden />
         </>
       )
     }
-  }else {
+  } else {
     return (
       <>
         <Forbidden />
@@ -39,3 +55,5 @@ export default function AdminDashboard() {
     )
   }
 }
+
+AdminDashboard.auth = true

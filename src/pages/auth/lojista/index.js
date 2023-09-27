@@ -42,3 +42,5 @@ export default function LojistaDashboard() {
     )
   }*/
 }
+
+LojistaDashboard.auth = true

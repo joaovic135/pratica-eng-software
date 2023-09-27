@@ -108,4 +108,4 @@ export default function Lojistas() {
 
 }
 
-
+Lojistas.auth = true
