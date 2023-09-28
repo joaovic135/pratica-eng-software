@@ -71,7 +71,7 @@ export default NextAuth({
         try{
           console.log(APIURL)
           console.log("Rota" + `${APIURL}/api/lojista/login`)
-          
+
           const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ export default NextAuth({
               senha: credentials.password
             }),
           });
-          
+          console.log(user)
           const user = await res.json();
           if (res.ok && user) {
             return user
@@ -89,6 +89,7 @@ export default NextAuth({
           }
 
         }catch(e){
+          console.log(e)
           console.log(e.message)
           const errorMessage = e.message
           throw new Error(errorMessage)
