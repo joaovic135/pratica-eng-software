@@ -65,7 +65,7 @@ export default function Produto() {
   const handleDelete = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
+    const response = await fetch(`${APIURL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
       credentials: 'include',
       method: 'DELETE',
       headers: { "Content-Type": "application/json" },
