@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { APIURL } from '@/lib/constants';
 
 export default function SignIn() {
   const router = useRouter()
@@ -96,7 +97,7 @@ export default function SignIn() {
       return;
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista`, {
+    const response = await fetch(`${APIURL}/api/lojista`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },

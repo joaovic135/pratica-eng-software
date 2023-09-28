@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Modal from '@mui/material/Modal';
 import AppAppBar from '@/components/appAppBar';
+import { APIURL } from '@/lib/constants';
 
 
 export default function EditProductScreen() {
@@ -29,7 +30,7 @@ export default function EditProductScreen() {
 
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/?id=` + id + "&idLojista=" + idLojista, {
+    fetch(`${APIURL}/api/produto/?id=` + id + "&idLojista=" + idLojista, {
       method: 'GET',
     })
       .then(resp => resp.json())
@@ -48,7 +49,7 @@ export default function EditProductScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
+    const response = await fetch(`${APIURL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },

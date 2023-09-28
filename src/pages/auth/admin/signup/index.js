@@ -1,6 +1,7 @@
 import AppHeader from "@/components/AppHeader"
 import AppSidebar from "@/components/AppSidebar"
 import Forbidden from "@/components/Forbidden"
+import { APIURL } from "@/lib/constants"
 import { CCard, CCardBody, CCardHeader, CCol, CContainer, CForm, CFormInput, CFormLabel, CFormTextarea, CRow } from "@coreui/react"
 import { Box, Button, Container, TextField, Typography } from "@mui/material"
 import { useSession } from "next-auth/react"
@@ -125,7 +126,7 @@ export default function AdminSignUp() {
       return;
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/admin`, {
+    const response = await fetch(`${APIURL}/api/admin`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },

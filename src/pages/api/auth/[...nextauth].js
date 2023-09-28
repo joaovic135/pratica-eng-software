@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { jwtConfig } from './jwt-config.js';
+import { APIURL } from "@/lib/constants.js";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -16,7 +17,7 @@ export default NextAuth({
 
       async authorize(credentials, req) {
         
-        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/login`, {
+        const res = await fetch(`${APIURL}/api/login`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -38,7 +39,7 @@ export default NextAuth({
       name: 'Admin',
       async authorize(credentials, req) {
         try{
-          const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/admin/login`, {
+          const res = await fetch(`${APIURL}/api/admin/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -68,7 +69,7 @@ export default NextAuth({
       name: 'Lojista',
       async authorize(credentials, req) {
         try{
-          const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista/login`, {
+          const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { APIURL } from '@/lib/constants';
 
 
 export default function Cadastrar() {
@@ -30,7 +31,7 @@ export default function Cadastrar() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto`, {
+    const response = await fetch(`${APIURL}/api/produto`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
