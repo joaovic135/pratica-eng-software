@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     case 'POST':
       const user = req.body
       try{
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
         const emailInserido = user.email;
         const senhaInserida = user.senha;
 
