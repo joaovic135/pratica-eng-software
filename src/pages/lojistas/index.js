@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
+import { APIURL } from '@/lib/constants';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
@@ -90,7 +91,7 @@ export default function Lojistas() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojistas`)
+    fetch(`${APIURL}/api/lojistas`)
       .then(resp => resp.json())
       .then(json => { setLojista(json) })
   }, [])

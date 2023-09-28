@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { APIURL } from '@/lib/constants';
 
 export default function SignUp() {
   const router = useRouter();
@@ -97,7 +98,7 @@ export default function SignUp() {
       return;
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/usuario`, {
+    const response = await fetch(`${APIURL}/api/usuario`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, email, senha, telefone, endereco, cidade, cep })

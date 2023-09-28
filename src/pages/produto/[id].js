@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Modal from '@mui/material/Modal';
 import AppAppBar from '@/components/appAppBar';
+import { APIURL } from '@/lib/constants';
 
 export default function Produto() {
   const router = useRouter()
@@ -32,7 +33,7 @@ export default function Produto() {
 
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
+    fetch(`${APIURL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
       method: 'GET',
     })
       .then(resp => resp.json())
@@ -64,7 +65,7 @@ export default function Produto() {
   const handleDelete = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
+    const response = await fetch(`${APIURL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
       credentials: 'include',
       method: 'DELETE',
       headers: { "Content-Type": "application/json" },

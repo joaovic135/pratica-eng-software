@@ -1,3 +1,4 @@
+import { APIURL } from '@/lib/constants';
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
 import { useState } from "react";
@@ -9,7 +10,7 @@ export default function User() {
   const [name, setName] = useState([]);
 
   useEffect(() => {
-    fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/usuario`)
+    fetch(`${APIURL}/api/usuario`)
       .then(resp => resp.json())
       .then(json => { setName(json) })
   }, [])

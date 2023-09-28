@@ -13,6 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { APIURL } from '@/lib/constants';
 
 
 
@@ -38,7 +39,7 @@ export default function Lojista() {
 
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista/?id=` + id , {
+    fetch(`${APIURL}/api/lojista/?id=` + id , {
       method: 'GET',
     })
       .then(resp => resp.json())

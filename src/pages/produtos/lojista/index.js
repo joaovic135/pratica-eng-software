@@ -10,6 +10,7 @@ import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { DataGrid } from '@mui/x-data-grid';
+import { APIURL } from '@/lib/constants';
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
@@ -33,7 +34,7 @@ export default function Produtos() {
 
   
     useEffect(() => {
-      fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/lojista/?id=` + id , {
+      fetch(`${APIURL}/api/produto/lojista/?id=` + id , {
         method: 'GET',
       })
         .then(resp => resp.json())
