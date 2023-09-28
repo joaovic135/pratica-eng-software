@@ -7,9 +7,6 @@ export default async function handler(req, res) {
   try {
     
     await db.sequelize.sync();
-    console.log("-------------------------------------------------------------------------------------")
-    console.log(Usuario)
-    console.log("-------------------------------------------------------------------------------------")
     switch (req.method) {
 
       case 'GET':
@@ -20,12 +17,10 @@ export default async function handler(req, res) {
         const emailInserido = req.body.email;
         const senhaInserida = req.body.senha;
 
-        console.log(emailInserido)
         const usuario = await Usuario.findOne({
           where: { email: emailInserido }
         });
 
-        console.log("teste")
         if (!usuario) {
           throw new Error('Usuario não encontrado')
         }

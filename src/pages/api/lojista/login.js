@@ -5,9 +5,6 @@ const Lojista = db.Lojista;
 
 
 export default async function handler(req, res) {
-  console.log("-------------------------------------------------------------------------------------")
-  console.log(Lojista)
-  console.log("-------------------------------------------------------------------------------------")
   switch (req.method) {
     
     case 'GET':
@@ -20,15 +17,11 @@ export default async function handler(req, res) {
         const emailInserido = user.email;
         const senhaInserida = user.senha;
 
-        console.log(emailInserido)
 
-        console.log(senhaInserida)
         const lojista = await Lojista.findOne({
           where: {  email: emailInserido  }
         });
 
-        console.log("teste")
-        console.log(lojista)
         if(!lojista){
           throw new Error('Lojista não encontrado')
         } 

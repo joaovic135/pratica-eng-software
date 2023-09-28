@@ -14,7 +14,6 @@ export default function LojistaDashboard() {
       return router.push('/auth/lojista/login')
     },
   })
-  console.log(session)
 
 
     return (

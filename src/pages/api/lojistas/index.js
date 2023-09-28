@@ -4,9 +4,6 @@ const Lojista = db.Lojista;
 
 
 export default async function handler(req, res) {
-  console.log("-------------------------------------------------------------------------------------")
-  console.log(Lojista)
-  console.log("-------------------------------------------------------------------------------------")
   await db.sequelize.sync();
 
   try {

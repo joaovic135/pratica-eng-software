@@ -1,0 +1,1 @@
+export const APIURL = `${process.env.NEXT_PROTOCOL}://${process.env.NEXT_PUBLIC_VERCEL_URL}`

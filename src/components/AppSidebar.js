@@ -37,7 +37,6 @@ const AppSidebar = () => {
         onClick={() => {
           // Use as ações do Redux Toolkit para alterar o estado
           dispatch(setSidebarUnfoldable(!unfoldable));
-          console.log(unfoldable)
         }}
       />
     </CSidebar>

@@ -24,12 +24,10 @@ export default function Produto() {
       return router.push('/auth/lojista/login')
     },
   })
-  console.log(session)
 
   const idLojista = session.user.lojista.id
   const { id } = router.query
 
-  console.log(id)
 
 
 
@@ -56,7 +54,6 @@ export default function Produto() {
 
 
   const handleClickDelete = () => {
-    console.log("ASSSSSSSSSSSSSSSSSS")
     setModalOpen(true)
   }
   const handleModalClose = () => {
@@ -80,7 +77,6 @@ export default function Produto() {
     router.push('/')
   };
 
-  console.log(produto)
 
   const theme = createTheme();
 

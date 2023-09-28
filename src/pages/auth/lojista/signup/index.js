@@ -96,7 +96,7 @@ export default function SignIn() {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/lojista", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -104,8 +104,6 @@ export default function SignIn() {
     })
     const data = await response.json()
     const {error}  = data
-    console.log(response.status)
-    console.log("-------------------------------------------------------------------------------------")
     if (response.status === 400) return setError("Email já cadastrado")
 
     router.push('/auth/lojista/login')

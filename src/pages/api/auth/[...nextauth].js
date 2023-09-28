@@ -16,7 +16,7 @@ export default NextAuth({
 
       async authorize(credentials, req) {
         
-        const res = await fetch("/api/login", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/login`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -26,7 +26,6 @@ export default NextAuth({
         });
         
         const user = await res.json();
-        console.log(user)
         if (res.ok && user) {
           return user
         }
@@ -39,7 +38,7 @@ export default NextAuth({
       name: 'Admin',
       async authorize(credentials, req) {
         try{
-          const res = await fetch("/api/admin/login", {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/admin/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -49,8 +48,6 @@ export default NextAuth({
           });
           
           const user = await res.json();
-          console.log(user)
-          console.log("linha56")
           if (res.ok && user) {
             return user
           }else{
@@ -81,8 +78,6 @@ export default NextAuth({
           });
           
           const user = await res.json();
-          console.log(user)
-          console.log("linha56")
           if (res.ok && user) {
             return user
           }else{

@@ -35,8 +35,6 @@ export default function Lojista() {
 
   const { id } = router.query
 
-  console.log(id)
-
 
 
   useEffect(() => {
@@ -53,7 +51,6 @@ export default function Lojista() {
   if (!lojista) return null
 
 
-  console.log(lojista)
   return (
 
 

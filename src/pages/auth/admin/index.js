@@ -13,7 +13,6 @@ import AppHeader from "@/components/AppHeader"
 export default function AdminDashboard() {
   const router = useRouter()
   const { data: session } = useSession()
-  console.log(session)
 
 
 

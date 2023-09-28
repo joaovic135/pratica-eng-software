@@ -9,10 +9,8 @@ export default async function handler(req, res) {
 
       case 'GET':
         const params = req.query;
-        console.log(params)
 
         const produto = await Produto.findAll()
-        //   console.log(produto)
         res.status(200).json(produto);
         break;
 
