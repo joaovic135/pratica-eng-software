@@ -35,7 +35,7 @@ export default function Produtos() {
     console.log(APIURL)
   
     useEffect(() => {
-      fetch(`${APIURL}/api/produto/lojista/?id=` + id , {
+      fetch(`http://localhost:3000/api/produto/lojista/?id=${id}` , {
         method: 'GET',
       })
         .then(resp => resp.json())
