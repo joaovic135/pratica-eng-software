@@ -76,7 +76,7 @@ export default function Lojista() {
           <TableBody>
             {lojista.Produtos?.map((produto) => produto && (
               <TableRow
-                key={...produto.id}
+                key={produto.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row"> {produto.nome}</TableCell>
