@@ -36,25 +36,6 @@ export default async function handler(req, res) {
           descricao: user.descricao,
         });
         const id = novoLojista.id;
-      res.status(200).json({ name: 'erro J' });
-      break;
-
-    case 'PUT':
-      try {
-        const params = req.query;
-        await Lojista.update(req.body, { where: { id: params.id, idLojista: params.idLojista } })
-
-      } catch (e) { console.log(e) }
-      res.status(200).json({ name: 'erro J' });
-      break;
-
-    case 'DELETE':
-      try {
-        const params = req.query;
-        await Lojista.destroy({ where: { id: params.id, idLojista: params.idLojista } })
-      } catch (e) { console.log(e) }
-      res.status(200).json({ name: 'erro J' });
-      break;
 
         res.status(200).json({ name: 'erro J' });
         break;
