@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
-import { APIURL } from '../../lib/constants';
+import { APIURL } from '@/lib/constants';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
 const MatEdit = ({ id }) => {
@@ -67,6 +67,7 @@ const MatEdit = ({ id }) => {
   </>
   );
 }
+
 
 const ConfirmationModal = ({ open, onClose, onConfirm }) => {
   return (
