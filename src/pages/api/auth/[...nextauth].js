@@ -2,7 +2,6 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { jwtConfig } from './jwt-config.js';
 import { APIURL } from "@/lib/constants.js";
-import axios from "axios";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -73,14 +72,11 @@ export default NextAuth({
           console.log(APIURL)
           const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
-            url: `${APIURL}/api/lojista/login`,
-            data: {
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
               email: credentials.email,
-              senha: credentials.password,
-            },
-            headers: {
-              'Content-Type': 'application/json',
-            },
+              senha: credentials.password
+            }),
           });
           console.log(res)
           const user = await res.json();
