@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { jwtConfig } from './jwt-config.js';
 import { APIURL } from "@/lib/constants.js";
+import axios from "axios";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -68,27 +69,27 @@ export default NextAuth({
       id: 'lojista',
       name: 'Lojista',
       async authorize(credentials, req) {
-        try{
-          const res = await fetch(`${APIURL}/api/lojista/login`, {
+        try {
+          const response = await axios({
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+            url: `${APIURL}/api/lojista/login`,
+            data: {
               email: credentials.email,
-              senha: credentials.password
-            }),
+              senha: credentials.password,
+            },
+            headers: {
+              'Content-Type': 'application/json',
+            },
           });
-          
-          const user = await res.json();
-          if (res.ok && user) {
-            return user
-          }else{
-            throw new Error(user.error)
+        
+          if (response.status === 200 && response.data) {
+            return response.data;
+          } else {
+            throw new Error(response.data.error);
           }
-
-        }catch(e){
-          console.log(e.message)
-          const errorMessage = e.message
-          throw new Error(errorMessage)
+        } catch (error) {
+          console.error(error.message);
+          throw new Error(error.message);
         }
         
         
