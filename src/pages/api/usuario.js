@@ -3,9 +3,6 @@ import db from '../../models/index';
 const Usuario = db.Usuario;
 
 export default async function handler(req, res) {
-  console.log("-------------------------------------------------------------------------------------")
-  console.log(Usuario)
-  console.log("-------------------------------------------------------------------------------------")
   try {
     
     await db.sequelize.sync();
@@ -17,7 +14,6 @@ export default async function handler(req, res) {
 
       case 'POST':
         const user = req.body
-        console.log("teste")
         const salt = await genSalt(10);
         const senha = await hash(user.senha, salt);
 

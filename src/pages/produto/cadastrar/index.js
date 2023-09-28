@@ -24,11 +24,9 @@ export default function Cadastrar() {
           return router.push('/auth/lojista/login')
         },
       })
-      console.log(session)
           const idLojista = session.user.lojista.id
           const { id } = router.query
         
-          console.log(id)
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -40,7 +38,6 @@ export default function Cadastrar() {
     })
     const data = await response.json()
     const { error } = data
-    console.log("-------------------------------------------------------------------------------------")
     if (response.status === 401) return setError(error)
 
     router.push('/auth/lojista')

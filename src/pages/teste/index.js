@@ -22,9 +22,7 @@ export default function EditProductScreen() {
       return router.push('/auth/lojista/login')
     },
   })
-  console.log(session)
 
   const { id } = router.query
 
-  console.log(id)
 }

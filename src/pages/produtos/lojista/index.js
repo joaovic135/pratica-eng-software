@@ -31,7 +31,6 @@ export default function Produtos() {
 
     const id  = 1
 
-    console.log(id)
   
     useEffect(() => {
       fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/lojista/?id=` + id , {
@@ -43,7 +42,6 @@ export default function Produtos() {
         })
     }, [])
 
-    console.log(session) 
     if (session) {
         if (session.user.lojista != null) {
             return (

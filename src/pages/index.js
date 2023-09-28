@@ -17,6 +17,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Container from '@mui/material/Container';
 import Typography from '@/components/typography';
 import { styled } from '@mui/material/styles';
+import { APIURL } from '@/lib/constants';
 
 const inter = Inter({ subsets: ['latin'] })
 const backgroundImage =
@@ -116,14 +117,14 @@ const images = [
 
 export default function Home() {
   const router = useRouter()
-
+  const a = APIURL
+  console.log(`asdasd${APIURL}`)
   const { data:session,  status } = useSession({
     required: true,
     onUnauthenticated() {
       return router.push('/auth/login')
     },
   })
-  console.log(session)
   if(status === 'loading'||status === 'authenticated'){
     return (
       <>

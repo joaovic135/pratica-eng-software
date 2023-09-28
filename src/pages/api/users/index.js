@@ -7,10 +7,6 @@ export default async function handler(req, res) {
   try {
     await db.sequelize.sync(); // Aguarde o banco de dados ser sincronizado antes de continuar
 
-    console.log("-------------------------------------------------------------------------------------")
-    console.log(Usuario)
-    console.log("-------------------------------------------------------------------------------------")
-
 
     switch (req.method) {
       case 'GET':
@@ -20,7 +16,6 @@ export default async function handler(req, res) {
 
       case 'POST':
         const user = req.body;
-        console.log("teste");
         const salt = await genSalt(10);
         const senha = await hash(user.senha, salt);
 

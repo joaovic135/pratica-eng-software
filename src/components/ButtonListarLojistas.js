@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 export default function ButtonListarLojistas(){
   const router = useRouter()
   const {data:session} = useSession()
-  console.log(session)
 
 
 

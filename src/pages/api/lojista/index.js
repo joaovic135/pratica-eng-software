@@ -4,9 +4,6 @@ const Lojista = db.Lojista;
 
 
 export default async function handler(req, res) {
-  console.log("-------------------------------------------------------------------------------------")
-  console.log(Lojista)
-  console.log("-------------------------------------------------------------------------------------")
   try {
     
     await db.sequelize.sync();
@@ -14,7 +11,6 @@ export default async function handler(req, res) {
 
       case 'GET':
         const params = req.query;
-        console.log(req)
         const lojista = await Lojista.findOne({
           where: { id: params.id },
           include: {
@@ -22,12 +18,8 @@ export default async function handler(req, res) {
           }
 
         });
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        console.log(params)
 
-        console.log(lojista)
 
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         res.status(200).json(lojista);
         break;
 
