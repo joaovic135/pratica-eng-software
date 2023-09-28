@@ -7,9 +7,9 @@ import ErrorTypography from '@/components/error';
 import { signIn, useSession } from "next-auth/react"
 import bg from '../../../../public/ceramica_exemplo.jpg'
 
+
 export default function Login() {
   const router = useRouter()
-
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState(null);

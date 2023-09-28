@@ -1,10 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { jwtConfig } from './jwt-config.js';
-import db from '../../../models/index';
-db.sequelize.sync();
-const Usuario = db.Usuario;
-
 
 export default NextAuth({
   // Configure one or more authentication providers

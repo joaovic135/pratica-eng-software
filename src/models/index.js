@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-let modelPath = path.resolve(process.cwd() , 'src' , 'models'); //add this line
+let modelPath = path.resolve(process.cwd(), 'src', 'models'); //add this line
 
 const basename = path.basename(__dirname + '/../models/index.js'); //change this line
 const env = process.env.NODE_ENV || 'development';
@@ -12,12 +12,27 @@ const config = require(__dirname + '/../config/config.js')[env];
 
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+
+
+
+const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466AzFLvkzP7PRXEUt0Xu7fAh3lXpfFNxn9tjRM3', {
+  host: 'aws.connect.psdb.cloud',
+  dialect: 'mysql',
+  dialectOptions: {
+      ssl: {
+          rejectUnauthorized: true,        
+      }
+  }
+});
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connected to PlanetScale!');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  } 
+})(); 
 
 fs
   .readdirSync(modelPath) //change this line
