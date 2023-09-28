@@ -80,6 +80,7 @@ export default NextAuth({
               senha: credentials.password
             }),
           });
+          console.log(res)
           const user = await res.json();
           console.log(user)
           if (res.ok && user) {
