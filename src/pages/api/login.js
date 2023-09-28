@@ -24,6 +24,10 @@ export default async function handler(req, res) {
         if (!usuario) {
           throw new Error('Usuario não encontrado')
         }
+
+        if (!(await usuario.isTheUserPassword(senhaInserida))) {
+          throw new Error('Senha incorreta')
+        }
         return res.json({ usuario });
 
         break;
