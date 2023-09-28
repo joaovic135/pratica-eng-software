@@ -32,7 +32,7 @@ export default function Cadastrar() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:3000/api/produto", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },

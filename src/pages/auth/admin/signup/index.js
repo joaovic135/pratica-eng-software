@@ -125,7 +125,7 @@ export default function AdminSignUp() {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/admin", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/admin`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },

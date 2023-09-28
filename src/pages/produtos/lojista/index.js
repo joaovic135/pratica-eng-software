@@ -34,7 +34,7 @@ export default function Produtos() {
     console.log(id)
   
     useEffect(() => {
-      fetch("http://localhost:3000/api/produto/lojista/?id=" + id , {
+      fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/lojista/?id=` + id , {
         method: 'GET',
       })
         .then(resp => resp.json())

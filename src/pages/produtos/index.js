@@ -29,7 +29,7 @@ export default function Produtos() {
     const { data: session } = useSession()
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/produto/listar/", { method: 'GET' })
+        fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/produto/listar/`, { method: 'GET' })
             .then(resp => resp.json())
             .then(json => { setProducts(json) })
     }, [])

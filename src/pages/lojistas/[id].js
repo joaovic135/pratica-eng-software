@@ -40,7 +40,7 @@ export default function Lojista() {
 
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/lojista/?id=" + id , {
+    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista/?id=` + id , {
       method: 'GET',
     })
       .then(resp => resp.json())
