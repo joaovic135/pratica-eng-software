@@ -1,6 +1,7 @@
 import { genSalt, hash } from 'bcrypt';
 console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
 import db from '../../../models/index';
+db.sequelize.sync();
 const Lojista = db.Lojista;
 
 
@@ -22,14 +23,14 @@ export default async function handler(req, res) {
 
 
         const lojista = await Lojista.findOne({
-          where: { email: emailInserido }
+          where: {  email: emailInserido  }
         });
 
         if(!lojista){
           throw new Error('Lojista não encontrado')
-        }
+        } 
 
-        if (!(await lojista.isTheUserPassword(senhaInserida))) {
+        if(!(await lojista.isTheUserPassword(senhaInserida))){
           throw new Error('Senha incorreta')
         }
         return res.json({lojista});
@@ -39,8 +40,5 @@ export default async function handler(req, res) {
       }
       break;
 
-    }
-  } catch (e) {
-    return res.status(401).json({ error: e.message })
   }
 }
