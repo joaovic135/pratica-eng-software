@@ -24,7 +24,6 @@ export default function EditProductScreen() {
   })
   console.log(session)
 
-  const idLojista = session.user.lojista.id
   const { id } = router.query
 
   console.log(id)
