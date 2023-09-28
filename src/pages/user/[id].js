@@ -10,7 +10,7 @@ export default function User() {
   const [name, setName] = useState([]);
 
   useEffect(() => {
-    fetch(`${APIURL}/api/usuario`)
+    fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/usuario`)
       .then(resp => resp.json())
       .then(json => { setName(json) })
   }, [])

@@ -17,7 +17,7 @@ export default NextAuth({
 
       async authorize(credentials, req) {
         
-        const res = await fetch(`${APIURL}/api/login`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/login`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -39,7 +39,7 @@ export default NextAuth({
       name: 'Admin',
       async authorize(credentials, req) {
         try{
-          const res = await fetch(`${APIURL}/api/admin/login`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/admin/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
