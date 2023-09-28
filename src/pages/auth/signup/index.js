@@ -97,7 +97,7 @@ export default function SignUp() {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/usuario", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/usuario`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, email, senha, telefone, endereco, cidade, cep })

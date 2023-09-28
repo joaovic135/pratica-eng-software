@@ -71,7 +71,7 @@ export default NextAuth({
       name: 'Lojista',
       async authorize(credentials, req) {
         try{
-          const res = await fetch("/api/lojista/login", {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojista/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -90,7 +90,7 @@ export default function Lojistas() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/lojistas")
+    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/lojistas`)
       .then(resp => resp.json())
       .then(json => { setLojista(json) })
   }, [])

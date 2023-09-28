@@ -93,7 +93,7 @@ export default function Users() {
 
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/users")
+    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/users`)
       .then(resp => resp.json())
       .then(json => { setUsers(json) })
   }, [])
