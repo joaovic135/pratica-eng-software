@@ -139,8 +139,10 @@ export default function Home() {
         >
           {/* Increase the network loading priority of the background image. */}
           <Image
+            width={500}
+            height={500}
             style={{ display: 'none' }}
-            src={backgroundImage}
+            src="/latex_exemplo.jpg"
             alt="increase priority"
           />
           <Typography color="inherit" align="center" variant="h2" marked="center">
