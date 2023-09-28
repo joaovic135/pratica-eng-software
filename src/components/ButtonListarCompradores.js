@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 export default function ButtonListarCompradores(){
   const router = useRouter()
   const {data:session} = useSession()
+  (session)
 
 
 
