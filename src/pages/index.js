@@ -138,7 +138,7 @@ export default function Home() {
           }}
         >
           {/* Increase the network loading priority of the background image. */}
-          <img
+          <Image
             style={{ display: 'none' }}
             src={backgroundImage}
             alt="increase priority"
