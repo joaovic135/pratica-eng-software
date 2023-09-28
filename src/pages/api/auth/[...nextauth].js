@@ -69,8 +69,6 @@ export default NextAuth({
       name: 'Lojista',
       async authorize(credentials, req) {
         try{
-          console.log(APIURL)
-          console.log("Rota" + `${APIURL}/api/lojista/login`)
 
           const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
