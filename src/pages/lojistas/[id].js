@@ -39,7 +39,7 @@ export default function Lojista() {
 
 
   useEffect(() => {
-    fetch(`${APIURL}/api/lojista/?id=` + id , {
+    fetch(`${APIURL}/api/lojista/?id=${id}` , {
       method: 'GET',
     })
       .then(resp => resp.json())

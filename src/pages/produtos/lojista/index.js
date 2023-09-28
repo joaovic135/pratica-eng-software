@@ -31,10 +31,11 @@ export default function Produtos() {
     const { data: session } = useSession()
 
     const id  = 1
-
+    
+    console.log(APIURL)
   
     useEffect(() => {
-      fetch(`${APIURL}/api/produto/lojista/?id=` + id , {
+      fetch(`http://localhost:3000/api/produto/lojista/?id=${id}` , {
         method: 'GET',
       })
         .then(resp => resp.json())

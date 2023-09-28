@@ -30,7 +30,7 @@ export default function EditProductScreen() {
 
 
   useEffect(() => {
-    fetch(`${APIURL}/api/produto/?id=` + id + "&idLojista=" + idLojista, {
+    fetch(`${APIURL}/api/produto/?id=${id}&idLojista=${idLojista}`, {
       method: 'GET',
     })
       .then(resp => resp.json())
@@ -49,7 +49,7 @@ export default function EditProductScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${APIURL}/api/produto/edit/?id=` + id + "&idLojista=" + idLojista, {
+    const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${dLojista}`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
