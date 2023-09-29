@@ -14,6 +14,8 @@ export default async function handler(req, res) {
 
     case 'POST':
       const user = req.body
+      console.log("BBBBBBBBBBBBBBBBBBBBBBBB")
+
       try{
         console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
         const emailInserido = user.email;
@@ -33,6 +35,7 @@ export default async function handler(req, res) {
         }
         return res.json({lojista});
       }catch(e){
+        console.log(e)
         return res.status(401).json({error: e.message})
       }
       break;
