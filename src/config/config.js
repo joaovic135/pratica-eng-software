@@ -1,5 +1,4 @@
 
-const mysql2 = require('mysql2');
 
 module.exports ={
 
@@ -9,7 +8,7 @@ module.exports ={
     database: 'db',
     host: 'aws.connect.psdb.cloud',
     dialect: 'mysql',
-    dialectModule: mysql2,
+    dialectModule: require('mysql2'),
     dialectOptions: {
       ssl: {
         rejectUnauthorized: true,
