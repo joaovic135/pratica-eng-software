@@ -15,9 +15,6 @@ import mysql2 from 'mysql2';
 
 const db = {};
 
-
-
-
 const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466AzFLvkzP7PRXEUt0Xu7fAh3lXpfFNxn9tjRM3', {
   host: 'aws.connect.psdb.cloud',
   dialect: 'mysql',
@@ -38,21 +35,13 @@ const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466A
   } 
 })(); 
 
-fs
-  .readdirSync(modelPath) //change this line
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = require(__dirname + '/../models/' + file)(sequelize, Sequelize.DataTypes); //change this line
-    db[model.name] = model;
-  });
+const Lojista = require('./lojista');
+const Produto = require('./produto');
+const Usuario = require('./usuario');
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+db.Lojista = Lojista;
+db.Produto = Produto;
+db.Usuario = Usuario;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
