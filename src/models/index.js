@@ -39,6 +39,10 @@ const Lojista = require('./lojista');
 const Produto = require('./produto');
 const Usuario = require('./usuario');
 
+Lojista.init(sequelize);
+Produto.init(sequelize);
+Usuario.init(sequelize);
+
 db.Lojista = Lojista;
 db.Produto = Produto;
 db.Usuario = Usuario;
