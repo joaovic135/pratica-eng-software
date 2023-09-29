@@ -18,6 +18,7 @@ const db = {};
 const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466AzFLvkzP7PRXEUt0Xu7fAh3lXpfFNxn9tjRM3', {
   host: 'aws.connect.psdb.cloud',
   dialect: 'mysql',
+  dialectModule: require('mysql2'),
   dialectOptions: {
       ssl: {
           rejectUnauthorized: true,        
