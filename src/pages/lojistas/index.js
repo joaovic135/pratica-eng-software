@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
-import { APIURL } from '@/lib/constants';
+import { APIURL } from '../../lib/constants';
 
 
 const MatEdit = ({ index }) => {
@@ -63,6 +63,7 @@ export default function Lojistas() {
 
 
   useEffect(() => {
+    console.log(APIURL)
     fetch(`${APIURL}/api/lojistas`)
       .then(resp => resp.json())
       .then(json => { setLojista(json) })
