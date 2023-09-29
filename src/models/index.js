@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-let modelPath = require('../../src/models'); //change this line
+let modelPath = require('/src/models'); //change this line
 //let modelPath = path.resolve('..', 'src', 'models'); //add this line
 console.log(modelPath)
 console.log("caminho")
