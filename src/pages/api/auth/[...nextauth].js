@@ -69,7 +69,7 @@ export default NextAuth({
       name: 'Lojista',
       async authorize(credentials, req) {
         try{
-
+          console.log(APIURL)
           const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
