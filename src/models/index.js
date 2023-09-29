@@ -9,6 +9,7 @@ let modelPath = path.resolve(process.cwd(), 'src', 'models'); //add this line
 const basename = path.basename(__dirname + '/../models/index.js'); //change this line
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
+import mysql2 from 'mysql2';
 
 const db = {};
 
@@ -18,7 +19,7 @@ const db = {};
 const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466AzFLvkzP7PRXEUt0Xu7fAh3lXpfFNxn9tjRM3', {
   host: 'aws.connect.psdb.cloud',
   dialect: 'mysql',
-  dialectModule: require('mysql2'),
+  dialectModule: mysql2,
   dialectOptions: {
       ssl: {
           rejectUnauthorized: true,        
