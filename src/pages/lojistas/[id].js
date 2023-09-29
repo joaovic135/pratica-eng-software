@@ -23,7 +23,6 @@ export default function Lojista() {
   const [modalOpen, setModalOpen] = useState(false);
   const [lojista, setLojista] = useState([]);
   const [produtos, setProdutos] = useState([]);
-
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
@@ -32,22 +31,20 @@ export default function Lojista() {
   })
 
 
-
-
   const { id } = router.query
 
-
-
+  
+  console.log(id)
   useEffect(() => {
     fetch(`${APIURL}/api/lojista/?id=${id}` , {
       method: 'GET',
     })
       .then(resp => resp.json())
       .then(json => {
-        setLojista(json)
-        setProdutos(json.Produtos)
+        setLojista(json.lojista);
+        setProdutos(json.produtos);
       })
-  }, [])
+  }, [id])
 
   if (!lojista) return null
 
@@ -72,7 +69,7 @@ export default function Lojista() {
           </TableHead>
 
           <TableBody>
-            {lojista.Produtos?.map((produto) => produto && (
+            {produtos?.map((produto) => produto && (
               <TableRow
                 key={produto.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
