@@ -5,10 +5,7 @@ db.sequelize.sync();
 const Lojista = db.Lojista;
 
 
-export async function handler(req, res) {
-
-  console.log(req.method)
-  console.log("backend-------------")
+export default async function handler(req, res) {
   switch (req.method) {
     
     case 'GET':
