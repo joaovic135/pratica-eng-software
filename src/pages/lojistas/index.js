@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
-import { APIURL } from '@/lib/constants';
+import { APIURL } from '../../lib/constants';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
