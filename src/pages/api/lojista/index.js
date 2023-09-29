@@ -1,7 +1,7 @@
 import { genSalt, hash } from 'bcrypt';
 import db from '../../../models/index';
 const Lojista = db.Lojista;
-
+const Produto = db.Produto;
 
 export default async function handler(req, res) {
   try {
@@ -11,18 +11,17 @@ export default async function handler(req, res) {
 
       case 'GET':
         const params = req.query;
-        const lojista = await Lojista.findOne({
-          where: { id: params.id },
-          include: {
-            model: db.Produto,
-          }
 
-        });
-
-
-        res.status(200).json(lojista);
+        
+        const lojista = await Lojista.findOne({ where: { id: params.id } });
+        const produtos = await Produto.findAll({ where: { idLojista: lojista.id } });
+        const responseData = {
+          lojista: lojista,
+          produtos: produtos,
+        };
+        
+        res.status(200).json(responseData);
         break;
-
 
       case 'POST':
         const user = req.body
