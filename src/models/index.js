@@ -35,17 +35,10 @@ const sequelize = new Sequelize('db', 'jcghtq93gd961qgtppej', 'pscale_pw_mWN466A
   } 
 })(); 
 
-const Lojista = require('./lojista');
-const Produto = require('./produto');
-const Usuario = require('./usuario');
-
-Lojista.init(sequelize);
-Produto.init(sequelize);
-Usuario.init(sequelize);
+const Lojista = require('./lojista')(sequelize, Sequelize); // Importe o modelo Lojista
 
 db.Lojista = Lojista;
-db.Produto = Produto;
-db.Usuario = Usuario;
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
