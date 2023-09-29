@@ -2,17 +2,9 @@ import { genSalt, hash } from 'bcrypt';
 import db from '../../../models/index';
 const Lojista = db.Lojista;
 
-import Cors from 'cors';
-
-const cors = Cors({
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  origin: 'http://example.com', // Replace with your allowed origin(s)
-});
-
 
 export default async function handler(req, res) {
   await db.sequelize.sync();
-  await cors(req, res);
 
   try {
     switch (req.method) {
