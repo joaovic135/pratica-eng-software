@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 let modelPath = path.resolve(process.cwd(), 'src', 'models'); //add this line
-
+console.log(modelPath)
+console.log("caminho")
 const basename = path.basename(__dirname + '/../models/index.js'); //change this line
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
