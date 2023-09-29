@@ -1,10 +1,12 @@
 import { genSalt, hash } from 'bcrypt';
 import db from '../../../models/index';
+import withCORS from '@/middleware/cors';
 const Lojista = db.Lojista;
 
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   await db.sequelize.sync();
+
 
   try {
     switch (req.method) {
@@ -50,3 +52,5 @@ export default async function handler(req, res) {
     }
   } catch (e) { console.log(e) }
 }
+
+export default withCORS(handler);
