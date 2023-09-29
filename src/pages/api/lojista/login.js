@@ -1,4 +1,5 @@
 import { genSalt, hash } from 'bcrypt';
+console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
 import db from '../../../models/index';
 db.sequelize.sync();
 const Lojista = db.Lojista;
