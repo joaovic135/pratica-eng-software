@@ -8,6 +8,7 @@ module.exports ={
     database: 'db',
     host: 'aws.connect.psdb.cloud',
     dialect: 'mysql',
+    dialectModule: mysql2,
     dialectOptions: {
       ssl: {
         rejectUnauthorized: true,
