@@ -37,7 +37,7 @@
     "react-router-dom": "^6.16.0",
     "redux": "^4.2.1",
     "sass": "^1.68.0",
-    "sequelize": "^6.32.1",
+    "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
     "simplebar-react": "^3.2.4",
     "swr": "^2.2.1"
