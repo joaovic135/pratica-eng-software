@@ -5,6 +5,9 @@ const Lojista = db.Lojista;
 
 
 export async function handler(req, res) {
+
+  console.log(req.method)
+  console.log("backend-------------")
   switch (req.method) {
     
     case 'GET':
