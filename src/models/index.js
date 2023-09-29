@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-let modelPath = path.resolve('./', 'src', 'models'); //add this line
+let modelPath = path.resolve(__dirname, '..', 'models'); //change this line
+//let modelPath = path.resolve('..', 'src', 'models'); //add this line
 console.log(modelPath)
 console.log("caminho")
 const basename = path.basename(__dirname + '/../models/index.js'); //change this line
