@@ -25,20 +25,56 @@ export default function Editar() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/lojista/?id=" + id, {
-      method: 'GET',
-    })
-      .then(resp => resp.json())
-      .then(json => {
-        setNome(json.nome)
-        setEmail(json.email)
-        setNumero(json.numero)
-        setDescricao(json.descricao)
+    if (id) {
+      fetch(`http://localhost:3000/api/lojista/edit/${id}`, {
+        method: 'GET',
       })
+        .then(resp => resp.json())
+        .then(json => {
+          setNome(json.nome || '');
+          setEmail(json.email || ''); 
+          setNumero(json.numero || ''); 
+          setDescricao(json.descricao || ''); 
+        })
+    }
   }, [id]);
+
+  const formatPhoneNumber = (value) => {
+    // Remove todos os caracteres não numéricos
+    const phoneNumber = value.replace(/\D/g, '');
+
+    // Formata o número de telefone no formato brasileiro
+    const formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+
+    return formattedPhoneNumber;
+  };
+
+  const handleTelefoneChange = (e) => {
+    setNumero(formatPhoneNumber(e.target.value));
+  };
+
+  const isEmailValid = (email) => {
+    // Expressão regular para validar o formato de um email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  };
+
+  const isFormValid = () => {
+    return (
+      nome.trim() !== '' &&
+      isEmailValid(email) &&
+      numero.trim() !== '' &&
+      descricao.trim() !== ''
+    );
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!isFormValid()) {
+      setError('Preencha todos os campos corretamente.');
+      return;
+    }
 
     const response = await fetch(`http://localhost:3000/api/lojistas/${id}`, {
       credentials: 'include',
@@ -74,7 +110,7 @@ export default function Editar() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Editar informações
+          Editar Informações
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -101,6 +137,8 @@ export default function Editar() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                error={!isEmailValid(email)}
+                helperText={!isEmailValid(email) ? 'Digite um email válido' : ''}
               />
             </Grid>
             <Grid item xs={12}>
@@ -112,7 +150,7 @@ export default function Editar() {
                 name="telefone"
                 autoComplete="telefone"
                 value={numero}
-                onChange={(e) => setNumero(e.target.value)}
+                onChange={handleTelefoneChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,9 +170,15 @@ export default function Editar() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={!isFormValid()}
           >
             Alterar
           </Button>
+          {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
           <Grid container justifyContent="flex-end">
             <Grid item></Grid>
           </Grid>

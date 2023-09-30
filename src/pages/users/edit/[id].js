@@ -28,22 +28,66 @@ export default function Editar() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/users/?id=" + id, {
-      method: 'GET',
-    })
-      .then(resp => resp.json())
-      .then(json => {
-        setNome(json.nome)
-        setEmail(json.email)
-        setTelefone(json.telefone)
-        setEndereco(json.endereco)
-        setCidade(json.cidade)
-        setCep(json.cep)
+    if (id) {
+      fetch(`http://localhost:3000/api/users/${id}`, {
+        method: 'GET',
       })
+        .then(resp => resp.json())
+        .then(json => {
+          setNome(json.nome || '');
+          setEmail(json.email || ''); 
+          setTelefone(json.telefone || ''); 
+          setEndereco(json.endereco || ''); 
+          setCidade(json.cidade || ''); 
+          setCep(json.cep || '');
+        })
+    }
   }, [id]);
+  const formatPhoneNumber = (value) => {
+    // Remove todos os caracteres não numéricos
+    const phoneNumber = value.replace(/\D/g, '');
+
+    // Formata o número de telefone no formato brasileiro
+    const formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+
+    return formattedPhoneNumber;
+  };
+
+  const handleTelefoneChange = (e) => {
+    setTelefone(formatPhoneNumber(e.target.value));
+  };
+
+  const handleCepChange = (e) => {
+    // Remove todos os caracteres não numéricos
+    const numericCep = e.target.value.replace(/\D/g, '');
+    setCep(numericCep);
+  };
+
+  const isEmailValid = (email) => {
+    // Expressão regular para validar o formato de um email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  };
+
+  const isFormValid = () => {
+    return (
+      nome.trim() !== '' &&
+      isEmailValid(email) &&
+      telefone.trim() !== '' &&
+      endereco.trim() !== '' &&
+      cidade.trim() !== '' &&
+      cep.trim() !== ''
+    );
+  };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!isFormValid()) {
+      setError('Preencha todos os campos corretamente.');
+      return;
+    }
 
     const response = await fetch(`http://localhost:3000/api/users/${id}`, {
       credentials: 'include',
@@ -55,11 +99,11 @@ export default function Editar() {
     const data = await response.json();
     const { error } = data;
 
-    if (response.status === 401) {
-      return setError(error);
+    if (response.status === 400) {
+      setError("Email ja cadastrado");
+    } else {
+      router.push('/users');
     }
-
-    router.push('/users');
   };
   if (session) {
     if (session.user.usuario.tipoUsuario === 'admin') {
@@ -78,7 +122,7 @@ export default function Editar() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Editar informações
+          Editar Informações
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -105,6 +149,8 @@ export default function Editar() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                error={!isEmailValid(email)}
+                helperText={!isEmailValid(email) ? 'Digite um email válido' : ''}
               />
             </Grid>
             <Grid item xs={12}>
@@ -116,7 +162,7 @@ export default function Editar() {
                 name="telefone"
                 autoComplete="telefone"
                 value={telefone}
-                onChange={(e) => setTelefone(e.target.value)}
+                onChange={handleTelefoneChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -151,7 +197,7 @@ export default function Editar() {
                 name="cep"
                 autoComplete="cep"
                 value={cep}
-                onChange={(e) => setCep(e.target.value)}
+                onChange={handleCepChange}
               />
             </Grid>
           </Grid>
@@ -160,9 +206,15 @@ export default function Editar() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={!isFormValid()}
           >
             Alterar
           </Button>
+          {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
           <Grid container justifyContent="flex-end">
             <Grid item></Grid>
           </Grid>

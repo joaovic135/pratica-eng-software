@@ -11,10 +11,19 @@ export default async function handler(req, res) {
   switch (req.method) {
 
     case 'GET':
-
-      const users = await Usuario.findAll();
-      res.status(200).json(users);
-      break;
+        const params = req.query;
+        const userId = params.id;
+        try {
+          const user = await Usuario.findOne({ where: { id: params.id } });
+          if (user) {
+            res.status(200).json(user.dataValues); // Se o usuário for encontrado, responde com o usuário em formato JSON
+          } else {
+            res.status(404).json({ error: 'Usuário não encontrado' }); // Se o usuário não for encontrado, responde com um erro 404
+          }
+        } catch (error) {
+          res.status(500).json({ error: 'Erro ao buscar usuário' }); // Se houver um erro durante a busca, responde com um erro 500
+        }
+        break;
 
     case 'PUT':
       try {

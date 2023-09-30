@@ -13,27 +13,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '@/lib/constants';
 
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
 
 
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+
   const handleDeleteClick = (event) => {
     event.stopPropagation();
-    fetch(`http://localhost:3000/api/users/${id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (response.ok) {
-          window.location.reload();
-
-        } 
-        else {
-      }
-      })
-      .catch((error) => {
-        console.error('Erro ao excluir usuario:', error);
-      });
+    setConfirmationOpen(true);
   };
   const handleEditClick = (event) => {
     event.stopPropagation();
@@ -56,9 +46,49 @@ const MatEdit = ({ id }) => {
       </IconButton>
     }
   />
+   <ConfirmationModal
+        open={isConfirmationOpen}
+        onClose={() => setConfirmationOpen(false)}
+        onConfirm={() => {
+          fetch(`http://localhost:3000/api/users/${id}`, {
+            method: 'DELETE',
+          })
+            .then((response) => {
+              if (response.ok) {
+                window.location.reload();
+              } else {
+                // Lógica para lidar com erros
+              }
+            })
+            .catch((error) => {
+              console.error('Erro ao excluir usuario:', error);
+            });
+        }}
+      />
 </>
   );
 }
+
+const ConfirmationModal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Confirmação</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Tem certeza que deseja excluir este usuário? Esta ação é irreversível.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={() => { onConfirm(); onClose(); }} color="primary" autoFocus>
+          Confirmar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 
 const columns = [

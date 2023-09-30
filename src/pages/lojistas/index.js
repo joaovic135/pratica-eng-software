@@ -12,28 +12,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '../../lib/constants';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
 
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
 
   const handleDeleteClick = (event) => {
     event.stopPropagation();
-    fetch(`http://localhost:3000/api/lojistas/${id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (response.ok) {
-          window.location.reload();
-
-        } 
-        else {
-      }
-      })
-      .catch((error) => {
-        console.error('Erro ao excluir lojista:', error);
-      });
+    setConfirmationOpen(true);
   };
+
   const handleEditClick = (event) => {
     event.stopPropagation();
     router.push(`/lojistas/edit/${id}`);
@@ -55,9 +45,54 @@ const MatEdit = ({ id }) => {
         </IconButton>
       }
     />
+       <ConfirmationModal
+        open={isConfirmationOpen}
+        onClose={() => setConfirmationOpen(false)}
+        onConfirm={() => {
+          fetch(`http://localhost:3000/api/lojistas/${id}`, {
+            method: 'DELETE',
+          })
+            .then((response) => {
+              if (response.ok) {
+                window.location.reload();
+              } else {
+                // Lógica para lidar com erros
+              }
+            })
+            .catch((error) => {
+              console.error('Erro ao excluir lojista:', error);
+            });
+        }}
+      />
   </>
   );
 }
+
+const ConfirmationModal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Confirmação</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Tem certeza que deseja excluir este lojista? <br />
+          <span style={{ color: "red" }}>
+            TODOS OS PRODUTOS RELACIONADOS A ESTE LOJISTA SERÃO EXCLUÍDOS!
+          </span>{" "}
+          <br />
+          Esta ação é irreversível.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={() => { onConfirm(); onClose(); }} color="primary" autoFocus>
+          Confirmar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 const columns = [
   { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90 },
