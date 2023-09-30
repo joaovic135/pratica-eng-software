@@ -24,7 +24,7 @@ export default function About() {
 
 
       <Button variant="outlined" startIcon={<ShoppingCartRounded />}>
-        Adicionar ao carrinho
+        Adicionar ao carrinho!!!!!
       </Button>
 
 
