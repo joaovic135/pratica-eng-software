@@ -50,7 +50,7 @@ const MatEdit = ({ id }) => {
         open={isConfirmationOpen}
         onClose={() => setConfirmationOpen(false)}
         onConfirm={() => {
-          fetch(`http://localhost:3000/api/users/${id}`, {
+          fetch(`${APIURL}/api/users/${id}`, {
             method: 'DELETE',
           })
             .then((response) => {

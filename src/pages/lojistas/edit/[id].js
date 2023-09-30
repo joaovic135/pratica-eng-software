@@ -26,7 +26,7 @@ export default function Editar() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3000/api/lojista/edit/${id}`, {
+      fetch(`${APIURL}/api/lojista/edit/${id}`, {
         method: 'GET',
       })
         .then(resp => resp.json())
@@ -76,7 +76,7 @@ export default function Editar() {
       return;
     }
 
-    const response = await fetch(`http://localhost:3000/api/lojistas/${id}`, {
+    const response = await fetch(`${APIURL}/api/lojistas/${id}`, {
       credentials: 'include',
       method: 'PUT', 
       headers: { 'Content-Type': 'application/json' },
