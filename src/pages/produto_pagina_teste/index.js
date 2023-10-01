@@ -35,22 +35,25 @@ export default function PaginaProduto() {
       <AppAppBar></AppAppBar>
       <Typography>
         <Box sx={{ width: '100%'}}>
-          <Stack spacing={0}>
-            <Item> 
-              <Stack //categorias
-                  direction="row"
-                  divider={<Divider orientation="vertical" flexItem />}
-                  spacing={1}
-                >
-                  <Item>Página Inicial -~ teste</Item>
-                  <Item></Item>
-                  <Item>Itens decorativos</Item>
-                  <Item>Artesanato com reciclagem</Item>
-                  <Item>Plástico</Item>
-                  <Item>Vaso de flor de garrafa PET</Item>
-              </Stack>
-            </Item>
               <div style={{ display:'flex', justifyContent:'center' }}>
+                <Item>
+                  <Stack //categorias
+                          direction="row"
+                          divider={<Divider orientation="vertical" flexItem />}
+                          spacing={1}
+                        >
+                          <Item>Página Inicial -~ teste</Item>
+                          <Item></Item>
+                          <Item>Itens decorativos</Item>
+                          <Item>Artesanato com reciclagem</Item>
+                          <Item>Plástico</Item>
+                          <Item>Vaso de flor de garrafa PET</Item>
+                  </Stack>
+              </Item>
+              </div>
+              
+              <div style={{ display:'flex', justifyContent:'center' }}>
+                
                 <Card 
                   raised
                   sx={{ 
@@ -59,6 +62,7 @@ export default function PaginaProduto() {
                     width: '150ch'
                   }}
                 >
+                  
                   <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <div style={{ marginTop: 50, marginLeft: 100 }}>
                       <CardMedia //, maxWidth: 400 
@@ -124,7 +128,6 @@ export default function PaginaProduto() {
                   </CardActions>
                 </Card>
               </div>
-          </Stack>
         </Box>
       </Typography>
       <AppFooter></AppFooter>
