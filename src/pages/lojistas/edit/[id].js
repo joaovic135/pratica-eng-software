@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Forbidden from '@/components/Forbidden';
-import { APIURL } from '../../lib/constants';
+import { APIURL } from '@/lib/constants';
 export default function Editar() {
   const router = useRouter();
   const { id } = router.query;
