@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { APIURL } from '../../lib/constants';
+import { APIURL } from '@/lib/constants';
 import {
   Avatar,
   Box,
