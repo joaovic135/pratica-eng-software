@@ -15,7 +15,9 @@ export default async function handler(req, res) {
       case 'POST':
         const user = req.body
         const salt = await genSalt(10);
-        const senha = await hash(user.senha, salt);     
+        const senha = await hash(user.senha, salt);
+
+
         const novoUsuario = await Usuario.create({
           nome: user.nome,
           email: user.email,

@@ -49,7 +49,7 @@ export default function EditProductScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${dLojista}`, {
+    const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
       credentials: 'include',
       method: 'POST',
       headers: { "Content-Type": "application/json" },
