@@ -30,7 +30,7 @@ export default function Produtos() {
     const [products, setProducts] = useState([]);
     const { data: session } = useSession()
 
-    const id  = 1
+    const id  = session.user.lojista.id
     
     console.log(APIURL)
   
