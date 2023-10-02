@@ -1,6 +1,7 @@
 import db from '../../../models/index';
 import { useSession } from 'next-auth/react';
 const Produto = db.Produto;
+const Lojista = db.Lojista;
 
 
 export default async function handler(req, res) {
@@ -13,8 +14,21 @@ export default async function handler(req, res) {
       case 'GET':
         const params = req.query;
 
-        const produto = await Produto.findOne({ where: { id: params.id, idLojista: params.idLojista } })
-        res.status(200).json(produto.dataValues);
+        const produto = await Produto.findOne({ where: { id: params.id} })
+        
+        if(produto == null){
+          throw new Error('produto nao encontrado')
+        }
+
+        const lojista = await Lojista.findOne({ where: { id: produto.idLojista} });
+        
+        const responseData = {
+          lojista: lojista,
+          produto: produto,
+        };
+        
+        
+        res.status(200).json(responseData); 
         break;
 
       case 'POST':

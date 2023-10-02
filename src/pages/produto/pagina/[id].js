@@ -8,11 +8,9 @@ import AppAppBar from '@/components/appAppBar';
 import { APIURL } from '@/lib/constants';
 import AppFooter from '@/components/appFooter'
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Pagination from '@mui/material/Pagination';
 import ShoppingCartRounded from '@mui/icons-material/ShoppingCartRounded'
 
-export default function Produto() {
+export default function Produto_Pagina() {
   const router = useRouter()
   const [produto, setProduto] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,67 +19,39 @@ export default function Produto() {
   const [preco, setPreco] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [estoque, setEstoque] = useState([]);
+  const [lojista, setLojista] = useState('');
 
-
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      return router.push('/auth/lojista/login')
-    },
-  })
-
-  const nomeLojista = session.user.lojista.nome
-  const idLojista = session.user.lojista.id
   const { id } = router.query
+    useEffect(() => {
+      if(id != undefined){
+        fetch(`${APIURL}/api/produto/?id=${id}`, {
+          method: 'GET',
+        })
+        .then(resp => {
+          if (resp.status != 200) {
+            router.push('/error');
+            console.error('Produto não encontrado');
+          } else {
+            return resp.json();
+          }
+        })
+        .then(json => {
+          if (json) {
+            setNome(json.produto.nome);
+            setDescricao(json.produto.descricao);
+            setPreco(json.produto.preco);
+            setCategoria(json.produto.categoria);
+            setEstoque(json.produto.estoque);
+            setLojista(json.lojista.nome);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+      }
+    }, [id]);
 
-
-
-
-  useEffect(() => {
-    fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
-      method: 'GET',
-    })
-      .then(resp => resp.json())
-      .then(json => {
-        setProduto(json)
-        setNome(json.nome)
-        setDescricao(json.descricao)
-        setPreco(json.preco)
-        setCategoria(json.categoria)
-        setEstoque(json.estoque)
-      })
-  }, [])
-
-
-  const handleEditClick = () => {
-    router.push('/produto/edit/' + id)
-    // Implemente a lógica para editar o produto aqui
-  };
-
-
-  const handleClickDelete = () => {
-    setModalOpen(true)
-  }
-  const handleModalClose = () => {
-    setModalOpen(false);
-  }
-
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-
-    const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
-      credentials: 'include',
-      method: 'DELETE',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome, descricao, preco, categoria, estoque })
-    })
-    // Chame a função onSave com o produto editado
-    const data = await response.json()
-    const { error } = data
-    if (response.status === 401) return setError(error)
-    router.push('/')
-  };
+    
 
   const preventDefault = (event) => event.preventDefault();
 
@@ -120,7 +90,7 @@ export default function Produto() {
                 <Typography variant="body1">
                     <Link  href="/" color="inherit">
                         Página Inicial
-                    </Link> &#62; {produto.categoria} &#62; {produto.nome}
+                    </Link> &#62; {categoria} &#62; {nome}
                 </Typography>
             </Box>
         </Box>          
@@ -146,19 +116,19 @@ export default function Produto() {
                                 <div style={{ marginTop: 0, marginLeft: 0 }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
-                                            {produto.nome}
+                                            {nome}
                                         </Typography>
                                         <Typography gutterBottom variant="h7" component="div">
-                                            Vendido por {nomeLojista}
+                                            Vendido por {lojista}
                                         </Typography>
                                         <br></br>
                                         <Typography variant="h5">
-                                            R$&nbsp;{produto.preco}
+                                            R$&nbsp;{preco}
                                         </Typography>
                                         <Typography variant="h7" color="green" >
                                             Em estoque&nbsp;
                                             <Typography variant="h7" color="black" >
-                                                ({produto.estoque})
+                                                ({estoque})
                                             </Typography>
                                         </Typography>
                                         <CardActions> </CardActions>
@@ -183,8 +153,8 @@ export default function Produto() {
                         </Typography>
                     </Box>
                     <Card variant="outlined" sx={description}>
-                        <Typography variant="body1" color="black">
-                            {produto.descricao}
+                        <Typography margin="5px" variant="body1" color="black">
+                          {descricao}
                         </Typography>
                     </Card>
                 </Card>
@@ -194,6 +164,3 @@ export default function Produto() {
     </>
   )
 }
-
-
-Produto.auth = true
