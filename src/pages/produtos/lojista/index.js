@@ -40,6 +40,7 @@ export default function Produtos() {
       })
         .then(resp => resp.json())
         .then(json => {
+            console.log(json)
           setProducts(json)
         })
     }, [])

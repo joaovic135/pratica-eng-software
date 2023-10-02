@@ -40,10 +40,6 @@ const Lojista = require('./lojista')(sequelize, Sequelize); // Importe o modelo 
 const Usuario = require('./usuario')(sequelize, Sequelize); // Importe o modelo Lojista
 const Produto = require('./produto')(sequelize, Sequelize); // Importe o modelo Lojista
 
-Lojista.init(sequelize);
-Produto.init(sequelize);
-Usuario.init(sequelize);
-
 db.Lojista = Lojista;
 db.Usuario = Usuario;
 db.Produto = Produto;

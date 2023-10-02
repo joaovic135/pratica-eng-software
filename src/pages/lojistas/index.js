@@ -12,7 +12,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '@/lib/constants';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import AppHeader from '@/components/AppHeader';
+import AppSidebar from '@/components/AppSidebar';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
@@ -31,21 +33,21 @@ const MatEdit = ({ id }) => {
 
   return (
     <>
-    <FormControlLabel
-      control={
-        <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
-          <DeleteIcon style={{ color: blue[500] }} />
-        </IconButton>
-      }
-    />
-    <FormControlLabel
-      control={
-        <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
-          <EditIcon style={{ color: blue[500] }} />
-        </IconButton>
-      }
-    />
-       <ConfirmationModal
+      <FormControlLabel
+        control={
+          <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
+            <DeleteIcon style={{ color: blue[500] }} />
+          </IconButton>
+        }
+      />
+      <FormControlLabel
+        control={
+          <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
+            <EditIcon style={{ color: blue[500] }} />
+          </IconButton>
+        }
+      />
+      <ConfirmationModal
         open={isConfirmationOpen}
         onClose={() => setConfirmationOpen(false)}
         onConfirm={() => {
@@ -64,7 +66,7 @@ const MatEdit = ({ id }) => {
             });
         }}
       />
-  </>
+    </>
   );
 }
 
@@ -97,9 +99,11 @@ const ConfirmationModal = ({ open, onClose, onConfirm }) => {
 
 const columns = [
   { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90 },
-  { field: 'nome', headerName: 'Nome completo', flex: 1.5, minWidth: 150, renderCell: (params) => (
-    <Link href={`lojistas/${params.row.id}`}>{params.value}</Link>
-  ) },
+  {
+    field: 'nome', headerName: 'Nome completo', flex: 1.5, minWidth: 150, renderCell: (params) => (
+      <Link href={`lojistas/${params.row.id}`}>{params.value}</Link>
+    )
+  },
   { field: 'email', headerName: 'Email', flex: 1, minWidth: 150 },
   { field: 'numero', headerName: 'Telefone', flex: 1, minWidth: 150 },
   { field: 'descricao', headerName: 'Endereço', description: 'This column has a value getter and is not sortable.', flex: 1, minWidth: 150 },
@@ -136,14 +140,20 @@ export default function Lojistas() {
   if (session) {
     if (session.user.usuario.tipoUsuario === 'admin') {
       return (
-        <div style={{ height: 400, width: '100%' }}>
-          <AppAppBar></AppAppBar>
-          <Button onClick={() => router.back()} variant="contained">Voltar</Button>
-          <DataGrid
-            rows={lojista}
-            columns={columns}
-            pageSize={5}
-          />
+
+        <div>
+          <AppSidebar />
+          <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+            <AppHeader />
+            <div style={{ height: 400, width: '100%' }}>
+              <Button onClick={() => router.back()} variant="contained">Voltar</Button>
+              <DataGrid
+                rows={lojista}
+                columns={columns}
+                pageSize={5}
+              />
+            </div>
+          </div>
         </div>
       );
     } else {

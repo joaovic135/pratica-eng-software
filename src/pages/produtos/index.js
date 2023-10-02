@@ -11,6 +11,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { DataGrid } from '@mui/x-data-grid';
 import { APIURL } from '@/lib/constants';
+import AppHeader from '@/components/AppHeader';
+import AppSidebar from '@/components/AppSidebar';
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
@@ -37,23 +39,27 @@ export default function Produtos() {
     if (session) {
         if (session.user.usuario.tipoUsuario == "admin") {
             return (
-                <div style={{ height: 400, width: '100%' }}>
-                    <AppAppBar></AppAppBar>
-                    <Button onClick={()=> router.back()} variant="contained">Voltar</Button>
+                <div>
+                    <AppSidebar />
+                    <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+                        <AppHeader />
+                        <div style={{ height: 400, width: '100%' }}>
+                            <Button onClick={() => router.back()} variant="contained">Voltar</Button>
 
-                    <DataGrid
-                        rows={products}
-                        columns={columns}
-                        initialState={{
-                            pagination: {
-                                paginationModel: { page: 0, pageSize: 5 },
-                            },
-                        }}
-                        pageSizeOptions={[5, 10]}
-                        checkboxSelection
-                    />
+                            <DataGrid
+                                rows={products}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 5 },
+                                    },
+                                }}
+                                pageSizeOptions={[5, 10]}
+                                checkboxSelection
+                            />
+                        </div>
+                    </div>
                 </div>
-                /* <AppFooter></AppFooter> */
             );
         } else {
             return (
@@ -62,6 +68,6 @@ export default function Produtos() {
                 </>
             )
         }
-    } 
+    }
 }
 Produtos.auth = true

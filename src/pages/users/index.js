@@ -13,7 +13,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '@/lib/constants';
 
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import AppSidebar from '@/components/AppSidebar';
+import AppHeader from '@/components/AppHeader';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
@@ -31,22 +33,22 @@ const MatEdit = ({ id }) => {
   };
 
   return (
-<>
-  <FormControlLabel
-    control={
-      <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
-        <DeleteIcon style={{ color: blue[500] }} />
-      </IconButton>
-    }
-  />
-  <FormControlLabel
-    control={
-      <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
-        <EditIcon style={{ color: blue[500] }} />
-      </IconButton>
-    }
-  />
-   <ConfirmationModal
+    <>
+      <FormControlLabel
+        control={
+          <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
+            <DeleteIcon style={{ color: blue[500] }} />
+          </IconButton>
+        }
+      />
+      <FormControlLabel
+        control={
+          <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
+            <EditIcon style={{ color: blue[500] }} />
+          </IconButton>
+        }
+      />
+      <ConfirmationModal
         open={isConfirmationOpen}
         onClose={() => setConfirmationOpen(false)}
         onConfirm={() => {
@@ -65,12 +67,13 @@ const MatEdit = ({ id }) => {
             });
         }}
       />
-</>
+    </>
   );
 }
 
 const ConfirmationModal = ({ open, onClose, onConfirm }) => {
   return (
+
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Confirmação</DialogTitle>
       <DialogContent>
@@ -133,26 +136,30 @@ export default function Users() {
     if (session.user.usuario.tipoUsuario === 'admin') {
       return (
 
-        <div style={{ height: 400, width: '100%' }}>
-          <AppAppBar></AppAppBar>
+        <div>
+          <AppSidebar />
+          <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+            <AppHeader />
+            <div style={{ height: 400, width: '100%' }}>
 
-          <Button onClick={()=> router.back()} variant="contained">Voltar</Button>
+              <Button onClick={() => router.back()} variant="contained">Voltar</Button>
 
-          
-          <DataGrid
-            rows={users}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-          />
+
+              <DataGrid
+                rows={users}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+              />
+            </div>
+          </div>
         </div>
       );
-
     } else {
       return (
         <>
