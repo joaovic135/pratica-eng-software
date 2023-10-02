@@ -15,10 +15,6 @@ export default async function handler(req, res) {
             idLojista: params.id
           }
         })
-        res.status(200).json(produto);
-        break;
-
-      case 'POST':
         res.status(200).json({ name: 'Produto' });
         break;
 

@@ -8,26 +8,86 @@ import { DataGrid } from '@mui/x-data-grid';
 import AppAppBar from '@/components/appAppBar'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '@/lib/constants';
 
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
-const MatEdit = ({ index }) => {
-
-  const handleEditClick = () => {
-    // some action
-  }
+const MatEdit = ({ id }) => {
+  const router = useRouter();
 
 
-  return <FormControlLabel
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+
+  const handleDeleteClick = (event) => {
+    event.stopPropagation();
+    setConfirmationOpen(true);
+  };
+  const handleEditClick = (event) => {
+    event.stopPropagation();
+    router.push(`/users/edit/${id}`);
+  };
+
+  return (
+<>
+  <FormControlLabel
     control={
-      <IconButton color="secondary" aria-label="add an alarm" onClick={handleEditClick} >
+      <IconButton color="secondary" aria-label="delete" onClick={handleDeleteClick}>
+        <DeleteIcon style={{ color: blue[500] }} />
+      </IconButton>
+    }
+  />
+  <FormControlLabel
+    control={
+      <IconButton color="secondary" aria-label="edit" onClick={handleEditClick}>
         <EditIcon style={{ color: blue[500] }} />
       </IconButton>
     }
   />
+   <ConfirmationModal
+        open={isConfirmationOpen}
+        onClose={() => setConfirmationOpen(false)}
+        onConfirm={() => {
+          fetch(`${APIURL}/api/users/${id}`, {
+            method: 'DELETE',
+          })
+            .then((response) => {
+              if (response.ok) {
+                window.location.reload();
+              } else {
+                // Lógica para lidar com erros
+              }
+            })
+            .catch((error) => {
+              console.error('Erro ao excluir usuario:', error);
+            });
+        }}
+      />
+</>
+  );
+}
+
+const ConfirmationModal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Confirmação</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Tem certeza que deseja excluir este usuário? Esta ação é irreversível.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={() => { onConfirm(); onClose(); }} color="primary" autoFocus>
+          Confirmar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 };
 
 
@@ -42,14 +102,14 @@ const columns = [
   { field: 'tipoUsuario', headerName: 'Tipo de usuário', flex: 0.5, minWidth: 130 },
   {
     field: "actions",
-    headerName: "Actions",
+    headerName: "Ações",
     sortable: false,
     width: 140,
     disableClickEventBubbling: true,
     renderCell: (params) => {
       return (
         <div className="d-flex justify-content-between align-items-center" style={{ cursor: "pointer" }}>
-          <MatEdit index={params.row.id} />
+          <MatEdit id={params.row.id} />
         </div>
       );
     }

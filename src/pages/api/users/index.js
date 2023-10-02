@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   try {
     await db.sequelize.sync(); // Aguarde o banco de dados ser sincronizado antes de continuar
 
-
     switch (req.method) {
       case 'GET':
         const users = await Usuario.findAll();
