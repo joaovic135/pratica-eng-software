@@ -30,12 +30,12 @@ export default function Produtos() {
     const [products, setProducts] = useState([]);
     const { data: session } = useSession()
 
-    const id  = 1
+    const id  = session.user.lojista.id
     
     console.log(APIURL)
   
     useEffect(() => {
-      fetch(`http://localhost:3000/api/produto/lojista/?id=${id}` , {
+      fetch(`${APIURL}/api/produto/lojista/?id=${id}` , {
         method: 'GET',
       })
         .then(resp => resp.json())
