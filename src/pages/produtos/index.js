@@ -68,6 +68,12 @@ export default function Produtos() {
                 </>
             )
         }
-    } 
+    } else {
+        return (
+            <>
+                <Forbidden />
+            </>
+        )
+    }
 }
 Produtos.auth = true

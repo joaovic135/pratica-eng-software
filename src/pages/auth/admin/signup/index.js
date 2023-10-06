@@ -248,7 +248,12 @@ export default function AdminSignUp() {
 
         </>
       )
-    }
+    }else {
+      return (
+        <>
+          <Forbidden />
+        </>
+      )
   } else {
     return (
       <>
