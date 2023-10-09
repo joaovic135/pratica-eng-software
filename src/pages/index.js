@@ -18,6 +18,8 @@ import Container from '@mui/material/Container';
 import Typography from '@/components/typography';
 import { styled } from '@mui/material/styles';
 import { APIURL } from '@/lib/constants';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 const backgroundImage =
@@ -119,16 +121,23 @@ export default function Home() {
   const router = useRouter()
   const a = APIURL
   console.log(`asdasd${APIURL}`)
+  const [sessao, setSessao] = useState();
   const { data:session,  status } = useSession({
     required: true,
     onUnauthenticated() {
       return router.push('/auth/login')
     },
   })
+  useEffect(() => {
+    if(session != undefined){
+      setSessao(session.user.usuario)
+    }
+  }, [session])
+  
   if(status === 'loading'||status === 'authenticated'){
     return (
       <>
-        <AppAppBar></AppAppBar>
+        {sessao && <AppAppBar sessao={sessao} />}
         
 
         <BannerLayout
@@ -232,3 +241,5 @@ export default function Home() {
   }
 
 }
+
+Home.auth = true
