@@ -88,11 +88,14 @@ export default function Produto_Pagina() {
     margin: 5,
     width: '121ch'
   }
-  if (sessao == null) {
+
+  useEffect(() => {
+    if (sessao == null) {
     console.log(session)
     if (session)
       setSession(session.user.usuario);
   }
+  }, [sessao])
 
   return (
     <>
