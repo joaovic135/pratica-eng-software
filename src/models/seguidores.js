@@ -14,8 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Seguidores.init({
-    IdComprador: DataTypes.STRING,
-    IdLojista: DataTypes.STRING
+    IdComprador: {
+      type:DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{msg:'Id do comprador não pode ser nulo'},
+        notEmpty:{msg:'Id do comprador não pode ser vazio'}
+      }
+    },
+    IdLojista:{
+      type:DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{msg:'Id do lojista não pode ser nulo'},
+        notEmpty:{msg:'Id do lojista não pode ser vazio'}
+      }
+    }
+    
   }, {
     sequelize,
     modelName: 'Seguidores',

@@ -48,16 +48,30 @@ export default function PerfilLojista() {
   console.log(session.user.usuario.id)
   const idComprador = session.user.usuario.id
   const idLojista = lojista.id
+  console.log(idComprador, idLojista)
   const handleFollow = async () => {
     if (isFollowing) {
-      // Realize uma solicitação POST para deixar de seguir o lojista aqui
-      // Altere o estado do botão para "Não seguindo"
-      setIsFollowing(false);
+      const response = await fetch(`${APIURL}/api/seguirLojista?idComprador=${idComprador}&idLojista=${idLojista}`, {
+        method: 'DELETE',
+      });
+      if (response.status === 200) {
+        setIsFollowing(false);
+      }else{
+        const data = await response.json()
+        const {error}  = data
+        console.log(error);
+      }
     } else {
-      // Realize uma solicitação POST para seguir o lojista aqui
-      
-      // Altere o estado do botão para "Seguindo"
-      setIsFollowing(true);
+      const response = await fetch(`${APIURL}/api/seguirLojista?idComprador=${idComprador}&idLojista=${idLojista}`, {
+        method: 'POST',
+      });
+      if (response.status === 200) {
+        setIsFollowing(true);
+      } else {
+        const data = await response.json()
+        const {error}  = data
+        console.log(error);
+      }
     }
   };
 
@@ -81,12 +95,12 @@ export default function PerfilLojista() {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                  <Button
-                  onClick={handleFollow}
-                  variant={isFollowing ? "contained" : "outlined"}
-                >
-                  {isFollowing ? 'Seguindo' : 'Seguir'}
-                </Button>
+                    <Button
+                      onClick={handleFollow}
+                      variant={isFollowing ? "contained" : "outlined"}
+                    >
+                      {isFollowing ? 'Seguindo' : 'Seguir'}
+                    </Button>
                   </div>
                 </Grid>
               </Grid>
