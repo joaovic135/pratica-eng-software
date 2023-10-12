@@ -4,13 +4,20 @@ import Link from '@mui/material/Link';
 import Toolbar from './toolbar';
 import SignOut from './signOut';
 import MuiAppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { IconButton } from '@mui/material';
+import { Label } from '@mui/icons-material';
 const rightLink = {
   fontSize: 16,
   color: 'common.white',
   ml: 3,
 };
 
-function AppAppBar() {
+
+
+
+function AppAppBar(props) {
   return (
     <div>
       <MuiAppBar elevation={0} position="fixed">
@@ -25,24 +32,19 @@ function AppAppBar() {
           >
             {'EcoArtes'}
           </Link>
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            {/* <Link
+          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <a>{props.sessao ? props.sessao.nome.split(' ')[0] : 'Visitante'}</a>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={() => { window.location.href = "/perfil" }}
               color="inherit"
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-in/"
-              sx={rightLink}
             >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-up/"
-              sx={{ ...rightLink, color: 'secondary.main' }}
-            >
-              {'Sign Up'}
-            </Link> */}
+              <AccountCircle />
+            </IconButton>
+
             <SignOut></SignOut>
           </Box>
         </Toolbar>
