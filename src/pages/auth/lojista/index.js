@@ -7,6 +7,9 @@ import ButtonListarCompradores from "@/components/ButtonListarCompradores"
 import AppAppBar from '@/components/appAppBar'
 import { useState } from "react"
 import { useEffect } from "react"
+import AppSidebar from "@/components/appSidebar_Lojista"
+import AppFooter from '@/components/appFooter'
+import AppHeader from "@/components/AppHeader2"
 
 export default function LojistaDashboard() {
   const router = useRouter()
@@ -27,7 +30,26 @@ export default function LojistaDashboard() {
   console.log(sessao)
   return (
     <>
-      {sessao && <AppAppBar sessao={sessao} />}
+      
+      {/*{sessao && <AppAppBar sessao={sessao} />}*/}
+      <AppAppBar/>
+      
+      
+      <div>
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+          <AppHeader />
+          {/*<div className="body flex-grow-1 px-3">
+            <ButtonAdminCadastro />
+            <ButtonListarCompradores />
+            <ButtonListarLojistas />
+            <ButtonListarProdutos />
+          </div>
+        {O FOOTER }*/}
+        </div>
+      </div>
+
+      
       <h1>Painel do Lojista</h1>
       <Link href="/produtos/lojista"> {/* Este é o link para a página de lista de produtos */}
         <Button variant="contained" color="primary">
@@ -39,7 +61,10 @@ export default function LojistaDashboard() {
           Cadastrar Produto
         </Button>
       </Link>
+      <Box></Box>
+      <AppFooter/>
     </>
+    
   )
 
   /*} else {
