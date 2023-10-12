@@ -48,8 +48,14 @@ export default function Produto_Pagina() {
         .catch(error => {
           console.error('Erro na requisição:', error);
         });
+    }
+    if (sessao == null) {
+      console.log(session)
+      if (session){
+        setSession(session.user.usuario);
       }
-    }, [id]);
+    }
+  }, [id], [sessao]);
 
     
 
