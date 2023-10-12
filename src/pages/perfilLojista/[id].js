@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Tab, Tabs, Paper, Button, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Tab, Tabs, Paper, Button, Grid, Link, Box } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -9,6 +9,7 @@ import Loading from '@/components/Loading';
 
 export default function PerfilLojista() {
   const router = useRouter();
+  const [isFollowing, setIsFollowing] = useState(false);
   const [lojista, setLojista] = useState(null);
   const [produtos, setProdutos] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -37,13 +38,29 @@ export default function PerfilLojista() {
   }, [id, session]);
 
   if (lojista === null) {
-    return <div><Loading/></div>;
+    return <div><Loading /></div>;
   }
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-  
+
+  console.log(session.user.usuario.id)
+  const idComprador = session.user.usuario.id
+  const idLojista = lojista.id
+  const handleFollow = async () => {
+    if (isFollowing) {
+      // Realize uma solicitação POST para deixar de seguir o lojista aqui
+      // Altere o estado do botão para "Não seguindo"
+      setIsFollowing(false);
+    } else {
+      // Realize uma solicitação POST para seguir o lojista aqui
+      
+      // Altere o estado do botão para "Seguindo"
+      setIsFollowing(true);
+    }
+  };
+
   return (
     <div>
       {session && <AppAppBar sessao={session.user.usuario} />}
@@ -51,15 +68,33 @@ export default function PerfilLojista() {
         <Grid item xs={12}>
           <Card style={{ maxWidth: 400, margin: '0 auto', borderRadius: 16 }}>
             <CardContent>
-              <Typography variant="h5" align="center">
-                {lojista.nome}
-              </Typography>
-              <Typography variant="subtitle1" align="center">
-                {lojista.email}
-              </Typography>
+              <Grid container>
+                <Grid item xs={12} sm={8}>
+                  <div>
+                    <Typography variant="h5" align="center">
+                      {lojista.nome}
+                    </Typography>
+                    <Typography variant="subtitle1" align="center">
+                      {lojista.email}
+                    </Typography>
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                  <Button
+                  onClick={handleFollow}
+                  variant={isFollowing ? "contained" : "outlined"}
+                >
+                  {isFollowing ? 'Seguindo' : 'Seguir'}
+                </Button>
+                  </div>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
+
+
         <Grid item xs={12}>
           <Paper square>
             <Tabs
