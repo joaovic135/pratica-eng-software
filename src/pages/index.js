@@ -116,16 +116,16 @@ const images = [
 
 
 export default function Home() {
-  const router = useRouter()
-  const a = APIURL
-  console.log(`asdasd${APIURL}`)
-  const { data:session,  status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      return router.push('/auth/login')
-    },
-  })
-  if(status === 'loading'||status === 'authenticated'){
+  // const router = useRouter()
+  // const a = APIURL
+  // console.log(`asdasd${APIURL}`)
+  // const { data:session,  status } = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     return router.push('/auth/login')
+  //   },
+  // })
+  // if(status === 'loading'|| status === 'authenticated'){
     return (
       <>
         <AppAppBar></AppAppBar>
@@ -229,6 +229,6 @@ export default function Home() {
         <AppFooter></AppFooter>
       </>
     )
-  }
+  // }
 
 }
