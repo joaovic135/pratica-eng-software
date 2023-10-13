@@ -33,36 +33,9 @@ const AppHeader = () => {
               className="nav-link"
               onClick={handleDashboardClick} // Use a função handleDashboardClick para navegar
             >
-              Dashboard
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">Users</a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">Settings</a>
-          </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilList} size="lg" />
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
             </a>
           </CNavItem>
         </CHeaderNav>
-      </CContainer>
-      <CHeaderDivider />
-      <CContainer fluid>
       </CContainer>
     </CHeader>
   )

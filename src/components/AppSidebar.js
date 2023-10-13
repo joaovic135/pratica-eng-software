@@ -27,6 +27,9 @@ const AppSidebar = () => {
       <CSidebarBrand className="d-none d-md-flex" to="/">
         <b>teste</b>
       </CSidebarBrand>
+      <CSidebarBrand className="d-none d-md-flex" to="/">
+        <b>Painel do Administrador</b>
+      </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
           <AppSidebarNav items={navigation} />

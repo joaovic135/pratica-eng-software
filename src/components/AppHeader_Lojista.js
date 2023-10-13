@@ -24,45 +24,17 @@ const AppHeader = () => {
             dispatch(setSidebarShow(!sidebarShow))
           }
         >
-          <CIcon icon={cilMenu} size="lg" />
+        <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <a
               className="nav-link"
               onClick={handleDashboardClick} // Use a função handleDashboardClick para navegar
             >
-              Dashboard
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">Users</a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">a</a>
-          </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilList} size="lg" />
-            </a>
-          </CNavItem>
-          <CNavItem>
-            <a className="nav-link" href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
             </a>
           </CNavItem>
         </CHeaderNav>
-      </CContainer>
-      <CHeaderDivider />
-      <CContainer fluid>
       </CContainer>
     </CHeader>
   )

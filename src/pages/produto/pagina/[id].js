@@ -64,8 +64,13 @@ export default function Produto_Pagina() {
           console.error('Erro na requisição:', error);
         });
     }
-  }, [id]);
-
+    if (sessao == null) {
+      console.log(session)
+      if (session){
+        setSession(session.user.usuario);
+      }
+    }
+  }, [id], [sessao]);
 
   if (!produto) return <div><Loading /></div>
 
@@ -88,14 +93,6 @@ export default function Produto_Pagina() {
     margin: 5,
     width: '121ch'
   }
-
-  useEffect(() => {
-    if (sessao == null) {
-    console.log(session)
-    if (session)
-      setSession(session.user.usuario);
-  }
-  }, [sessao])
 
   return (
     <>

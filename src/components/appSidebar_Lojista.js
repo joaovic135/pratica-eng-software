@@ -24,11 +24,11 @@ const AppSidebar = () => {
         dispatch(setSidebarShow(visible));
       }}
     >
-        <CSidebarBrand className="d-none d-md-flex" to="/">
+      <CSidebarBrand className="d-none d-md-flex" to="/">
         <b>teste</b>
       </CSidebarBrand>
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <b>teste</b>
+        <b>Painel do Lojista</b>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
