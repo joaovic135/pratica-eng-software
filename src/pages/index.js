@@ -128,9 +128,18 @@ export default function Home() {
   // if(status === 'loading'|| status === 'authenticated'){
     return (
       <>
-        <AppAppBar></AppAppBar>
-        
-
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <AppAppBar></AppAppBar>
+            
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            component="a"
+            href="/auth/lojista/perfil/"
+            sx={{ minWidth: 200 }}
+          >Visitar Perfil</Button>  
+        </Box>
         <BannerLayout
           sxBackground={{
             backgroundImage: `url(${backgroundImage})`,
