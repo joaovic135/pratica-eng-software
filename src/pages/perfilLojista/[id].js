@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, Typography, Tab, Tabs, Paper, Button, Grid, Link, Box } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -7,6 +7,13 @@ import { APIURL } from '@/lib/constants';
 import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
 
+import * as React from 'react';
+import Rating from '@mui/material/Rating';
+
+function Teste(){
+
+}
+
 export default function PerfilLojista() {
   const router = useRouter();
   const [isFollowing, setIsFollowing] = useState(false);
@@ -14,6 +21,11 @@ export default function PerfilLojista() {
   const [produtos, setProdutos] = useState(null);
   const [avaliacoes, setAvaliacoes] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [value, setValue] = React.useState(0);
+  let notas = 0;
+  let num_notas = 0;
+  let media_notas = 0;
+
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -48,6 +60,8 @@ export default function PerfilLojista() {
     }
   }, [id, session]);
 
+  
+
   if (lojista === null) {
     return <div><Loading /></div>;
   }
@@ -55,6 +69,16 @@ export default function PerfilLojista() {
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
+
+  const feedbacks = (avaliacoes)
+  if(feedbacks){
+    num_notas = feedbacks.length
+    feedbacks.forEach((feedback) => {
+      notas += feedback.avaliacao;
+    })
+    media_notas = notas / num_notas
+    console.log(media_notas)
+  }
 
   console.log(session.user.usuario.id)
   const idComprador = session.user.usuario.id
@@ -97,7 +121,7 @@ export default function PerfilLojista() {
                 <Grid item xs={12} sm={8}>
                   <div>
                     <Typography variant="h5" align="center">
-                      {lojista.nome}
+                      {lojista.nome}  {media_notas}
                     </Typography>
                     <Typography variant="subtitle1" align="center">
                       {lojista.email}
@@ -182,7 +206,17 @@ export default function PerfilLojista() {
                   >        
                     <CardContent>
                       <Typography variant="body1">{avaliacao.analise}</Typography>
-                      <Typography variant="body1">Nota: {avaliacao.avaliacao}</Typography>
+                      <Box
+                        sx={{
+                          '& > legend': { mt: 2 },
+                        }}
+                      >
+                        <Typography component="legend">Nota</Typography>
+                        <Rating 
+                          name="read-only" 
+                          value={avaliacao.avaliacao}
+                          readOnly />
+                      </Box>
                     </CardContent>
                   </Card>
                 </Grid>
