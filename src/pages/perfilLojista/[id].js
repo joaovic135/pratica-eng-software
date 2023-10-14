@@ -35,12 +35,12 @@ export default function PerfilLojista() {
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
         });
-      fetch(`${APIURL}/api/avaliacao/`, { 
+      fetch(`${APIURL}/api/avaliacao/?id=${id}`, { 
         method: 'GET',
       })
         .then(resp => resp.json())
         .then(json => {
-          setAvaliacoes(json);
+          setAvaliacoes(json.avaliacoes);
         })
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -179,7 +179,7 @@ export default function PerfilLojista() {
                       display: 'flex',
                       flexDirection: 'column',
                     }}
-                  >
+                  >        
                     <CardContent>
                       <Typography variant="body1">{avaliacao.analise}</Typography>
                       <Typography variant="body1">Nota: {avaliacao.avaliacao}</Typography>
