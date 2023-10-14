@@ -9,6 +9,7 @@ import Loading from '@/components/Loading';
 
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
+import Star from '@mui/icons-material/StarRate'
 
 function Teste(){
 
@@ -77,7 +78,6 @@ export default function PerfilLojista() {
       notas += feedback.avaliacao;
     })
     media_notas = notas / num_notas
-    console.log(media_notas)
   }
 
   console.log(session.user.usuario.id)
@@ -121,7 +121,7 @@ export default function PerfilLojista() {
                 <Grid item xs={12} sm={8}>
                   <div>
                     <Typography variant="h5" align="center">
-                      {lojista.nome}  {media_notas}
+                      {lojista.nome} <Star/>{media_notas.toFixed(1)}
                     </Typography>
                     <Typography variant="subtitle1" align="center">
                       {lojista.email}
