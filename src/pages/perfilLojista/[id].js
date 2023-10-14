@@ -120,6 +120,7 @@ export default function PerfilLojista() {
               textColor="primary"
             >
               <Tab label="Produtos/Serviços" />
+              <Tab label="Avaliações de usuários" />
               <Tab label="Sobre" />
             </Tabs>
           </Paper>
@@ -155,6 +156,13 @@ export default function PerfilLojista() {
             </Grid>
           )}
           {activeTab === 1 && (
+            <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
+              <CardContent>
+                <Typography variant="body1">{lojista.descricao}</Typography>
+              </CardContent>
+            </Card>
+          )}
+          {activeTab === 2 && (
             <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
               <CardContent>
                 <Typography variant="body1">{lojista.descricao}</Typography>
