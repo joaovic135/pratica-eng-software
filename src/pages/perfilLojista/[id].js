@@ -12,6 +12,7 @@ export default function PerfilLojista() {
   const [isFollowing, setIsFollowing] = useState(false);
   const [lojista, setLojista] = useState(null);
   const [produtos, setProdutos] = useState(null);
+  const [avaliacoes, setAvaliacoes] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const { data: session, status } = useSession({
     required: true,
@@ -30,6 +31,16 @@ export default function PerfilLojista() {
         .then((json) => {
           setLojista(json.lojista);
           setProdutos(json.produtos);
+        })
+        .catch((error) => {
+          // Trate erros, por exemplo, redirecionando para uma página de erro.
+        });
+      fetch(`${APIURL}/api/avaliacao/`, { 
+        method: 'GET',
+      })
+        .then(resp => resp.json())
+        .then(json => {
+          setAvaliacoes(json);
         })
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -156,11 +167,27 @@ export default function PerfilLojista() {
             </Grid>
           )}
           {activeTab === 1 && (
-            <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-              <CardContent>
-                <Typography variant="body1">{lojista.descricao}</Typography>
-              </CardContent>
-            </Card>
+            <Grid container justifyContent="center" spacing={2}>
+            {avaliacoes &&
+              avaliacoes.map((avaliacao, index) => (
+                <Grid item key={index}>
+                  <Card
+                    style={{
+                      width: 300,
+                      borderRadius: 16,
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <CardContent>
+                      <Typography variant="body1">{avaliacao.analise}</Typography>
+                      <Typography variant="body1">Nota: {avaliacao.avaliacao}</Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                  ))}
+          </Grid>
           )}
           {activeTab === 2 && (
             <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
