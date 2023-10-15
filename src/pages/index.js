@@ -130,7 +130,8 @@ export default function Home() {
   })
   useEffect(() => {
     if(session != undefined){
-      setSessao(session.user.usuario)
+      if (session.user.lojista) setSessao(session.user.lojista)
+      else if (session.user.usuario) setSessao(session.user.usuario)
     }
   }, [session])
   

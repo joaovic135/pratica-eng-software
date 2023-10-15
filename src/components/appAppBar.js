@@ -4,6 +4,7 @@ import Link from '@mui/material/Link';
 import Toolbar from './toolbar';
 import SignOut from './signOut';
 import MuiAppBar from '@mui/material/AppBar';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import Button from '@mui/material/Button';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { IconButton } from '@mui/material';
@@ -41,10 +42,19 @@ function AppAppBar(props) {
               aria-haspopup="true"
               onClick={() => { window.location.href = "/perfil" }}
               color="inherit"
-            >
+              >
               <AccountCircle />
             </IconButton>
-
+            <IconButton
+              size="large"
+              aria-label="cart"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={() => { window.location.href = "/carrinho" }}
+              color="inherit" 
+            >
+              <LocalGroceryStoreIcon />
+            </IconButton>
             <SignOut></SignOut>
           </Box>
         </Toolbar>
