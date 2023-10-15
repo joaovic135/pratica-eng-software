@@ -2,22 +2,16 @@ import { useState } from 'react';
 import { Card, CardContent, Typography, Tab, Tabs, Paper, Button, Grid, Link, Box } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-
 import { APIURL } from '@/lib/constants';
 import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
-
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Star from '@mui/icons-material/StarRate'
 
-function Teste(){
-
-}
-
 export default function PerfilLojista() {
   const router = useRouter();
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(null);
   const [lojista, setLojista] = useState(null);
   const [produtos, setProdutos] = useState(null);
   const [avaliacoes, setAvaliacoes] = useState(null);
@@ -34,7 +28,9 @@ export default function PerfilLojista() {
     },
   });
   const { id } = router.query;
-
+  const idComprador = session.user.usuario.id
+  //const idComprador = session.user.usuario.id
+  //const idLojista = lojista.id
   React.useEffect(() => {
     if (session && id) {
       fetch(`${APIURL}/api/lojista/?id=${id}`, {
@@ -54,6 +50,18 @@ export default function PerfilLojista() {
         .then(resp => resp.json())
         .then(json => {
           setAvaliacoes(json.avaliacoes);
+        })
+        .catch((error) => {
+          // Trate erros, por exemplo, redirecionando para uma página de erro.
+        });
+      fetch(`${APIURL}/api/seguirLojista?idComprador=${idComprador}&idLojista=${id}`, {
+        method: 'GET',
+      })
+        .then(resp => resp.json())
+        .then(json => {
+          /*console.log("aaaaa" + (json))
+          console.log("bbbbb" + (json))*/
+          setIsFollowing(json);
         })
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -81,7 +89,7 @@ export default function PerfilLojista() {
   }
 
   console.log(session.user.usuario.id)
-  const idComprador = session.user.usuario.id
+  //const idComprador = session.user.usuario.id
   const idLojista = lojista.id
   console.log(idComprador, idLojista)
   const handleFollow = async () => {
