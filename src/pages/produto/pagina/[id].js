@@ -72,7 +72,6 @@ export default function Produto_Pagina() {
     }
   }, [id], [sessao]);
 
-
   if (!produto) return <div><Loading /></div>
 
   const preventDefault = (event) => event.preventDefault();

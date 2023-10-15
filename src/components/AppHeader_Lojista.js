@@ -24,9 +24,8 @@ const AppHeader = () => {
             dispatch(setSidebarShow(!sidebarShow))
           }
         >
-          <CIcon icon={cilMenu} size="lg" />
+        <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <a

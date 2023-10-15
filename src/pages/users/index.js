@@ -137,6 +137,7 @@ export default function Users() {
       return (
 
         <div>
+          <AppAppBar />
           <AppSidebar />
           <div className="wrapper d-flex flex-column min-vh-100 bg-light">
             <AppHeader />
