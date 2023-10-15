@@ -7,6 +7,7 @@ import { Box, Button, Container, TextField, Typography } from "@mui/material"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import AppAppBar from '@/components/appAppBar';
 
 export default function AdminSignUp() {
 
@@ -142,6 +143,7 @@ export default function AdminSignUp() {
     if (session.user.usuario.tipoUsuario === 'admin') {
       return (
         <>
+          <AppAppBar />
           <AppSidebar />
           <div className="wrapper d-flex flex-column min-vh-100 bg-light">
             <AppHeader />

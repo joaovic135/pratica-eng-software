@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react';
 import { AppSidebarNav } from './AppSidebarNav';
 import SimpleBar from 'simplebar-react';
-import navigation from '../_nav';
+import navigation from '../_nav_lojista';
 import 'simplebar-core/dist/simplebar.css'
 
 // Importe as ações do Redux Toolkit
@@ -28,7 +28,7 @@ const AppSidebar = () => {
         <b>teste</b>
       </CSidebarBrand>
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <b>Painel do Administrador</b>
+        <b>Painel do Lojista</b>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
