@@ -10,15 +10,12 @@ export default async function handler(req, res) {
 
     switch (req.method) {
       case 'GET':
-        const check = await Seguidores.findOne({
+        const check_seguidor = await Seguidores.findOne({
           where: {
             IdComprador: idComprador,
             IdLojista: idLojista,
           }})
-        /*const responseData = {
-          resultado: check
-        };*/
-        res.status(200).json(check);
+        res.status(200).json(check_seguidor);
         break;
 
       case 'POST':

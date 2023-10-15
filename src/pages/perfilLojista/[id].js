@@ -29,8 +29,6 @@ export default function PerfilLojista() {
   });
   const { id } = router.query;
   const idComprador = session.user.usuario.id
-  //const idComprador = session.user.usuario.id
-  //const idLojista = lojista.id
   React.useEffect(() => {
     if (session && id) {
       fetch(`${APIURL}/api/lojista/?id=${id}`, {
@@ -59,8 +57,6 @@ export default function PerfilLojista() {
       })
         .then(resp => resp.json())
         .then(json => {
-          /*console.log("aaaaa" + (json))
-          console.log("bbbbb" + (json))*/
           setIsFollowing(json);
         })
         .catch((error) => {
@@ -89,7 +85,6 @@ export default function PerfilLojista() {
   }
 
   console.log(session.user.usuario.id)
-  //const idComprador = session.user.usuario.id
   const idLojista = lojista.id
   console.log(idComprador, idLojista)
   const handleFollow = async () => {
