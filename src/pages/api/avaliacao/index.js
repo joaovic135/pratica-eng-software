@@ -1,7 +1,6 @@
 import db from '../../../models/index';
 
 const Lojista = db.Lojista;
-//const Comprador = db.Usuario;
 const Avaliacao = db.Avaliacoes;
 
 export default async function handler(req, res) {
