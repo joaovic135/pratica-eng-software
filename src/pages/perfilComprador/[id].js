@@ -11,6 +11,8 @@ export default function PerfilLojista() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
+  const [usuario, setUsuario] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(null);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -19,6 +21,7 @@ export default function PerfilLojista() {
   });
   const { id } = router.query;
   const user = session.user.usuario
+  console.log("Id user..:",id)
   console.log("Id user session..:",session.user.usuario.id)
   console.log("User..:",user)
 
@@ -39,8 +42,58 @@ export default function PerfilLojista() {
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
             });
+            fetch(`${APIURL}/api/seguirLojista?idComprador=${session.user.usuario.id}&idLojista=${id}`, {
+                method: 'GET',
+            })
+            .then((resp) => resp.json())
+            .then((json) => {
+                setIsFollowing(json);
+            })
+            .catch((error) => {
+                // Trate erros, por exemplo, redirecionando para uma página de erro.
+            });
+            fetch(`${APIURL}/api/users/?id=${id}`, {
+                method: 'GET',
+            })
+            .then((resp) => resp.json())
+            .then((json) => {
+                setUsuario(json.usuario);
+                console.log("Usuario..:",json.usuario)
+            })
+            .catch((error) => {
+                // Trate erros, por exemplo, redirecionando para uma página de erro.
+            });
+
         }
     }, [id, session]);
+
+    const handleFollow = async (idLojista) => {
+        if (isFollowing !== idLojista) {
+            console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
+            const response = await fetch(`${APIURL}/api/seguirLojista?idComprador=${session.user.usuario.id}&idLojista=${idLojista}`, {
+            method: 'DELETE',
+          });
+          if (response.status === 200) {
+            setIsFollowing(false);
+          }else{
+            const data = await response.json()
+            const {error}  = data
+            console.log(error);
+          }
+        } else {
+          const response = await fetch(`${APIURL}/api/seguirLojista?idComprador=${session.user.usuario.id}&idLojista=${idLojista}`, {
+            method: 'POST',
+          });
+          if (response.status === 200) {
+            setIsFollowing(true);
+          } else {
+            const data = await response.json()
+            const {error}  = data
+            console.log(error);
+          }
+        }
+        window.location.reload();
+    };
 
   return (
     <div>
@@ -114,10 +167,11 @@ export default function PerfilLojista() {
                                     onClick={() => router.push(`/perfilLojista/${lojista.id}`)}
                                 >Ver perfil
                                 </Button>
-                                <Button 
-                                    variant='contained' 
-                                    color='primary' 
-                                >Seguindo
+                                <Button
+                                    onClick={() => handleFollow(lojista.id)}
+                                    variant={isFollowing === lojista.id? "contained" : "outlined"}
+                                >
+                                    Seguindo
                                 </Button>
 
                             </CardContent>

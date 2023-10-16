@@ -9,6 +9,9 @@ import Button from '@mui/material/Button';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { IconButton } from '@mui/material';
 import { Label } from '@mui/icons-material';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+
 const rightLink = {
   fontSize: 16,
   color: 'common.white',
@@ -19,6 +22,16 @@ const rightLink = {
 
 
 function AppAppBar(props) {
+  
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      return router.push('/auth/login');
+    },
+  });
+  const router = useRouter();
+  const { id } = router.query;  
+
   return (
     <div>
       <MuiAppBar elevation={0} position="fixed">
@@ -40,7 +53,7 @@ function AppAppBar(props) {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={() => { window.location.href = "/perfil" }}
+              onClick={() => { router.push(`/perfilComprador/${session.user.usuario.id}`) }}
               color="inherit"
               >
               <AccountCircle />
