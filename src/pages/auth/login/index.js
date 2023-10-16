@@ -16,6 +16,13 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
+  const { data: session, status } = useSession({
+    required: false,
+    onUnauthenticated() {
+      return router.push('/auth/login');
+    },
+  });
+
   const isEmailValid = (email) => {
     // Expressão regular para verificar o formato do email
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -58,7 +65,7 @@ export default function Login() {
       setIsLoading(false);
     } else {
       // Redirecione ou faça alguma outra ação de sucesso
-      router.push('/');
+      router.push(`/perfilComprador/${session.user.usuario.id}`);
     }
 
   };
