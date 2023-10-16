@@ -24,7 +24,7 @@ const rightLink = {
 function AppAppBar(props) {
   
   const { data: session, status } = useSession({
-    required: true,
+    required: false,
     onUnauthenticated() {
       return router.push('/auth/login');
     },
