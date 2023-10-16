@@ -17,7 +17,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
   const { data: session, status } = useSession({
-    required: false,
+    required: true,
     onUnauthenticated() {
       return router.push('/auth/login');
     },
@@ -65,7 +65,7 @@ export default function Login() {
       setIsLoading(false);
     } else {
       // Redirecione ou faça alguma outra ação de sucesso
-      router.push(`/perfilComprador/${session.user.usuario.id}`);
+      router.push(`/`);
     }
 
   };
