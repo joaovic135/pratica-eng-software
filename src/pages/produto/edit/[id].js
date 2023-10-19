@@ -59,7 +59,7 @@ export default function EditProductScreen() {
     const data = await response.json()
     const { error } = data
     if (response.status === 401) return setError(error)
-    router.push('/produto/' + id)
+    router.push('/produto/lojista/' + id)
   };
 
   const inputStyle = {

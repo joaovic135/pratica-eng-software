@@ -53,7 +53,18 @@ function AppAppBar(props) {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={() => { router.push(`/perfilComprador/${session.user.usuario.id}`) }}
+              onClick={() => { 
+                // Aqui vai a rota para o perfil do usuário
+                if(session.user.lojista){
+                  router.push(`/auth/lojista`)
+                } else if (session.user.usuario.tipoUsuario == 'usuario'){
+                  router.push(`/perfilComprador/${session.user.usuario.id}`)
+                } else if (session.user.usuario.tipoUsuario == 'admin'){
+                  router.push(`/auth/admin`)
+                } else {
+                  router.push(`/auth/login`)
+                }
+              }}
               color="inherit"
               >
               <AccountCircle />
