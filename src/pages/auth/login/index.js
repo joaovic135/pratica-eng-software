@@ -144,8 +144,8 @@ export default function Login() {
                 {error && <ErrorTypography text={error} />}
                 <Grid container justifyContent="flex-end">
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Esqueceu a Senha?
+                    <Link href="/auth/lojista/login" variant="body2">
+                      Entrar como Lojista
                     </Link>
                   </Grid>
                   <Grid item>
@@ -153,11 +153,6 @@ export default function Login() {
                       Não tem uma conta? Cadastre-se
                     </Link>
                   </Grid>
-                </Grid>
-                <Grid item>
-                  <Link href="/auth/lojista/login" variant="body2">
-                    Entrar como Lojista
-                  </Link>
                 </Grid>
               </Box>
             </Box>

@@ -167,16 +167,6 @@ export default function Home() {
           >
             Descubra pinturas, bijuterias e muito mais feitas por artistas independentes
           </Typography>
-          <Button
-            color="secondary"
-            variant="contained"
-            size="large"
-            component="a"
-            href="/premium-themes/onepirate/sign-up/"
-            sx={{ minWidth: 200 }}
-          >
-            Veja mais !
-          </Button>
           <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
             Discover the experience
           </Typography>

@@ -123,11 +123,6 @@ export default function Login() {
                 </Button>
                 {error && <ErrorTypography text={error} />}
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Esqueceu a Senha?
-                    </Link>
-                  </Grid>
                   <Grid item>
                     <Link href="/auth/lojista/signup" variant="body2">
                       Não tem uma conta? Crie uma

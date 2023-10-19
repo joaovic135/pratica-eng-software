@@ -133,13 +133,6 @@ export default function AdminLogin() {
                   Login in
                 </Button>
                 {error && <ErrorTypography text={error} />}
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Esqueceu a Senha?
-                    </Link>
-                  </Grid>
-                </Grid>
               </Box>
             </Box>
           </Grid>
