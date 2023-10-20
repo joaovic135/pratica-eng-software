@@ -18,6 +18,8 @@ import Container from '@mui/material/Container';
 import Typography from '@/components/typography';
 import { styled } from '@mui/material/styles';
 import { APIURL } from '@/lib/constants';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 const backgroundImage =
@@ -116,19 +118,27 @@ const images = [
 
 
 export default function Home() {
-  const router = useRouter()
-  const a = APIURL
-  console.log(`asdasd${APIURL}`)
+  // const router = useRouter()
+  // const a = APIURL
+  // console.log(`asdasd${APIURL}`)
+  const [sessao, setSessao] = useState();
   const { data:session,  status } = useSession({
-    required: true,
+    required: false,
     onUnauthenticated() {
       return router.push('/auth/login')
     },
   })
-  if(status === 'loading'||status === 'authenticated'){
+  useEffect(() => {
+    if(session != undefined){
+      if (session.user.lojista) setSessao(session.user.lojista)
+      else if (session.user.usuario) setSessao(session.user.usuario)
+    }
+  }, [session])
+  
+  // if(status === 'loading'||status === 'authenticated'){
     return (
       <>
-        <AppAppBar></AppAppBar>
+        <AppAppBar sessao={sessao} />
         
 
         <BannerLayout
@@ -157,24 +167,14 @@ export default function Home() {
           >
             Descubra pinturas, bijuterias e muito mais feitas por artistas independentes
           </Typography>
-          <Button
-            color="secondary"
-            variant="contained"
-            size="large"
-            component="a"
-            href="/premium-themes/onepirate/sign-up/"
-            sx={{ minWidth: 200 }}
-          >
-            Veja mais !
-          </Button>
           <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-            Discover the experience
+            {/*Discover the experience*/}
           </Typography>
         </BannerLayout>
 
         <Container component="section" sx={{ mt: 8, mb: 4 }}>
           <Typography variant="h4" marked="center" align="center" component="h2">
-            Conheça o Artesanato da Amazonia
+            Conheça o Artesanato da Amazônia
           </Typography>
           <Box sx={{ mt: 8, display: 'flex', flexWrap: 'wrap' }}>
             {images.map((image) => (
@@ -231,4 +231,6 @@ export default function Home() {
     )
   }
 
-}
+// }
+
+// Home.auth = true
