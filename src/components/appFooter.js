@@ -44,7 +44,7 @@ export default function AppFooter() {
               direction="column"
               justifyContent="flex-end"
               spacing={2}
-              sx={{ height: 120 }}
+              sx={{ height: 80 }}
             >
             <Grid item xs={6} sm={4} md={2}>
               <Box component="ul" sx={{ m: 0, listStyle: 'none', p: 0 }}>
