@@ -8,7 +8,7 @@ import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
 import Rating from '@mui/material/Rating';
 import Forbidden from '@/components/Forbidden';
-import AppFooter from '@/components/appFooter'
+import AppFooter from '@/components/appFooter_PerfilComprador'
 
 export default function PerfilComprador() {
   const router = useRouter();
@@ -229,7 +229,7 @@ export default function PerfilComprador() {
     
             </Grid>
           </Grid>
-          <AppFooter/>
+          <AppFooter sx={{position:"fixed"}}/>
         </div>
       );
     }

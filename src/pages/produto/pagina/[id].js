@@ -79,7 +79,7 @@ export default function Produto_Pagina() {
   const theme = createTheme();
 
   const card = {
-    height: '90ch',
+    height: '80ch',
     width: '130ch',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(5)
@@ -89,7 +89,7 @@ export default function Produto_Pagina() {
     marginBottom: theme.spacing(2),
     textAlign: 'justify',
     ml: 2,
-    height: '40ch',
+    height: '30ch',
     margin: 5,
     width: '121ch'
   }
@@ -171,7 +171,7 @@ export default function Produto_Pagina() {
                   marginTop: theme.spacing(2),
                   marginBottom: theme.spacing(-5),
                   ml: 5,
-                  width: '150ch'
+                  width: '0ch'
                 }}>
                   <Typography variant="h5">
                     Descrição
@@ -185,6 +185,7 @@ export default function Produto_Pagina() {
               </Card>
             </div>
           </Box>
+          <AppFooter/>
         </Box>
       ) : (
         // Renderize o componente de carregamento enquanto as informações estão sendo carregadas

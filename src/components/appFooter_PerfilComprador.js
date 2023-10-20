@@ -35,8 +35,8 @@ export default function AppFooter() {
     <Typography
       component="footer"
       sx={{ 
-        display: 'flex', 
-        //position: "fixed", 
+        //display: 'flex', 
+        position: "fixed", 
         bottom: "0",
         left: "0",
         right: "0",
