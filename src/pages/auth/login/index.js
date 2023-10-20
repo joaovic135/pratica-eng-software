@@ -16,12 +16,12 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
-  const { data: session, status } = useSession({
+  /*const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       return router.push('/auth/login');
     },
-  });
+  });*/
 
   const isEmailValid = (email) => {
     // Expressão regular para verificar o formato do email

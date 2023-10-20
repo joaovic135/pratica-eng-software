@@ -74,7 +74,7 @@ export default function Produto_Pagina() {
 
   if (!produto) return <div><Loading /></div>
 
-  const preventDefault = (event) => event.preventDefault();
+  const precoFormatado = preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
   const theme = createTheme();
 
@@ -148,7 +148,7 @@ export default function Produto_Pagina() {
                           </Typography>
                           <br></br>
                           <Typography variant="h5">
-                            R$&nbsp;{preco}
+                            R$&nbsp;{precoFormatado}
                           </Typography>
                           <Typography variant="h7" color="green" >
                             Em estoque&nbsp;
