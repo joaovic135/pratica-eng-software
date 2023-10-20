@@ -6,12 +6,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { APIURL } from '@/lib/constants';
 import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
+import Rating from '@mui/material/Rating';
 
 export default function PerfilLojista() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
   const [usuario, setUsuario] = useState(null);
+  const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
   const { data: session, status } = useSession({
     required: true,
@@ -19,25 +21,35 @@ export default function PerfilLojista() {
       return router.push('/auth/login');
     },
   });
-  const { id } = router.query;
+  
   const user = session.user.usuario
-  console.log("Id user..:",id)
-  console.log("Id user session..:",session.user.usuario.id)
-  console.log("User..:",user)
+  //console.log("Id user..:",id)
+  //console.log("Id user session..:",session.user.usuario.id)
+  //console.log("User..:",user)
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-
+  const { id } = router.query;
     React.useEffect(() => {
         if (session && id) {
+            fetch(`${APIURL}/api/avaliacao_comprador/?id=${id}`, { 
+              method: 'GET',
+            })
+              .then(resp => resp.json())
+              .then(json => {
+                setAvaliacoes(json.avaliacoes_comprador);
+              })
+              .catch((error) => {
+                // Trate erros, por exemplo, redirecionando para uma página de erro.
+              });
             fetch(`${APIURL}/api/seguindo/?id=${id}`, {
                 method: 'GET',
             })
             .then((resp) => resp.json())
             .then((json) => {
                 setLojistas(json.lojistas);
-                console.log("Lojistas..:",json.lojistas)
+                //console.log("Lojistas..:",json.lojistas)
             })
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -52,13 +64,14 @@ export default function PerfilLojista() {
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
             });
+            
             fetch(`${APIURL}/api/users/?id=${id}`, {
                 method: 'GET',
             })
             .then((resp) => resp.json())
             .then((json) => {
                 setUsuario(json.usuario);
-                console.log("Usuario..:",json.usuario)
+                //console.log("Usuario..:",json.usuario)
             })
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -135,9 +148,9 @@ export default function PerfilLojista() {
               textColor="primary"
               
             >
-              <Tab label="Sequindo" />
+              <Tab label="Lojistas seguidos" />
               <Tab label="Avaliações" />
-              <Tab label="Historico de compras" />
+              <Tab label="Histórico de compras" />
             </Tabs>
           </Paper>
         </Grid>
@@ -181,11 +194,37 @@ export default function PerfilLojista() {
                 </Grid>
             )}
           {activeTab === 1 && (
-            <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-              <CardContent>
-                <Typography variant="body1">Avaliações</Typography>
-              </CardContent>
-            </Card>
+            <Grid container justifyContent="center" spacing={2}>
+            {avaliacoes_comprador &&
+              avaliacoes_comprador.map((avaliacoes_comprador, index) => (
+                <Grid item key={index}>
+                  <Card
+                    style={{
+                      width: 300,
+                      borderRadius: 16,
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >        
+                    <CardContent>
+                      <Typography variant="body1">{avaliacoes_comprador.analise}</Typography>
+                      <Box
+                        sx={{
+                          '& > legend': { mt: 2 },
+                        }}
+                      >
+                        <Typography component="legend">Nota</Typography>
+                        <Rating 
+                          name="read-only" 
+                          value={avaliacoes_comprador.avaliacao}
+                          readOnly />
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                  ))}
+            </Grid>
           )}
           
           {activeTab === 2 && (

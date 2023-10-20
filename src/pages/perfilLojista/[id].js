@@ -14,7 +14,7 @@ export default function PerfilLojista() {
   const [isFollowing, setIsFollowing] = useState(null);
   const [lojista, setLojista] = useState(null);
   const [produtos, setProdutos] = useState(null);
-  const [avaliacoes, setAvaliacoes] = useState(null);
+  const [avaliacoes_lojista, setAvaliacoes] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [value, setValue] = React.useState(0);
   let notas = 0;
@@ -42,12 +42,12 @@ export default function PerfilLojista() {
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
         });
-      fetch(`${APIURL}/api/avaliacao/?id=${id}`, { 
+      fetch(`${APIURL}/api/avaliacao_lojista/?id=${id}`, { 
         method: 'GET',
       })
         .then(resp => resp.json())
         .then(json => {
-          setAvaliacoes(json.avaliacoes);
+          setAvaliacoes(json.avaliacoes_lojista);
         })
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -75,7 +75,7 @@ export default function PerfilLojista() {
     setActiveTab(newValue);
   };
 
-  const feedbacks = (avaliacoes)
+  const feedbacks = (avaliacoes_lojista)
   if(feedbacks){
     num_notas = feedbacks.length
     feedbacks.forEach((feedback) => {
@@ -195,8 +195,8 @@ export default function PerfilLojista() {
           )}
           {activeTab === 1 && (
             <Grid container justifyContent="center" spacing={2}>
-            {avaliacoes &&
-              avaliacoes.map((avaliacao, index) => (
+            {avaliacoes_lojista &&
+              avaliacoes_lojista.map((avaliacoes_lojista, index) => (
                 <Grid item key={index}>
                   <Card
                     style={{
@@ -208,7 +208,7 @@ export default function PerfilLojista() {
                     }}
                   >        
                     <CardContent>
-                      <Typography variant="body1">{avaliacao.analise}</Typography>
+                      <Typography variant="body1">{avaliacoes_lojista.analise}</Typography>
                       <Box
                         sx={{
                           '& > legend': { mt: 2 },
@@ -217,7 +217,7 @@ export default function PerfilLojista() {
                         <Typography component="legend">Nota</Typography>
                         <Rating 
                           name="read-only" 
-                          value={avaliacao.avaliacao}
+                          value={avaliacoes_lojista.avaliacao}
                           readOnly />
                       </Box>
                     </CardContent>

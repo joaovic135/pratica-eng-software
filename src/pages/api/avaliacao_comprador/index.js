@@ -1,6 +1,6 @@
 import db from '../../../models/index';
 
-const Lojista = db.Lojista;
+const Usuario = db.Usuario;
 const Avaliacao = db.Avaliacoes;
 
 export default async function handler(req, res) {
@@ -9,11 +9,10 @@ export default async function handler(req, res) {
         switch (req.method) {
             case 'GET':
                 const params = req.query;
-                const lojista = await Lojista.findOne({ where: { id: params.id } });
-                const avaliacao = await Avaliacao.findAll({ where: { idLojista: lojista.id } });
+                const comprador = await Usuario.findOne({ where: { id: params.id } });
+                const avaliacao_comprador = await Avaliacao.findAll({ where: { idComprador: comprador.id } });
                 const responseData = {
-                    lojista: lojista,
-                    avaliacoes: avaliacao,
+                    avaliacoes_comprador: avaliacao_comprador,
                 };
                 res.status(200).json(responseData);
                 break;
