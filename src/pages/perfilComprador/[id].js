@@ -218,7 +218,7 @@ export default function PerfilLojista() {
           {activeTab === 2 && (
             <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
               <CardContent>
-                <Typography variant="body1">Histórico de compras... Será implementado somente na sprint 6.</Typography>
+                <Typography variant="body1">Histórico de compras. Essa funcionalidade será implementada somente na sprint 6.</Typography>
               </CardContent>
             </Card>
           )}
