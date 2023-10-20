@@ -4,8 +4,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import Typography from './typography';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+
 function Copyright() {
   return (
     <React.Fragment>
@@ -35,7 +34,7 @@ export default function AppFooter() {
   return (
     <Typography
       component="footer"
-      sx={{ display: 'flex', bgcolor: 'secondary.light' }}
+      sx={{ display: 'flex', bgcolor: 'primary.dark' }}
     >
       <Container sx={{ my: 8, display: 'flex' }}>
         <Grid container spacing={5}>
@@ -47,11 +46,21 @@ export default function AppFooter() {
               spacing={2}
               sx={{ height: 120 }}
             >
-              
-              
+            <Grid item xs={6} sm={4} md={2}>
+              <Box component="ul" sx={{ m: 0, listStyle: 'none', p: 0 }}>
+                <Box component="li" sx={{ py: 0.5 }}>
+                  <Link href="/sobre" color="rgb(255,255,255)">Sobre</Link>
+                </Box>
+                <Box component="li" sx={{ py: 0.5 }}>
+                  <Link href="/suporte" color="rgb(255,255,255)">Suporte</Link>
+                </Box>
+              </Box>
+            </Grid>
+              <Grid item>
+                {/*<Copyright />*/}
+              </Grid>
             </Grid>
           </Grid>
-          
           
         </Grid>
       </Container>
