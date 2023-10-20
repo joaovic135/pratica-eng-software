@@ -9,6 +9,7 @@ import ButtonListarLojistas from "@/components/ButtonListarLojistas"
 import ButtonListarProdutos from "@/components/ButtonListarProdutos"
 import AppSidebar from "@/components/AppSidebar"
 import AppHeader from "@/components/AppHeader"
+import AppFooter from "@/components/appFooter"
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -20,7 +21,7 @@ export default function AdminDashboard() {
     if (session.user.usuario.tipoUsuario === 'admin') {
       return (
         <>
-
+        <AppAppBar/>
           <div>
             <AppSidebar />
             <div className="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -31,7 +32,7 @@ export default function AdminDashboard() {
                 <ButtonListarLojistas />
                 <ButtonListarProdutos />
               </div>
-              {/* O FOOTER */}
+              <AppFooter/>
             </div>
 
           </div>
