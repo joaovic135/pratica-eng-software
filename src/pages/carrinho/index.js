@@ -1,4 +1,4 @@
-export default function Sobre() {
+export default function Carrinho_de_Compras() {
     return (
         <>
         <h2>
