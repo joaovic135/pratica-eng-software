@@ -16,12 +16,12 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
-  const { data: session, status } = useSession({
+  /*const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       return router.push('/auth/login');
     },
-  });
+  });*/
 
   const isEmailValid = (email) => {
     // Expressão regular para verificar o formato do email
@@ -139,7 +139,7 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
                 <Grid container justifyContent="flex-end">

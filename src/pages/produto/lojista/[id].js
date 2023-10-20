@@ -171,7 +171,7 @@ export default function Produto() {
           </Button>
 
           <Button variant="contained" color="primary" onClick={handleModalClose}>
-            Fechar Modal
+            Cancelar operação
           </Button>
         </Box>
       </Modal>

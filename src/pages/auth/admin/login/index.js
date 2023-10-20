@@ -130,7 +130,7 @@ export default function AdminLogin() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login in
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
               </Box>

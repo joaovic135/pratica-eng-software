@@ -9,7 +9,7 @@ export default function SignOut(){
         onClick={() => signOut()}
         variant="contained"
       >
-        Sign Out
+        Finalizar sessão
       </Button> 
     )
 
@@ -20,7 +20,7 @@ export default function SignOut(){
           onClick={() => signIn()}
           variant="contained"
         >
-          Sign in
+          Iniciar sessão
         </Button>
       </>
     )

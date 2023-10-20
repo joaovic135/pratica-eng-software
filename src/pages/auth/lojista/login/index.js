@@ -119,13 +119,18 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login in
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
-                <Grid container>
+                <Grid container justifyContent="flex-end">
+                  <Grid item xs>
+                    <Link href="/auth/login" variant="body2">
+                      Entrar como Comprador
+                    </Link>
+                  </Grid>
                   <Grid item>
                     <Link href="/auth/lojista/signup" variant="body2">
-                      Não tem uma conta? Crie uma
+                      Não tem uma conta? Cadastre-se
                     </Link>
                   </Grid>
                 </Grid>

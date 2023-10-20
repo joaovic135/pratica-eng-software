@@ -6,12 +6,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { APIURL } from '@/lib/constants';
 import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
+import Rating from '@mui/material/Rating';
+import Forbidden from '@/components/Forbidden';
+import AppFooter from '@/components/appFooter_PerfilComprador'
 
-export default function PerfilLojista() {
+export default function PerfilComprador() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
-  const [usuario, setUsuario] = useState(null);
+  const [comprador, setComprador] = useState(true); //por enquanto nao funciona se for null
+  const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
   const { data: session, status } = useSession({
     required: true,
@@ -19,25 +23,37 @@ export default function PerfilLojista() {
       return router.push('/auth/login');
     },
   });
-  const { id } = router.query;
+  
   const user = session.user.usuario
-  console.log("Id user..:",id)
-  console.log("Id user session..:",session.user.usuario.id)
-  console.log("User..:",user)
+  //console.log("Id user..:",id)
+  //console.log("Id user session..:",session.user.usuario.id)
+  //console.log("User..:",user)
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-
+  const { id } = router.query;
     React.useEffect(() => {
         if (session && id) {
+            fetch(`${APIURL}/api/avaliacao_comprador/?id=${id}`, { 
+              method: 'GET',
+            })
+              .then(resp => resp.json())
+              .then(json => {
+                setComprador(json.comprador);
+                console.log(json.comprador.nome)
+                setAvaliacoes(json.avaliacoes_comprador);
+              })
+              .catch((error) => {
+                // Trate erros, por exemplo, redirecionando para uma página de erro.
+              });
             fetch(`${APIURL}/api/seguindo/?id=${id}`, {
                 method: 'GET',
             })
             .then((resp) => resp.json())
             .then((json) => {
                 setLojistas(json.lojistas);
-                console.log("Lojistas..:",json.lojistas)
+                //console.log("Lojistas..:",json.lojistas)
             })
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
@@ -52,18 +68,6 @@ export default function PerfilLojista() {
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
             });
-            fetch(`${APIURL}/api/users/?id=${id}`, {
-                method: 'GET',
-            })
-            .then((resp) => resp.json())
-            .then((json) => {
-                setUsuario(json.usuario);
-                console.log("Usuario..:",json.usuario)
-            })
-            .catch((error) => {
-                // Trate erros, por exemplo, redirecionando para uma página de erro.
-            });
-
         }
     }, [id, session]);
 
@@ -95,111 +99,155 @@ export default function PerfilLojista() {
         window.location.reload();
     };
 
-  return (
-    <div>
-      {session && <AppAppBar sessao={session.user.usuario} />}
-      <Grid container justifyContent="center" spacing={2}>
-        <Grid item xs={12}>
-          <Card style={{ maxWidth: 400, margin: '0 auto', borderRadius: 16 }}>
-            <CardContent>
-              <Grid container>
-                <Grid item xs={12} sm={8}>
-                  <div>
-                    <Typography variant="h5" align="center">
-                      {user.nome}
-                    </Typography>
-                    <Typography variant="subtitle1" align="center">
-                      {user.email}
-                    </Typography>
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <SvgIcon component={AccountCircleIcon} sx={{ fontSize: 80 }} />
-                  </div>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-
-
-        <Grid item xs={12}>
-          <Paper square>
-            <Tabs
-              value={activeTab}
-              onChange={handleTabChange}
-              centered
-              aria-label="Tabs"
-              indicatorColor="primary"
-              textColor="primary"
-              
-            >
-              <Tab label="Sequindo" />
-              <Tab label="Avaliações" />
-              <Tab label="Historico de compras" />
-            </Tabs>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-            {activeTab === 0 && (
-                <Grid container justifyContent="center" spacing={2}>
-                {lojistas && lojistas.map((lojista, index) => (
-                    <Grid item key={index}>
-                        <Card
-                            style={
-                                {
-                                    width: 300,
-                                    borderRadius: 16,
-                                    textAlign: 'left',
-                                    display: 'flex',
-                                    flexDirection: 'column',
+  if (session){
+    if (session.user.usuario.id === comprador.id){
+      return (
+        <div>
+          {session && <AppAppBar sessao={session.user.usuario} />}
+          <Grid container justifyContent="center" spacing={2}>
+            <Grid item xs={12}>
+                  <Card style={{ maxWidth: 400, margin: '0 auto', borderRadius: 16 }}>
+                    <CardContent>
+                      <Grid container>
+                        <Grid item xs={12} sm={8}>
+                          <div>
+                            <Typography variant="h5" align="center">
+                              {comprador.nome}
+                            </Typography>
+                            <Typography variant="subtitle1" align="center">
+                              {comprador.email}
+                            </Typography>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <SvgIcon component={AccountCircleIcon} sx={{ fontSize: 80 }} />
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card> 
+            </Grid>
+    
+            <Grid item xs={12}>
+              <Paper square>
+                <Tabs
+                  value={activeTab}
+                  onChange={handleTabChange}
+                  centered
+                  aria-label="Tabs"
+                  indicatorColor="primary"
+                  textColor="primary"
+                  
+                >
+                  <Tab label="Lojistas seguidos" />
+                  <Tab label="Avaliações" />
+                  <Tab label="Histórico de compras" />
+                </Tabs>
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+                {activeTab === 0 && (
+                    <Grid container justifyContent="center" spacing={2}>
+                    {lojistas && lojistas.map((lojista, index) => (
+                        <Grid item key={index}>
+                            <Card
+                                style={
+                                    {
+                                        width: 300,
+                                        borderRadius: 16,
+                                        textAlign: 'left',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                    }
                                 }
-                            }
-                        >
-                            <CardContent>
-                                <Typography variant="h6">{lojista.nome}</Typography>
-                                <Typography variant="body1">{lojista.email}</Typography>
-                                <Typography variant="body1">{lojista.telefone}</Typography>
-                                <Button 
-                                    variant='contained' 
-                                    color='primary' 
-                                    onClick={() => router.push(`/perfilLojista/${lojista.id}`)}
-                                >Ver perfil
-                                </Button>
-                                <Button
-                                    onClick={() => handleFollow(lojista.id)}
-                                    variant={isFollowing === lojista.id? "contained" : "outlined"}
-                                >
-                                    Seguindo
-                                </Button>
-
-                            </CardContent>
-                        </Card>
+                              >
+                                <CardContent>
+                                    <Typography variant="h6">{lojista.nome}</Typography>
+                                    <Typography variant="body1">E-mail: {lojista.email}</Typography>
+                                    <Typography variant="body1">Telefone: {lojista.numero}</Typography>
+                                    <Button 
+                                        variant='contained' 
+                                        color='primary' 
+                                        onClick={() => router.push(`/perfilLojista/${lojista.id}`)}
+                                    >Ver perfil
+                                    </Button>
+                                    <Button
+                                        onClick={() => handleFollow(lojista.id)}
+                                        variant={isFollowing === lojista.id? "contained" : "outlined"}
+                                    >
+                                        Seguindo
+                                    </Button>
+    
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
                     </Grid>
-                ))}
+                )}
+              {activeTab === 1 && (
+                <Grid container justifyContent="center" spacing={2}>
+                {avaliacoes_comprador &&
+                  avaliacoes_comprador.map((avaliacoes_comprador, index) => (
+                    <Grid item key={index}>
+                      <Card
+                        style={{
+                          width: 300,
+                          borderRadius: 16,
+                          textAlign: 'left',
+                          display: 'flex',
+                          flexDirection: 'column',
+                        }}
+                      >        
+                        <CardContent>
+                          <Typography variant="body1">{avaliacoes_comprador.analise}</Typography>
+                          <Box
+                            sx={{
+                              '& > legend': { mt: 2 },
+                            }}
+                          >
+                            <Typography component="legend">Nota</Typography>
+                            <Rating 
+                              name="read-only" 
+                              value={avaliacoes_comprador.avaliacao}
+                              readOnly />
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                      ))}
                 </Grid>
-            )}
-          {activeTab === 1 && (
-            <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-              <CardContent>
-                <Typography variant="body1">Avaliações</Typography>
-              </CardContent>
-            </Card>
-          )}
-          
-          {activeTab === 2 && (
-            <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-              <CardContent>
-                <Typography variant="body1">Histórico de compras</Typography>
-              </CardContent>
-            </Card>
-          )}
-
-        </Grid>
-      </Grid>
-    </div>
-  );
+              )}
+              
+              {activeTab === 2 && (
+                <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
+                  <CardContent>
+                    <Typography variant="body1">Histórico de compras. Essa funcionalidade será implementada somente na sprint 6.</Typography>
+                  </CardContent>
+                </Card>
+              )}
+    
+            </Grid>
+          </Grid>
+          <AppFooter sx={{position:"fixed"}}/>
+        </div>
+      );
+    }
+    else{
+      return (
+        <>
+          <Forbidden />
+        </>
+      )
+    }
+  }
+  else{
+    return (
+      <>
+        <Forbidden />
+      </>
+    )
+  }
 }
 
-PerfilLojista.auth = true;
+PerfilComprador.auth = true;
