@@ -12,7 +12,7 @@ export default function PerfilLojista() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
-  const [usuario, setUsuario] = useState(null);
+  const [comprador, setComprador] = useState(true); //por enquanto nao funciona se for null
   const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
   const { data: session, status } = useSession({
@@ -38,6 +38,8 @@ export default function PerfilLojista() {
             })
               .then(resp => resp.json())
               .then(json => {
+                setComprador(json.comprador);
+                console.log(json.comprador.nome)
                 setAvaliacoes(json.avaliacoes_comprador);
               })
               .catch((error) => {
@@ -64,19 +66,6 @@ export default function PerfilLojista() {
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
             });
-            
-            fetch(`${APIURL}/api/users/?id=${id}`, {
-                method: 'GET',
-            })
-            .then((resp) => resp.json())
-            .then((json) => {
-                setUsuario(json.usuario);
-                //console.log("Usuario..:",json.usuario)
-            })
-            .catch((error) => {
-                // Trate erros, por exemplo, redirecionando para uma página de erro.
-            });
-
         }
     }, [id, session]);
 
@@ -113,29 +102,28 @@ export default function PerfilLojista() {
       {session && <AppAppBar sessao={session.user.usuario} />}
       <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
-          <Card style={{ maxWidth: 400, margin: '0 auto', borderRadius: 16 }}>
-            <CardContent>
-              <Grid container>
-                <Grid item xs={12} sm={8}>
-                  <div>
-                    <Typography variant="h5" align="center">
-                      {user.nome}
-                    </Typography>
-                    <Typography variant="subtitle1" align="center">
-                      {user.email}
-                    </Typography>
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <SvgIcon component={AccountCircleIcon} sx={{ fontSize: 80 }} />
-                  </div>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+              <Card style={{ maxWidth: 400, margin: '0 auto', borderRadius: 16 }}>
+                <CardContent>
+                  <Grid container>
+                    <Grid item xs={12} sm={8}>
+                      <div>
+                        <Typography variant="h5" align="center">
+                          {comprador.nome}
+                        </Typography>
+                        <Typography variant="subtitle1" align="center">
+                          {comprador.email}
+                        </Typography>
+                      </div>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <SvgIcon component={AccountCircleIcon} sx={{ fontSize: 80 }} />
+                      </div>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card> 
         </Grid>
-
 
         <Grid item xs={12}>
           <Paper square>
@@ -169,11 +157,11 @@ export default function PerfilLojista() {
                                     flexDirection: 'column',
                                 }
                             }
-                        >
+                          >
                             <CardContent>
                                 <Typography variant="h6">{lojista.nome}</Typography>
-                                <Typography variant="body1">{lojista.email}</Typography>
-                                <Typography variant="body1">{lojista.telefone}</Typography>
+                                <Typography variant="body1">E-mail: {lojista.email}</Typography>
+                                <Typography variant="body1">Telefone: {lojista.numero}</Typography>
                                 <Button 
                                     variant='contained' 
                                     color='primary' 
@@ -230,7 +218,7 @@ export default function PerfilLojista() {
           {activeTab === 2 && (
             <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
               <CardContent>
-                <Typography variant="body1">Histórico de compras</Typography>
+                <Typography variant="body1">Histórico de compras... Será implementado somente na sprint 6.</Typography>
               </CardContent>
             </Card>
           )}
