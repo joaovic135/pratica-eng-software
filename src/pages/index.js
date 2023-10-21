@@ -179,6 +179,7 @@ export default function Home() {
           <Box sx={{ mt: 8, display: 'flex', flexWrap: 'wrap' }}>
             {images.map((image) => (
               <ImageIconButton
+                disabled
                 key={image.title}
                 style={{
                   width: image.width,
