@@ -34,7 +34,7 @@ export default function Lojista() {
   const { id } = router.query
 
   
-  console.log(id)
+  //console.log(id)
   useEffect(() => {
     fetch(`${APIURL}/api/lojista/?id=${id}` , {
       method: 'GET',

@@ -41,7 +41,7 @@ export default function PerfilComprador() {
               .then(resp => resp.json())
               .then(json => {
                 setComprador(json.comprador);
-                console.log(json.comprador.nome)
+                //console.log(json.comprador.nome)
                 setAvaliacoes(json.avaliacoes_comprador);
               })
               .catch((error) => {
@@ -73,7 +73,7 @@ export default function PerfilComprador() {
 
     const handleFollow = async (idLojista) => {
         if (isFollowing !== idLojista) {
-            console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
+            //console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
             const response = await fetch(`${APIURL}/api/seguirLojista?idComprador=${session.user.usuario.id}&idLojista=${idLojista}`, {
             method: 'DELETE',
           });

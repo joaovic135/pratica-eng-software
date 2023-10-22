@@ -1,5 +1,5 @@
 import { genSalt, hash } from 'bcrypt';
-console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
+//console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
 import db from '../../../models/index';
 db.sequelize.sync();
 const Lojista = db.Lojista;
@@ -14,10 +14,10 @@ export default async function handler(req, res) {
 
     case 'POST':
       const user = req.body
-      console.log("BBBBBBBBBBBBBBBBBBBBBBBB")
+      //console.log("BBBBBBBBBBBBBBBBBBBBBBBB")
 
       try{
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
+        //console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
         const emailInserido = user.email;
         const senhaInserida = user.senha;
 
