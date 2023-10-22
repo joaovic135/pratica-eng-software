@@ -13,6 +13,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { APIURL } from '@/lib/constants';
 import AppHeader from '@/components/AppHeader';
 import AppSidebar from '@/components/AppSidebar';
+import Loading from '@/components/Loading';
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
@@ -44,21 +45,26 @@ export default function Produtos() {
                     <AppSidebar />
                     <div className="wrapper d-flex flex-column min-vh-100 bg-light">
                         <AppHeader />
-                        <div style={{ height: 400, width: '100%' }}>
-                            <Button onClick={() => router.back()} variant="contained">Voltar</Button>
 
-                            <DataGrid
-                                rows={products}
-                                columns={columns}
-                                initialState={{
-                                    pagination: {
-                                        paginationModel: { page: 0, pageSize: 5 },
-                                    },
-                                }}
-                                pageSizeOptions={[5, 10]}
-                                checkboxSelection
-                            />
-                        </div>
+                        {products !== null && products.length > 0 ? (
+                            <div style={{ height: 400, width: '100%' }}>
+                                <Button onClick={() => router.back()} variant="contained">Voltar</Button>
+
+                                <DataGrid
+                                    rows={products}
+                                    columns={columns}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: { page: 0, pageSize: 5 },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5, 10]}
+                                    checkboxSelection
+                                />
+                            </div>
+                        ) : (
+                            <p><Loading /></p>
+                        )}
                     </div>
                 </div>
             );

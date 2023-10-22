@@ -16,18 +16,18 @@ export default function Cadastrar() {
   const [nome, setName] = useState([]);
   const [preco, setPreço] = useState([]);
   const [categoria, setCategoria] = useState([]);
-  const [estoque,setEstoque]= useState([]);
-  const [descricao,setDescricao]= useState([]);
+  const [estoque, setEstoque] = useState([]);
+  const [descricao, setDescricao] = useState([]);
 
   const { data: session } = useSession({
     required: true,
-        onUnauthenticated() {
-          return router.push('/auth/lojista/login')
-        },
-      })
-          const idLojista = session.user.lojista.id
-          const { id } = router.query
-        
+    onUnauthenticated() {
+      return router.push('/auth/lojista/login')
+    },
+  })
+  const idLojista = session.user.lojista.id
+  const { id } = router.query
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -74,7 +74,7 @@ export default function Cadastrar() {
                 id="nome"
                 label="Nome do produto"
                 autoFocus
-                value = {nome}
+                value={nome}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -101,7 +101,7 @@ export default function Cadastrar() {
               />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="estoque"
@@ -109,10 +109,10 @@ export default function Cadastrar() {
                 name="estoque"
                 value={estoque}
                 onChange={(e) => setEstoque(e.target.value)}
-                />
+              />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="descricao"
@@ -123,9 +123,9 @@ export default function Cadastrar() {
                 maxRows={20}
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                />
+              />
             </Grid>
-            
+
           </Grid>
           <Button
             type="submit"
