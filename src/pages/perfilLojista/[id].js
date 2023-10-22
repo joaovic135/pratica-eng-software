@@ -167,7 +167,7 @@ export default function PerfilLojista() {
                   indicatorColor="primary"
                   textColor="primary"
                 >
-                  <Tab label="Produtos/Serviços" />
+                  <Tab label="Produtos" />
                   <Tab label="Avaliações de usuários" />
                   <Tab label="Sobre" />
                 </Tabs>
@@ -294,7 +294,7 @@ export default function PerfilLojista() {
                   indicatorColor="primary"
                   textColor="primary"
                 >
-                  <Tab label="Produtos/Serviços" />
+                  <Tab label="Produtos" />
                   <Tab label="Avaliações de usuários" />
                   <Tab label="Sobre" />
                 </Tabs>
@@ -422,7 +422,7 @@ export default function PerfilLojista() {
                 indicatorColor="primary"
                 textColor="primary"
               >
-                <Tab label="Produtos/Serviços" />
+                <Tab label="Produtos" />
                 <Tab label="Avaliações de usuários" />
                 <Tab label="Sobre" />
               </Tabs>
