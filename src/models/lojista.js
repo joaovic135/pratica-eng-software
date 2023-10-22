@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Lojista.init({
     nome: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
+      type:DataTypes.STRING,
+      allowNull:false,
+      validate:{
         notNull: { msg: 'Nome não pode ser nulo' },
         notEmpty: { msg: 'Nome não pode ser vazio' }
       },
     },
-    senha: {
+      senha: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -29,28 +29,26 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'Este campo não pode ser vazio' },
       },
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: { msg: 'Email não pode ser nulo' },
-        notEmpty: { msg: 'Email não pode ser vazio' }
+    email:{ type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{msg:'Email não pode ser nulo'},
+        notEmpty:{msg:'Email não pode ser vazio'}
       },
     },
-    numero: {
-      type: DataTypes.STRING,
+    numero:{ 
+      type:DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: { msg: 'Este campo não pode ser vazio' },
         notEmpty: { msg: 'Este campo não pode ser vazio' },
       },
     },
-    descricao: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: { msg: 'Este campo não pode ser nulo' },
-        notEmpty: { msg: 'Este campo não pode ser vazio' }
+    descricao:{ type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{msg:'Este campo não pode ser nulo'},
+        notEmpty:{msg:'Este campo não pode ser vazio'}
       },
     },
   }, {
@@ -58,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Lojista',
     tableName: 'Lojista'
   });
-  Lojista.prototype.isTheUserPassword = async function (senhaInput) {
+    Lojista.prototype.isTheUserPassword = async function (senhaInput) {
     return await bcrypt.compare(senhaInput, this.senha);
   };
   return Lojista;

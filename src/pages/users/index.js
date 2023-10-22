@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue } from '@mui/material/colors';
 import { APIURL } from '@/lib/constants';
+import Footer from '@/components/appFooter'
 
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AppSidebar from '@/components/AppSidebar';
@@ -165,6 +166,7 @@ export default function Users() {
               )}
             </div>
           </div>
+          <Footer/>
         </div>
       );
     } else {

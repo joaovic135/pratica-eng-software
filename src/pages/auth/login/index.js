@@ -16,12 +16,12 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
-  const { data: session, status } = useSession({
+  /*const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       return router.push('/auth/login');
     },
-  });
+  });*/
 
   const isEmailValid = (email) => {
     // Expressão regular para verificar o formato do email
@@ -106,7 +106,7 @@ export default function Login() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant='h5'>
-                Bem vindo(a)
+                Bem-vindo(a) à tela de login do comprador
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
@@ -139,13 +139,13 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
                 <Grid container justifyContent="flex-end">
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Esqueceu a Senha?
+                    <Link href="/auth/lojista/login" variant="body2">
+                      Entrar como Lojista
                     </Link>
                   </Grid>
                   <Grid item>
@@ -153,11 +153,6 @@ export default function Login() {
                       Não tem uma conta? Cadastre-se
                     </Link>
                   </Grid>
-                </Grid>
-                <Grid item>
-                  <Link href="/auth/lojista/login" variant="body2">
-                    Entrar como Lojista
-                  </Link>
                 </Grid>
               </Box>
             </Box>

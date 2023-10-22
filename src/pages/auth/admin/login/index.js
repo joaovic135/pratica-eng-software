@@ -97,7 +97,7 @@ export default function AdminLogin() {
                 <SupervisorAccountOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant='h5'>
-                Login Admin
+                Bem-vindo(a) à tela de login do administrador
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
@@ -130,22 +130,14 @@ export default function AdminLogin() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login in
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Esqueceu a Senha?
-                    </Link>
-                  </Grid>
-                </Grid>
               </Box>
             </Box>
           </Grid>
         </Grid>
       )}
     </div>
-
   )
 }

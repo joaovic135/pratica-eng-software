@@ -11,7 +11,7 @@ export default function EditProductScreen() {
   const [produto, setProduto] = useState([]);
   const [nome, setNome] = useState([]);
   const [descricao, setDescricao] = useState([]);
-  const [preco, setPreco] = useState([]);
+  let [preco, setPreco] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [estoque, setEstoque] = useState([]);
 
@@ -35,17 +35,17 @@ export default function EditProductScreen() {
     })
       .then(resp => resp.json())
       .then(json => {
-        setProduto(json)
-        setNome(json.nome)
-        setDescricao(json.descricao)
-        setPreco(json.preco)
-        setCategoria(json.categoria)
-        setEstoque(json.estoque)
+        setProduto(json.produto)
+        setNome(json.produto.nome)
+        setDescricao(json.produto.descricao)
+        setPreco(json.produto.preco)
+        setCategoria(json.produto.categoria)
+        setEstoque(json.produto.estoque)
       })
   }, [])
 
 
-
+  //preco = preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -59,7 +59,7 @@ export default function EditProductScreen() {
     const data = await response.json()
     const { error } = data
     if (response.status === 401) return setError(error)
-    router.push('/produto/' + id)
+    router.push('/produto/lojista/' + id)
   };
 
   const inputStyle = {
@@ -102,7 +102,7 @@ export default function EditProductScreen() {
             label="Preço"
             variant="outlined"
             fullWidth
-            value={preco}
+            value={preco}//{preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             onChange={(e) => setPreco(e.target.value)}
             style={inputStyle}
           />
