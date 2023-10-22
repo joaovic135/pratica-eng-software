@@ -17,7 +17,6 @@ export default function Produto() {
   const [preco, setPreco] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [estoque, setEstoque] = useState([]);
-  const [sessao, setSession] = useState(null)
 
 
   const { data: session } = useSession({
@@ -34,9 +33,6 @@ export default function Produto() {
 
 
   useEffect(() => {
-    if (session){
-      setSession(session.user.lojista)
-    } 
     fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
       method: 'GET',
     })
@@ -49,7 +45,7 @@ export default function Produto() {
         setCategoria(json.categoria)
         setEstoque(json.estoque)
       })
-  }, [id,idLojista,session])
+  }, [])
 
 
   const handleEditClick = () => {
@@ -119,7 +115,7 @@ export default function Produto() {
   return (
 
     <>
-      {sessao && <AppAppBar sessao={sessao} />}
+      <AppAppBar></AppAppBar>
 
       <Card sx={card}>
         <CardMedia
@@ -171,7 +167,7 @@ export default function Produto() {
           </Button>
 
           <Button variant="contained" color="primary" onClick={handleModalClose}>
-            Cancelar operação
+            Fechar Modal
           </Button>
         </Box>
       </Modal>

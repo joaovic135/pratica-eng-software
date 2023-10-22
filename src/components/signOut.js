@@ -8,6 +8,7 @@ export default function SignOut(){
       <Button 
         onClick={() => signOut()}
         variant="contained"
+        sx={{ mt: 3, mb: 2 }}
       >
         Finalizar sessão
       </Button> 
@@ -19,6 +20,7 @@ export default function SignOut(){
         <Button 
           onClick={() => signIn()}
           variant="contained"
+          sx={{ mt: 3, mb: 2 }}
         >
           Iniciar sessão
         </Button>

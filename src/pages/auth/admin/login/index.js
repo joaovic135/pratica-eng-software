@@ -139,6 +139,5 @@ export default function AdminLogin() {
         </Grid>
       )}
     </div>
-
   )
 }

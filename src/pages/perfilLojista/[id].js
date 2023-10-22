@@ -506,3 +506,4 @@ export default function PerfilLojista() {
 }
 
 //PerfilLojista.auth = true;
+

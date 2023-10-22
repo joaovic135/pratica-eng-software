@@ -61,7 +61,7 @@ export default function AdminSignUp() {
   const formatPhoneNumber = (value) => {
     // Remove todos os caracteres não numéricos
     const phoneNumber = value.replace(/\D/g, '');
-
+    
     // Formata o número de telefone no formato brasileiro
     const formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
 
@@ -159,7 +159,7 @@ export default function AdminSignUp() {
                     <CCardBody>
                       <div className="mb-3">
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-
+                          
                           <TextField
                             name="nome"
                             label="Nome completo"
@@ -252,18 +252,13 @@ export default function AdminSignUp() {
 
         </>
       )
-    } else {
-      return (
-        <>
-          <Forbidden />
-        </>
-      )
-    } 
-  } else {
-      return (
-        <>
-          <Forbidden />
-        </>
-      )
     }
+  } else {
+    return (
+      <>
+        <Forbidden />
+      </>
+    )
   }
+
+}

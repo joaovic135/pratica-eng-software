@@ -3,7 +3,6 @@ import 'node_modules/@coreui/coreui/dist/css/coreui.min.css';
 import store from '../redux/store';
 import { Provider } from 'react-redux';
 import '../scss/style.scss'
-import Loading from "@/components/Loading";
 
 export default function App({
   Component,
@@ -29,7 +28,7 @@ function Auth({ children }) {
   const { status } = useSession({ required: true })
 
   if (status === "loading") {
-    return <Loading/>
+    return <div>Loading...</div>
   }
 
   return children
