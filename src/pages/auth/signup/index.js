@@ -109,7 +109,7 @@ export default function SignUp() {
     if (response.status === 400) {
       setError("Email ja cadastrado");
     } else {
-      router.push('/');
+      router.push('/auth/login');
     }
   };
 
@@ -129,7 +129,7 @@ export default function SignUp() {
         </Avatar>
 
         <Typography component="h1" variant="h5">
-          Sign up
+          Realizar cadastro de comprador
         </Typography>
 
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -141,7 +141,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="nome"
-                label="Nome"
+                label="Nome completo"
                 autoFocus
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
@@ -235,7 +235,7 @@ export default function SignUp() {
                 sx={{ mt: 3, mb: 2 }}
                 disabled={!isFormValid()}
               >
-                Sign Up
+                Concluir cadastro
               </Button>
             </Grid>
             {error && (

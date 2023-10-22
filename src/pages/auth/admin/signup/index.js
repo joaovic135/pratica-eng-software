@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import AppAppBar from '@/components/appAppBar';
+import Footer from '@/components/appFooter_Fixo'
 
 export default function AdminSignUp() {
 
@@ -161,7 +162,7 @@ export default function AdminSignUp() {
 
                           <TextField
                             name="nome"
-                            label="Nome"
+                            label="Nome completo"
                             variant="outlined"
                             value={nome}
                             autoFocus
@@ -232,7 +233,7 @@ export default function AdminSignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                           >
-                            Cadastrar
+                            Concluir cadastro
                           </Button>
                         </Box>
                         {error && (
@@ -246,6 +247,7 @@ export default function AdminSignUp() {
                 </CCol>
               </CRow>
             </CContainer>
+          <Footer/>
           </div>
 
         </>
