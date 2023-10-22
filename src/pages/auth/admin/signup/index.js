@@ -161,7 +161,7 @@ export default function AdminSignUp() {
 
                           <TextField
                             name="nome"
-                            label="Nome"
+                            label="Nome completo"
                             variant="outlined"
                             value={nome}
                             autoFocus
@@ -232,7 +232,7 @@ export default function AdminSignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                           >
-                            Cadastrar
+                            Concluir cadastro
                           </Button>
                         </Box>
                         {error && (
