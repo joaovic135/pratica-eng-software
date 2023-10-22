@@ -51,7 +51,7 @@ export default function Login() {
     setIsLoading(true);
 
     // Tente fazer o login
-    const result = await signIn("credentials", {
+    const result = await signIn("usuario", {
       email: email,
       password: senha,
       redirect: false,
