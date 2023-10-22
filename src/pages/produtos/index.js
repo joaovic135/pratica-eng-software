@@ -1,5 +1,4 @@
 import AppAppBar from '@/components/appAppBar'
-import AppFooter from '@/components/appFooter'
 import * as React from 'react';
 import { FormControlLabel, Button, IconButton } from '@mui/material';
 import Forbidden from '@/components/Forbidden';
@@ -13,10 +12,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import { APIURL } from '@/lib/constants';
 import AppHeader from '@/components/AppHeader';
 import AppSidebar from '@/components/AppSidebar';
+import Footer from '@/components/appFooter'
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
-    { field: 'idLojista', headerName: 'Lojista', flex: 1.5, minWidth: 150 },
+    { field: 'idLojista', headerName: 'ID_Lojista', flex: 1.5, minWidth: 150 },
     { field: 'nome', headerName: 'Nome', flex: 1, minWidth: 150 },
     { field: 'descricao', headerName: 'Descrição', flex: 1, minWidth: 150 },
     { field: 'preco', headerName: 'Preço', flex: 1, minWidth: 150 },
@@ -60,6 +60,7 @@ export default function Produtos() {
                             />
                         </div>
                     </div>
+                    <Footer/>
                 </div>
             );
         } else {

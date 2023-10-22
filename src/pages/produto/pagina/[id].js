@@ -17,6 +17,7 @@ export default function Produto_Pagina() {
   const [produtoCarregado, setProdutoCarregado] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [nome, setNome] = useState([]);
+  const [idLojista, setIdLojista] = useState([]);
   const [descricao, setDescricao] = useState([]);
   const [preco, setPreco] = useState([]);
   const [categoria, setCategoria] = useState([]);
@@ -51,8 +52,10 @@ export default function Produto_Pagina() {
         })
         .then(json => {
           if (json) {
+            //console.log(json);
             setProduto(json.produto);
             setNome(json.produto.nome);
+            setIdLojista(json.lojista.id);
             setDescricao(json.produto.descricao);
             setPreco(json.produto.preco);
             setCategoria(json.produto.categoria);
@@ -148,7 +151,7 @@ export default function Produto_Pagina() {
                                 {nome}
                               </Typography>
                               <Typography gutterBottom variant="h7" component="div">
-                                Vendido por {lojista}
+                                Vendido por <Link href={`/perfilLojista/${idLojista}`} color="inherit"> {lojista} </Link>
                               </Typography>
                               <br></br>
                               <Typography variant="h5">
@@ -251,7 +254,7 @@ export default function Produto_Pagina() {
                                 {nome}
                               </Typography>
                               <Typography gutterBottom variant="h7" component="div">
-                                Vendido por {lojista}
+                                Vendido por <Link href={`/perfilLojista/${idLojista}`} color="inherit"> {lojista} </Link>
                               </Typography>
                               <br></br>
                               <Typography variant="h5">
@@ -355,7 +358,7 @@ export default function Produto_Pagina() {
                               {nome}
                             </Typography>
                             <Typography gutterBottom variant="h7" component="div">
-                              Vendido por {lojista}
+                              Vendido por <Link href={`/perfilLojista/${idLojista}`} color="inherit"> {lojista} </Link>
                             </Typography>
                             <br></br>
                             <Typography variant="h5">

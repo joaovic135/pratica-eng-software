@@ -8,7 +8,7 @@ import AppAppBar from '@/components/appAppBar';
 import Loading from '@/components/Loading';
 import Rating from '@mui/material/Rating';
 import Forbidden from '@/components/Forbidden';
-import AppFooter from '@/components/appFooter_PerfilComprador'
+import AppFooter from '@/components/appFooter_Fixo'
 
 export default function PerfilComprador() {
   const router = useRouter();

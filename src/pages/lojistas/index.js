@@ -15,6 +15,7 @@ import { APIURL } from '@/lib/constants';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AppHeader from '@/components/AppHeader';
 import AppSidebar from '@/components/AppSidebar';
+import Footer from '@/components/appFooter'
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
@@ -101,7 +102,7 @@ const columns = [
   { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90 },
   {
     field: 'nome', headerName: 'Nome completo', flex: 1.5, minWidth: 150, renderCell: (params) => (
-      <Link href={`lojistas/${params.row.id}`}>{params.value}</Link>
+      <Link href={`perfilLojista/${params.row.id}`}>{params.value}</Link>
     )
   },
   { field: 'email', headerName: 'Email', flex: 1, minWidth: 150 },
@@ -155,6 +156,7 @@ export default function Lojistas() {
               />
             </div>
           </div>
+          <Footer/>
         </div>
       );
     } else {

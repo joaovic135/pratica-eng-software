@@ -97,7 +97,7 @@ export default function AdminLogin() {
                 <SupervisorAccountOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant='h5'>
-                Login Admin
+                Bem-vindo(a) à tela de login do administrador
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
