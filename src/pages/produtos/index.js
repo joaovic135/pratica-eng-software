@@ -12,11 +12,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { APIURL } from '@/lib/constants';
 import AppHeader from '@/components/AppHeader';
 import AppSidebar from '@/components/AppSidebar';
-<<<<<<< HEAD
 import Loading from '@/components/Loading';
-=======
 import Footer from '@/components/appFooter'
->>>>>>> 63a52164331b950017deb73486cbb66d5892494f
 
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
