@@ -12,7 +12,7 @@ export default function ButtonAdminCadastro(){
   if(1){
     return(
       <>
-        <Button onClick={()=> router.push('/auth/admin/signup')} variant="contained">Cadastrar Admin</Button>
+        <Button onClick={()=> router.push('/auth/admin/signup')} variant="contained">Cadastrar Administrador</Button>
       </>
     )
   }

@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { APIURL } from '@/lib/constants';
-
+import AppAppBar from '@/components/appAppBar';
+import Footer from '@/components/appFooter_Fixo'
 
 export default function Cadastrar() {
   const [error, setError] = useState(null);
@@ -44,8 +45,8 @@ export default function Cadastrar() {
     router.push('/auth/lojista')
   }
   return (
-
     <Container component="main" maxWidth="xs">
+      <AppAppBar/>
       <CssBaseline />
       <Box
         sx={{
@@ -139,6 +140,7 @@ export default function Cadastrar() {
           </Grid>
         </Box>
       </Box>
+      <Footer/>
     </Container>
 
 

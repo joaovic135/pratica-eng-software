@@ -106,7 +106,7 @@ export default function Login() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant='h5'>
-                Bem-vindo(a) à tela de login de comprador
+                Bem-vindo(a) à tela de login do comprador
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
