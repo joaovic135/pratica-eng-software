@@ -69,7 +69,7 @@ export default NextAuth({
       name: 'Lojista',
       async authorize(credentials, req) {
         try{
-          console.log(APIURL)
+          //console.log(APIURL)
           const res = await fetch(`${APIURL}/api/lojista/login`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -78,9 +78,9 @@ export default NextAuth({
               senha: credentials.password
             }),
           });
-          console.log(res)
+          //console.log(res)
           const user = await res.json();
-          console.log(user)
+          //console.log(user)
           if (res.ok && user) {
             return user
           }else{

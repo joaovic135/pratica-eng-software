@@ -32,7 +32,7 @@ export default function Produtos() {
 
     const id  = session.user.lojista.id
     
-    console.log(APIURL)
+    //console.log(APIURL)
   
     useEffect(() => {
       fetch(`${APIURL}/api/produto/lojista/?id=${id}` , {

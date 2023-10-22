@@ -19,10 +19,10 @@ export default async function handler(req, res) {
         break;
 
       case 'POST':
-        console.log(req.query)
+        //console.log(req.query)
         const user = req.query;
-        console.log(user.idLojista)
-        console.log(idLojista, idComprador)
+        //console.log(user.idLojista)
+        //console.log(idLojista, idComprador)
         const existingSeguidor = await Seguidores.findOne({
           where: {
             IdComprador: idComprador,

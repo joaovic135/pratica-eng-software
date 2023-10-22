@@ -133,7 +133,7 @@ export default function Lojistas() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    console.log(APIURL)
+    //console.log(APIURL)
     fetch(`${APIURL}/api/lojistas`)
       .then(resp => resp.json())
       .then(json => { setLojista(json) })
