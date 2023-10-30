@@ -15,12 +15,16 @@ import AppSidebar from '@/components/AppSidebar';
 import Loading from '@/components/Loading';
 import Footer from '@/components/appFooter'
 
+function formatarPreco(preco) {
+    return preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+  }
+
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
     { field: 'idLojista', headerName: 'ID_Lojista', flex: 1.5, minWidth: 150 },
     { field: 'nome', headerName: 'Nome', flex: 1, minWidth: 150 },
     { field: 'descricao', headerName: 'Descrição', flex: 1, minWidth: 150 },
-    { field: 'preco', headerName: 'Preço', flex: 1, minWidth: 150 },
+    { field: 'preco', headerName: 'Preço', flex: 1, minWidth: 150,valueFormatter: (params) => formatarPreco(params.value)},
     { field: 'categoria', headerName: 'Categoria', flex: 1, minWidth: 150 },
     { field: 'estoque', headerName: 'Estoque', flex: 1, minWidth: 150 },
     { field: 'file', headerName: 'File', flex: 0.5, minWidth: 130 }

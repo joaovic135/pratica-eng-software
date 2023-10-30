@@ -8,14 +8,14 @@ import { APIURL } from '@/lib/constants';
 
 
 export default function EditProductScreen() {
-  const [produto, setProduto] = useState([]);
-  const [nome, setNome] = useState([]);
-  const [descricao, setDescricao] = useState([]);
-  let [preco, setPreco] = useState([]);
-  const [categoria, setCategoria] = useState([]);
-  const [estoque, setEstoque] = useState([]);
-
+  const [produto, setProduto] = useState('');
+  const [error, setError] = useState(null);
   const router = useRouter()
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [estoque, setEstoque] = useState('');
+  const [descricao, setDescricao] = useState('');
 
   const { data: session } = useSession({
     required: true,
@@ -27,6 +27,40 @@ export default function EditProductScreen() {
   const idLojista = session.user.lojista.id
   const { id } = router.query
 
+  const formatNumber = (value) => {
+    // Remove todos os caracteres não numéricos
+    const justNumber = value.replace(/\D/g, '');
+
+    return justNumber ;
+  };
+  const formatPreco = (value) => {
+    // Remove todos os caracteres não numéricos
+    const precoFormated = value.replace(/[^\d.]/g, '');
+
+    return precoFormated ;
+  };
+
+  const handlePreco = (e) => {
+    setPreco(formatPreco(e.target.value));
+  };
+
+  const handleEstoque = (e) => {
+    setEstoque(formatNumber(e.target.value));
+  };
+
+  const isNumberValid=(value)=>{
+    return !isNaN(value) && value > 0;
+    
+  }
+
+  const formatCategoria=(value)=>{
+    const categoriaString=value.replace(/\d/g, '');
+
+    return categoriaString;
+  }
+  const handleCategoria = (e) => {
+    setCategoria(formatCategoria(e.target.value));
+  };
 
 
   useEffect(() => {
@@ -48,6 +82,28 @@ export default function EditProductScreen() {
   //preco = preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (nome.trim() === '') {
+      setError('O campo Nome é obrigatório.');
+      return;
+    }
+
+    if (preco === '' || !isNumberValid(preco)) {
+      setError('O campo Preço é obrigatório e deve ser preenchido com um valor maior que 0.');
+      return;
+    }
+    
+    if (categoria.trim()===''){
+      setError('O campo Categoria é obrigatório.');
+      return;
+    }
+    if(estoque ===''|| !isNumberValid(estoque)){
+      setError('O campo Estoque é obrigatorio e deve ser preenchido com um valor maior que 0.')
+      return;
+    }
+    if (descricao.trim() === '') {
+      setError('O campo Descrição é obrigatório.');
+      return;
+    }
 
     const response = await fetch(`${APIURL}/api/produto/edit/?id=${id}&idLojista=${idLojista}`, {
       credentials: 'include',
@@ -103,7 +159,7 @@ export default function EditProductScreen() {
             variant="outlined"
             fullWidth
             value={preco}//{preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            onChange={(e) => setPreco(e.target.value)}
+            onChange={handlePreco}
             style={inputStyle}
           />
           <TextField
@@ -112,7 +168,7 @@ export default function EditProductScreen() {
             variant="outlined"
             fullWidth
             value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
+            onChange={handleCategoria}
             style={inputStyle}
           />
           <TextField
@@ -122,12 +178,17 @@ export default function EditProductScreen() {
             variant="outlined"
             fullWidth
             value={estoque}
-            onChange={(e) => setEstoque(e.target.value)}
+            onChange={handleEstoque}
             style={inputStyle}
           />
           <Button variant="contained" color="primary" onClick={handleSubmit} sx={{padding: '10px'}}>
             Salvar
           </Button>
+          {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
 
         </FormControl>
       </Box>

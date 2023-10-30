@@ -7,7 +7,7 @@ import { useState } from "react";
 import Modal from '@mui/material/Modal';
 import AppAppBar from '@/components/appAppBar';
 import { APIURL } from '@/lib/constants';
-
+import Forbidden from '@/components/Forbidden';
 export default function Produto() {
   const router = useRouter()
   const [produto, setProduto] = useState([]);
@@ -26,8 +26,16 @@ export default function Produto() {
     },
   })
 
-  const idLojista = session.user.lojista.id
-  const { id } = router.query
+  let idLojista;
+  let id;
+
+  if (session && session.user && session.user.lojista && session.user.lojista.id) {
+    idLojista = session.user.lojista.id;
+  }
+
+  if (router.query && router.query.id) {
+    id = router.query.id;
+  }
 
 
 
@@ -111,6 +119,10 @@ export default function Produto() {
     display: 'flex',
     justifyContent: 'space-between',
   }
+  const precoFormatado = preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+  if (session){
+    if (idLojista !== undefined && session && session.user && session.user.lojista && session.user.lojista.id === idLojista){
 
   return (
 
@@ -133,7 +145,7 @@ export default function Produto() {
             Descrição: {produto.descricao}
           </Typography>
           <Typography variant="body2" color="text.secondary" >
-            Preço: R${produto.preco}
+          Preço: R$&nbsp;{precoFormatado}
           </Typography>
           <Typography variant="body2" color="text.secondary" >
             Categoria: {produto.categoria}
@@ -174,7 +186,23 @@ export default function Produto() {
 
     </>
 
+  );
+}
+else{
+  return (
+    <>
+      <Forbidden />
+    </>
   )
+}
+}
+else{
+  return (
+    <>
+      <Forbidden />
+    </>
+  )
+}
 
 }
 
