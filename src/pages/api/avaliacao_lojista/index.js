@@ -10,10 +10,9 @@ export default async function handler(req, res) {
             case 'GET':
                 const params = req.query;
                 const lojista = await Lojista.findOne({ where: { id: params.id } });
-                const avaliacao = await Avaliacao.findAll({ where: { idLojista: lojista.id } });
+                const avaliacao_lojista = await Avaliacao.findAll({ where: { idLojista: lojista.id } });
                 const responseData = {
-                    lojista: lojista,
-                    avaliacoes: avaliacao,
+                    avaliacoes_lojista: avaliacao_lojista,
                 };
                 res.status(200).json(responseData);
                 break;

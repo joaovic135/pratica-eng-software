@@ -29,7 +29,7 @@ export const AppSidebarNav = ({ items }) => {
       <Component
         key={index}
         {...rest}
-        visible={isRouteActive(rest.to)}
+        //visible={isRouteActive(rest.to)}
       >
         {navLink(name, icon, badge)}
       </Component>

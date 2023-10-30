@@ -14,7 +14,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { APIURL } from '@/lib/constants';
-import Loading from '@/components/Loading';
 
 
 
@@ -24,7 +23,6 @@ export default function Lojista() {
   const [modalOpen, setModalOpen] = useState(false);
   const [lojista, setLojista] = useState([]);
   const [produtos, setProdutos] = useState([]);
-  const [sessao, setSession] = useState(null); 
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
@@ -32,14 +30,13 @@ export default function Lojista() {
     },
   })
 
+
   const { id } = router.query
 
   
-  console.log(id)
+  //console.log(id)
   useEffect(() => {
-    if(id && session){
-      setSession(session.user.usuario)
-      fetch(`${APIURL}/api/lojista/?id=${id}` , {
+    fetch(`${APIURL}/api/lojista/?id=${id}` , {
       method: 'GET',
     })
       .then(resp => resp.json())
@@ -47,17 +44,16 @@ export default function Lojista() {
         setLojista(json.lojista);
         setProdutos(json.produtos);
       })
-    }
-  }, [id,session])
+  }, [id])
 
-  if (!lojista) return <div><Loading/></div>
+  if (!lojista) return null
 
 
   return (
 
 
     <div style={{ height: 400, width: '100%' }}>
-      <AppAppBar sessao={sessao}></AppAppBar>
+      <AppAppBar></AppAppBar>
 
 
       <TableContainer component={Paper}>

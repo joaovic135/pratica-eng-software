@@ -126,7 +126,7 @@ export default function SignIn() {
         </Avatar>
 
         <Typography component="h1" variant="h5">
-          Sign up
+          Realizar cadastro de lojista
         </Typography>
 
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -138,7 +138,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 id="nome"
-                label="Nome"
+                label="Nome completo"
                 autoFocus
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
@@ -201,7 +201,7 @@ export default function SignIn() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            Concluir cadastro
           </Button>
         {error && (
           <Typography variant="body2" color="error">

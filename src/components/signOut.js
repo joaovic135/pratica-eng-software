@@ -17,8 +17,9 @@ export default function SignOut(){
       <Button 
         onClick={() => handleLogout()}
         variant="contained"
+        sx={{ mt: 3, mb: 2 }}
       >
-        Sign Out
+        Finalizar sessão
       </Button> 
     )
 
@@ -28,8 +29,9 @@ export default function SignOut(){
         <Button 
           onClick={() => signIn()}
           variant="contained"
+          sx={{ mt: 3, mb: 2 }}
         >
-          Sign in
+          Iniciar sessão
         </Button>
       </>
     )

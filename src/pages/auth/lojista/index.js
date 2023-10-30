@@ -34,7 +34,7 @@ export default function LojistaDashboard() {
     } 
   },[session])
 
-  console.log(sessao)
+  //console.log(sessao)
   return (
     <>
       {sessao && <AppAppBar sessao={sessao} />}

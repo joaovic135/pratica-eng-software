@@ -97,7 +97,7 @@ export default function AdminLogin() {
                 <SupervisorAccountOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant='h5'>
-                Login Admin
+                Bem-vindo(a) à tela de login do administrador
               </Typography>
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
@@ -130,7 +130,7 @@ export default function AdminLogin() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Login in
+                  Iniciar sessão
                 </Button>
                 {error && <ErrorTypography text={error} />}
               </Box>
@@ -139,6 +139,5 @@ export default function AdminLogin() {
         </Grid>
       )}
     </div>
-
   )
 }

@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { APIURL } from '@/lib/constants';
-
+import AppAppBar from '@/components/appAppBar';
+import Footer from '@/components/appFooter_Fixo'
 
 export default function Cadastrar() {
   const [error, setError] = useState(null);
@@ -16,18 +17,18 @@ export default function Cadastrar() {
   const [nome, setName] = useState([]);
   const [preco, setPreço] = useState([]);
   const [categoria, setCategoria] = useState([]);
-  const [estoque,setEstoque]= useState([]);
-  const [descricao,setDescricao]= useState([]);
+  const [estoque, setEstoque] = useState([]);
+  const [descricao, setDescricao] = useState([]);
 
   const { data: session } = useSession({
     required: true,
-        onUnauthenticated() {
-          return router.push('/auth/lojista/login')
-        },
-      })
-          const idLojista = session.user.lojista.id
-          const { id } = router.query
-        
+    onUnauthenticated() {
+      return router.push('/auth/lojista/login')
+    },
+  })
+  const idLojista = session.user.lojista.id
+  const { id } = router.query
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -44,8 +45,8 @@ export default function Cadastrar() {
     router.push('/auth/lojista')
   }
   return (
-
     <Container component="main" maxWidth="xs">
+      <AppAppBar/>
       <CssBaseline />
       <Box
         sx={{
@@ -74,7 +75,7 @@ export default function Cadastrar() {
                 id="nome"
                 label="Nome do produto"
                 autoFocus
-                value = {nome}
+                value={nome}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -101,7 +102,7 @@ export default function Cadastrar() {
               />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="estoque"
@@ -109,10 +110,10 @@ export default function Cadastrar() {
                 name="estoque"
                 value={estoque}
                 onChange={(e) => setEstoque(e.target.value)}
-                />
+              />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="descricao"
@@ -123,9 +124,9 @@ export default function Cadastrar() {
                 maxRows={20}
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                />
+              />
             </Grid>
-            
+
           </Grid>
           <Button
             type="submit"
@@ -139,6 +140,7 @@ export default function Cadastrar() {
           </Grid>
         </Box>
       </Box>
+      <Footer/>
     </Container>
 
 

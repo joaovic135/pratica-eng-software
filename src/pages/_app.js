@@ -32,7 +32,7 @@ function Auth({ children }) {
   const { status } = useSession({ required: true })
 
   if (status === "loading") {
-    return <Loading/>
+    return <div>Loading...</div>
   }
 
   return children

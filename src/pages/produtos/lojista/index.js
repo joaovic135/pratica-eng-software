@@ -15,7 +15,7 @@ import { APIURL } from '@/lib/constants';
 const columns = [
     { field: 'id', headerName: 'ID', flex: 0.3, minWidth: 90, },
     { field: 'nome', headerName: 'Nome ', flex: 1, minWidth: 150  ,renderCell: (params) => (
-        <Link href={`/produto/lojista/${params.row.id}`}>{params.value}</Link>
+        <Link href={`/produto/${params.row.id}`}>{params.value}</Link>
       )},
     { field: 'descricao', headerName: 'Descrição', flex: 1, minWidth: 150 },
     { field: 'preco', headerName: 'Preço', flex: 1, minWidth: 150 },
@@ -26,19 +26,15 @@ const columns = [
 
 export default function Produtos() {
     const router = useRouter()
-    const [sessao, setSession] = useState(null)
 
     const [products, setProducts] = useState([]);
     const { data: session } = useSession()
 
     const id  = session.user.lojista.id
     
-    console.log(APIURL)
+    //console.log(APIURL)
   
     useEffect(() => {
-        if (session){
-            setSession(session.user.lojista)
-          }   
       fetch(`${APIURL}/api/produto/lojista/?id=${id}` , {
         method: 'GET',
       })
@@ -46,13 +42,13 @@ export default function Produtos() {
         .then(json => {
           setProducts(json)
         })
-    }, [id,session])
+    }, [])
 
     if (session) {
         if (session.user.lojista != null) {
             return (
                 <div style={{ height: 400, width: '100%' }}>
-                    {sessao && <AppAppBar sessao={sessao} />}
+                    <AppAppBar></AppAppBar>
                     <Button onClick={()=> router.back()} variant="contained">Voltar</Button>
 
                     <DataGrid

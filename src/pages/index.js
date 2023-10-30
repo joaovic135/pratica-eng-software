@@ -168,17 +168,18 @@ export default function Home() {
             Descubra pinturas, bijuterias e muito mais feitas por artistas independentes
           </Typography>
           <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-            Discover the experience
+            {/*Discover the experience*/}
           </Typography>
         </BannerLayout>
 
         <Container component="section" sx={{ mt: 8, mb: 4 }}>
           <Typography variant="h4" marked="center" align="center" component="h2">
-            Conheça o Artesanato da Amazonia
+            Conheça o Artesanato da Amazônia
           </Typography>
           <Box sx={{ mt: 8, display: 'flex', flexWrap: 'wrap' }}>
             {images.map((image) => (
               <ImageIconButton
+                disabled
                 key={image.title}
                 style={{
                   width: image.width,
