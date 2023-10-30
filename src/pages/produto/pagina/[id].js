@@ -10,6 +10,9 @@ import AppFooter from '@/components/appFooter'
 import * as React from 'react';
 import ShoppingCartRounded from '@mui/icons-material/ShoppingCartRounded'
 import Loading from '@/components/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { adicionarProduto } from '@/redux/carrinhoSlice';
+import CounterRedux from '@/redux/CounterRedux';
 
 export default function Produto_Pagina() {
   const router = useRouter()
@@ -24,7 +27,11 @@ export default function Produto_Pagina() {
   const [lojista, setLojista] = useState('');
   const [sessao, setSession] = useState(null);
   const { id } = router.query
-
+  const dispatch = useDispatch();
+  const produtoCounter = useSelector(state => state.produtos.produtos[id])
+  const carrinho = useSelector(state => state.carrinho.carrinho)
+  // console.warn("Carrinho na página produto:", carrinho)
+  
   const { data: session, status } = useSession({
     required: false,
     onUnauthenticated() {
@@ -94,9 +101,23 @@ export default function Produto_Pagina() {
     width: '121ch'
   }
 
+  const handleClickDelete = () =>{
+    setModalOpen(true);
+  }
+
+  const handleModalClose = () =>{
+    setModalOpen(false);
+  }
+
+  const handleCarrinho = () =>{
+    // console.log("handle carrinho vai agora")
+    dispatch(adicionarProduto({produto,produtoCounter}))
+    console.log("Carrinho na função handleCarrinho:", carrinho.carrinho)
+  }
+
   return (
     <>
-      <AppAppBar sessao={sessao} />
+      {session && <AppAppBar sessao={session.user.usuario} />}
 
       {produtoCarregado ? (
         // Renderize as informações do produto
@@ -158,8 +179,10 @@ export default function Produto_Pagina() {
                           </Typography>
                           <CardActions> </CardActions>
                           <br></br>
+                          {id ? <CounterRedux id={id}></CounterRedux> : <></>}
                           <br></br>
-                          <Button variant="outlined" startIcon={<ShoppingCartRounded />}>
+                          <br></br>
+                          <Button variant="outlined" startIcon={<ShoppingCartRounded />} onClick={handleCarrinho}>
                             Adicionar ao carrinho
                           </Button>
                         </CardContent>

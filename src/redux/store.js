@@ -1,10 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebarSlice';
+import produtosSlice from './produtosSlice';
+import CarrinhoSlice from './carrinhoSlice';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 
-const store = configureStore({
-  reducer: {
-    sidebar: sidebarReducer,
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const rootReducer = combineReducers({
+  sidebar: sidebarReducer,
+  produtos: produtosSlice,
+  carrinho: CarrinhoSlice
 });
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk],
+});
+
+export const persistor = persistStore(store);
