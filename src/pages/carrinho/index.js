@@ -82,9 +82,8 @@ function Carrinho() {
                             <Card style={{maxWidth: 400, margin: '0 auto', borderRadius: 16}}>
                                 <Button onClick={
                                     () => {
-                                        if (carrinho.length > 0) {
-                                            persistor.purge()
-                                            router.push(`/checkout`)
+                                        if (carrinho.carrinho.length > 0) {
+                                            router.push(`/carrinho/pagamento`)
                                         } else {
                                             console.log('Carrinho vazio')
                                         }

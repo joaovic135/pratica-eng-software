@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { persistor } from '@/redux/store';
 import AppAppBar from '@/components/appAppBar';
 
 const Pagamento = () => {
@@ -76,6 +77,7 @@ const Pagamento = () => {
                         fullWidth
                         style={{ marginTop: '16px' }}
                         onClick={() => {
+                            persistor.purge()
                             router.push('/checkout');
                         }}
                     >
