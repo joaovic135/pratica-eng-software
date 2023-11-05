@@ -57,6 +57,17 @@ const _nav = [
     href: '/produtos/',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
+  {
+    component: CNavTitle,
+    name: 'Leiloes',
+  },
+  {
+    component: CNavItem,
+    name: 'Listar',
+    href: '/leilao/admin/listar',
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+  },
+  
 ]
 
 export default _nav
