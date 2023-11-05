@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Paper, Box, Button } from '@mui/material';
+import { Container, Typography, Paper, Box, Button, Grid, Divider, CardContent, Card } from '@mui/material';
 import AppAppBar from '@/components/appAppBar';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
@@ -24,7 +24,12 @@ export default function Sobre() {
     },
   });
 
-  
+  const images = [
+    {
+      src: '/couro-peixe-exemplo.jpg',
+      alt: 'couro',
+    }
+  ]
   return (
     <>
       <div >
@@ -77,37 +82,38 @@ export default function Sobre() {
           </Container>
         </BannerLayout>
         
-        <Container component="section" sx={{ mt: 8, mb: 4 }}>
-          {/* Escrita e botão */}
-          <Container maxWidth="md">
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                mb: 8,
-              }}
-            >
-              <Paper>
-                <Box sx={{ p: 3 }}>
-                  <Typography variant="h4" marked="center" align="center" component="h2">
-                    Nossa História
+        <Container component="section" sx={{ mt: 5, mb: 10 }}>
+          <Card>
+            <Grid container spacing={2}>
+              <Grid item >
+                <CardContent >
+                  <Paper elevation={3} sx={{ p: 1, mb: 2 }}>
+                    <Typography variant="h5" component="div">
+                      Missão
+                    </Typography>
+                  </Paper>
+
+                  <Typography variant="body2">
+                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
                   </Typography>
-                  <Typography variant="h5" marked="center" align="center" component="h2">
-                    Conheca
+                  <Typography variant="body2">
+                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
+                  </Typography>
+                  <Typography variant="body2">
+                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
                   </Typography>
 
-                  <Button></Button>
-                </Box>
-              </Paper>
-            </Box>
-          </Container>
-          {/* Imagens */}
-          <Container maxWidth="md">
-            
-          </Container>
+                </CardContent>
+              </Grid>
+              
+              <Divider orientation="vertical" flexItem />
 
+              <Grid item >
+                <Image src="/fundos_sobre.jpg" width={300} height={300} />
+              </Grid>
+
+            </Grid>
+          </Card>
         </Container>
         <AppFooter />
       </div>
