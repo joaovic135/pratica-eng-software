@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Paper, Box } from '@mui/material';
+import { Container, Typography, Paper, Box, Button } from '@mui/material';
 import AppAppBar from '@/components/appAppBar';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
@@ -76,7 +76,39 @@ export default function Sobre() {
             </Box>
           </Container>
         </BannerLayout>
+        
+        <Container component="section" sx={{ mt: 8, mb: 4 }}>
+          {/* Escrita e botão */}
+          <Container maxWidth="md">
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                mb: 8,
+              }}
+            >
+              <Paper>
+                <Box sx={{ p: 3 }}>
+                  <Typography variant="h4" marked="center" align="center" component="h2">
+                    Nossa História
+                  </Typography>
+                  <Typography variant="h5" marked="center" align="center" component="h2">
+                    Conheca
+                  </Typography>
 
+                  <Button></Button>
+                </Box>
+              </Paper>
+            </Box>
+          </Container>
+          {/* Imagens */}
+          <Container maxWidth="md">
+            
+          </Container>
+
+        </Container>
         <AppFooter />
       </div>
     </>
