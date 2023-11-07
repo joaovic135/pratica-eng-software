@@ -15,6 +15,7 @@ import { APIURL } from '@/lib/constants';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AppHeader from '@/components/AppHeader';
 import AppSidebar from '@/components/AppSidebar';
+import Loading from '@/components/Loading';
 import Footer from '@/components/appFooter'
 
 const MatEdit = ({ id }) => {
@@ -147,14 +148,20 @@ export default function Lojistas() {
           <AppSidebar />
           <div className="wrapper d-flex flex-column min-vh-100 bg-light">
             <AppHeader />
-            <div style={{ height: 400, width: '100%' }}>
-              <Button onClick={() => router.back()} variant="contained">Voltar</Button>
-              <DataGrid
-                rows={lojista}
-                columns={columns}
-                pageSize={5}
-              />
-            </div>
+            {lojista !== null && lojista.length > 0 ? (
+
+              <div style={{ height: 400, width: '100%' }}>
+                <Button onClick={() => router.back()} variant="contained">Voltar</Button>
+                <DataGrid
+                  rows={lojista}
+                  columns={columns}
+                  pageSize={5}
+                />
+              </div>
+            ) : (
+              <p><Loading /></p>
+            )}
+
           </div>
           <Footer/>
         </div>

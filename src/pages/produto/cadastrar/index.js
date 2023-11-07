@@ -14,23 +14,82 @@ export default function Cadastrar() {
 
 
   const router = useRouter()
-  const [nome, setName] = useState([]);
-  const [preco, setPreço] = useState([]);
-  const [categoria, setCategoria] = useState([]);
-  const [estoque,setEstoque]= useState([]);
-  const [descricao,setDescricao]= useState([]);
+  const [nome, setName] = useState('');
+  const [preco, setPreço] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [estoque, setEstoque] = useState('');
+  const [descricao, setDescricao] = useState('');
 
   const { data: session } = useSession({
     required: true,
-        onUnauthenticated() {
-          return router.push('/auth/lojista/login')
-        },
-      })
-          const idLojista = session.user.lojista.id
-          const { id } = router.query
-        
+    onUnauthenticated() {
+      return router.push('/auth/lojista/login')
+    },
+  })
+  const idLojista = session.user.lojista.id
+  const { id } = router.query
+
+  const formatNumber = (value) => {
+    // Remove todos os caracteres não numéricos
+    const justNumber = value.replace(/\D/g, '');
+
+    return justNumber ;
+  };
+  const formatPreco = (value) => {
+    // Remove todos os caracteres não numéricos
+    const precoFormated = value.replace(/[^\d.]/g, '');
+
+    return precoFormated ;
+  };
+
+  const handlePreco = (e) => {
+    setPreço(formatPreco(e.target.value));
+  };
+
+  const handleEstoque = (e) => {
+    setEstoque(formatNumber(e.target.value));
+  };
+
+  const isNumberValid=(value)=>{
+    return value>0;
+    
+  }
+
+  const formatCategoria=(value)=>{
+    const categoriaString=value.replace(/\d/g, '');
+
+    return categoriaString;
+  }
+  const handleCategoria = (e) => {
+    setCategoria(formatCategoria(e.target.value));
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (nome.trim() === '') {
+      setError('O campo Nome é obrigatório.');
+      return;
+    }
+
+    if (preco.trim() === '' || !isNumberValid(preco)) {
+      setError('O campo Preço é obrigatório e deve ser preenchido com um valor maior que 0.');
+      return;
+    }
+    
+    if (categoria.trim()===''){
+      setError('O campo Categoria é obrigatório.');
+      return;
+    }
+    if(estoque.trim()===''|| !isNumberValid(estoque)){
+      setError('O campo Estoque é obrigatorio e deve ser preenchido com um valor maior que 0.')
+      return;
+    }
+    if (descricao.trim() === '') {
+      setError('O campo Descrição é obrigatório.');
+      return;
+    }
 
     const response = await fetch(`${APIURL}/api/produto`, {
       credentials: 'include',
@@ -75,7 +134,7 @@ export default function Cadastrar() {
                 id="nome"
                 label="Nome do produto"
                 autoFocus
-                value = {nome}
+                value={nome}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -87,7 +146,7 @@ export default function Cadastrar() {
                 label="Preço"
                 name="preco"
                 value={preco}
-                onChange={(e) => setPreço(e.target.value)}
+                onChange={handlePreco}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,22 +157,22 @@ export default function Cadastrar() {
                 label="Categoria"
                 name="categoria"
                 value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
+                onChange={handleCategoria}
               />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="estoque"
                 label="Estoque"
                 name="estoque"
                 value={estoque}
-                onChange={(e) => setEstoque(e.target.value)}
-                />
+                onChange={handleEstoque}
+              />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+              <TextField
                 required
                 fullWidth
                 id="descricao"
@@ -124,9 +183,9 @@ export default function Cadastrar() {
                 maxRows={20}
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                />
+              />
             </Grid>
-            
+
           </Grid>
           <Button
             type="submit"
@@ -136,6 +195,11 @@ export default function Cadastrar() {
           >
             Cadastrar
           </Button>
+          {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
           <Grid container justifyContent="flex-end">
           </Grid>
         </Box>

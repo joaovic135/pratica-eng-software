@@ -1,8 +1,10 @@
 import { SessionProvider, useSession } from "next-auth/react"
 import 'node_modules/@coreui/coreui/dist/css/coreui.min.css';
-import store from '../redux/store';
+import {store, peristor, persistor} from '../redux/store';
 import { Provider } from 'react-redux';
 import '../scss/style.scss'
+import Loading from "@/components/Loading";
+import { PersistGate } from 'redux-persist/integration/react';
 
 export default function App({
   Component,
@@ -11,13 +13,15 @@ export default function App({
   return (
     <SessionProvider session={session} >
       <Provider store={store}>
-        {Component.auth ? (
-          <Auth>
+        <PersistGate loading={null} persistor={persistor}>
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
             <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </PersistGate>
       </Provider>
     </SessionProvider >
   )

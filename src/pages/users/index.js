@@ -17,6 +17,7 @@ import Footer from '@/components/appFooter'
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AppSidebar from '@/components/AppSidebar';
 import AppHeader from '@/components/AppHeader';
+import Loading from '@/components/Loading';
 
 const MatEdit = ({ id }) => {
   const router = useRouter();
@@ -144,20 +145,25 @@ export default function Users() {
             <AppHeader />
             <div style={{ height: 400, width: '100%' }}>
 
-              <Button onClick={() => router.back()} variant="contained">Voltar</Button>
-
-
-              <DataGrid
-                rows={users}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                pageSizeOptions={[5, 10]}
-                checkboxSelection
-              />
+              
+              {users !== null && users.length > 0 ? ( // Add this condition
+                <div style={{ height: 400, width: '100%' }}>
+                  <Button onClick={() => router.back()} variant="contained">Voltar</Button>
+                  <DataGrid
+                    rows={users}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                      },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                  />
+                </div>
+              ) : (
+                <p><Loading/></p>
+              )}
             </div>
           </div>
           <Footer/>

@@ -10,6 +10,9 @@ import AppFooter from '@/components/appFooter'
 import * as React from 'react';
 import ShoppingCartRounded from '@mui/icons-material/ShoppingCartRounded'
 import Loading from '@/components/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { adicionarProduto } from '@/redux/carrinhoSlice';
+import CounterRedux from '@/redux/CounterRedux';
 
 export default function Produto_Pagina() {
   const router = useRouter()
@@ -25,7 +28,11 @@ export default function Produto_Pagina() {
   const [lojista, setLojista] = useState('');
   const [sessao, setSession] = useState(null);
   const { id } = router.query
-
+  const dispatch = useDispatch();
+  const produtoCounter = useSelector(state => state.produtos.produtos[id])
+  const carrinho = useSelector(state => state.carrinho.carrinho)
+  // console.warn("Carrinho na página produto:", carrinho)
+  
   const { data: session, status } = useSession({
     required: false,
     onUnauthenticated() {
@@ -98,6 +105,20 @@ export default function Produto_Pagina() {
     width: '121ch'
   }
 
+  const handleClickDelete = () =>{
+    setModalOpen(true);
+  }
+
+  const handleModalClose = () =>{
+    setModalOpen(false);
+  }
+
+  const handleCarrinho = () =>{
+    // console.log("handle carrinho vai agora")
+    dispatch(adicionarProduto({produto,produtoCounter}))
+    console.log("Carrinho na função handleCarrinho:", carrinho.carrinho)
+  }
+
   if(status === 'authenticated'){
     const tipoUsuario_logado = session.user.lojista ? session.user.lojista: session.user.usuario
     if(tipoUsuario_logado === session.user.usuario && session.user.usuario.tipoUsuario === 'usuario'){
@@ -164,9 +185,10 @@ export default function Produto_Pagina() {
                                 </Typography>
                               </Typography>
                               <CardActions> </CardActions>
+                              {id ? <CounterRedux id={id}></CounterRedux> : <></>}
                               <br></br>
                               <br></br>
-                                <Button variant="outlined" startIcon={<ShoppingCartRounded />}>
+                                <Button variant="outlined" startIcon={<ShoppingCartRounded />} onClick={handleCarrinho} >
                                   Adicionar ao carrinho
                                 </Button>
                             </CardContent>

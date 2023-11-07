@@ -18,7 +18,11 @@ export default async function handler(req, res) {
         const senhaInserida = req.body.senha;
 
         const usuario = await Usuario.findOne({
-          where: { email: emailInserido }
+          where: { 
+            email: emailInserido,
+            tipoUsuario:'usuario'
+
+          }
         });
 
         if (!usuario) {
