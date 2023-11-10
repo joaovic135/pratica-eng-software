@@ -20,34 +20,18 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 const _nav = [
   {
     component: CNavTitle,
-    name: 'Produtos',
-  },
-  {
-    component: CNavItem,
-    name: 'Listar Produtos',
-    href: '/produtos/lojista',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Cadastrar Produto',
-    href: '/produto/cadastrar',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'Perfil',
+    name: 'Informações Pessoais',
   },
   {
     component: CNavItem,
     name: 'Editar Perfil',
-    href: '/lojistas/editQ',
+    href: '/users/editQ',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Alterar Senha',
-    href: '/lojistas/alterarSenha',
+    href: '/users/alterarSenha',
     icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
   },
 ]

@@ -101,12 +101,16 @@ export default function Editar() {
 
     if (response.status === 400) {
       setError("Email ja cadastrado");
-    } else {
+    } 
+    if (session?.user?.usuario?.tipoUsuario === 'admin') {
       router.push('/users');
+    } else {
+      router.push('/auth/user'); // Redireciona outros usuários para a página principal de lojistas
     }
+
   };
   if (session) {
-    if (session.user.usuario.tipoUsuario === 'admin') {
+    if (session.user.usuario.tipoUsuario === 'admin' || session.user.usuario.id  === Number(id)) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
