@@ -47,7 +47,7 @@ export default function Sobre() {
             marked="center"
             sx={{ mb: 4 }}
           >
-            Sobre Nossa Empresa
+            Sobre Nós
           </Typography>
           <Typography
             color="inherit"
@@ -55,7 +55,7 @@ export default function Sobre() {
             variant="h5"
             sx={{ mb: 10 }}
           >
-            Conheça um pouco mais sobre a nossa empresa
+            Conheça um pouco mais sobre a EcoArtes
           </Typography>
           <Image
             width={500}
@@ -81,40 +81,8 @@ export default function Sobre() {
             </Box>
           </Container>
         </BannerLayout>
-        
-        <Container component="section" sx={{ mt: 5, mb: 10 }}>
-          <Card>
-            <Grid container spacing={2}>
-              <Grid item >
-                <CardContent >
-                  <Paper elevation={3} sx={{ p: 1, mb: 2 }}>
-                    <Typography variant="h5" component="div">
-                      Missão
-                    </Typography>
-                  </Paper>
 
-                  <Typography variant="body2">
-                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
-                  </Typography>
-                  <Typography variant="body2">
-                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
-                  </Typography>
-                  <Typography variant="body2">
-                    Nossa missão é tornar a vida mais fácil e eficiente para todos.
-                  </Typography>
 
-                </CardContent>
-              </Grid>
-              
-              <Divider orientation="vertical" flexItem />
-
-              <Grid item >
-                <Image src="/fundos_sobre.jpg" width={300} height={300} />
-              </Grid>
-
-            </Grid>
-          </Card>
-        </Container>
         <AppFooter />
       </div>
     </>
