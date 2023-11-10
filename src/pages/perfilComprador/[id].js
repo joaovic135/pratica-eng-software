@@ -16,7 +16,7 @@ export default function PerfilComprador() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
-  const [comprador, setComprador] = useState(true); //por enquanto nao funciona se for null
+  const [comprador, setComprador] = useState(null); //por enquanto nao funciona se for null
   const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
   const { data: session, status } = useSession({
@@ -35,6 +35,7 @@ export default function PerfilComprador() {
     setActiveTab(newValue);
   };
   const { id } = router.query;
+
   React.useEffect(() => {
     if (session && id) {
       fetch(`${APIURL}/api/avaliacao_comprador/?id=${id}`, {
@@ -73,6 +74,7 @@ export default function PerfilComprador() {
     }
   }, [id, session]);
 
+
   const handleFollow = async (idLojista) => {
     if (isFollowing !== idLojista) {
       //console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
@@ -103,6 +105,7 @@ export default function PerfilComprador() {
   const handleConfig=async() =>{
     router.push('/auth/user')
   }
+
 
   if (session) {
     if (session.user.usuario.id === comprador.id) {
