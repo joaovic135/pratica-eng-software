@@ -10,8 +10,13 @@ import Rating from '@mui/material/Rating';
 import Forbidden from '@/components/Forbidden';
 import AppFooter from '@/components/appFooter_Fixo'
 
+import { useDispatch, useSelector } from 'react-redux';
 export default function PerfilComprador() {
   const router = useRouter();
+  const HistoricosCompras = useSelector(state => state.historicos); 
+  console.log("HistoricosCompras..:",HistoricosCompras)
+  console.log(HistoricosCompras.historicoCompras[0].comprasUsuario.carrinhos[0])
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
   const [comprador, setComprador] = useState(true); //por enquanto nao funciona se for null
@@ -28,7 +33,9 @@ export default function PerfilComprador() {
   //console.log("Id user..:",id)
   //console.log("Id user session..:",session.user.usuario.id)
   //console.log("User..:",user)
-
+  
+  // const historicoUsuario = HistoricosCompras.filter((historico) => historico.usuarioId === user.id)
+  // console.log("historicoUsuario..:",historicoUsuario)
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -98,6 +105,7 @@ export default function PerfilComprador() {
         }
         window.location.reload();
     };
+
 
   if (session){
     if (session.user.usuario.id === comprador.id){
@@ -223,6 +231,7 @@ export default function PerfilComprador() {
                 <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
                   <CardContent>
                     <Typography variant="body1">Histórico de compras. Essa funcionalidade será implementada somente na sprint 6.</Typography>
+                    {}
                   </CardContent>
                 </Card>
               )}

@@ -9,6 +9,8 @@ import { useRouter } from 'next/router';
 import Typography from '@/components/typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+// const carrinhoLocalStorage = JSON(localStorage.getItem('carrinho') || '[]');
+
 function Carrinho() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -30,9 +32,10 @@ function Carrinho() {
     if (session) {
       setSession(session.user.usuario);
     }
+    // localStorage.setItem('carrinho', JSON.stringify(carrinho));
     setFrete(randomNumberInRange(1, 20));
   }, [session]);
-
+  
   const handleRemove = id => {
     dispatch(removerProduto({ id }));
   };

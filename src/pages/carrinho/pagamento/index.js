@@ -5,11 +5,20 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { persistor } from '@/redux/store';
+import { useSelector } from 'react-redux';
 import AppAppBar from '@/components/appAppBar';
+import { adicionarCompraHistorico } from '@/redux/historicoComprasSlice';
+import { useDispatch } from 'react-redux';
 
 const Pagamento = () => {
     
     const router = useRouter();
+    const dispatch = useDispatch();
+    const carrinho = useSelector(state => state.carrinho);
+    const historico = useSelector(state => state.historicos);
+
+    console.log("historico:",historico)
+    console.log("carrinho:",carrinho)
     const [sessao, setSession] = useState(null);
 
     const { data: session, status } = useSession({
@@ -26,6 +35,12 @@ const Pagamento = () => {
     }
     , [session])
     
+    function criarHistorico() {
+        const compras = carrinho.carrinho;
+        const usuarioId = session.user.usuario.id;
+        dispatch(adicionarCompraHistorico({usuarioId, compras}));
+    }
+
     return (
         <div>
             {session && <AppAppBar sessao={session.user.usuario} />}
@@ -77,6 +92,7 @@ const Pagamento = () => {
                         fullWidth
                         style={{ marginTop: '16px' }}
                         onClick={() => {
+                            criarHistorico()
                             persistor.purge()
                             router.push('/checkout');
                         }}
