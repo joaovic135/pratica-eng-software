@@ -35,7 +35,6 @@ export default function PerfilComprador() {
     setActiveTab(newValue);
   };
   const { id } = router.query;
-
   React.useEffect(() => {
     if (session && id) {
       fetch(`${APIURL}/api/avaliacao_comprador/?id=${id}`, {
@@ -74,7 +73,6 @@ export default function PerfilComprador() {
     }
   }, [id, session]);
 
-
   const handleFollow = async (idLojista) => {
     if (isFollowing !== idLojista) {
       //console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
@@ -102,11 +100,12 @@ export default function PerfilComprador() {
     }
     window.location.reload();
   };
-  const handleConfig=async() =>{
+  const handleConfig = async () => {
     router.push('/auth/user')
   }
-
-
+  if (!comprador) {
+    return <div><Loading /></div>
+  }
   if (session) {
     if (session.user.usuario.id === comprador.id) {
       return (
@@ -128,7 +127,7 @@ export default function PerfilComprador() {
                       </div>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                    <div style={{ marginTop: 1, marginBottom: 8,marginLeft:100 }}>
+                      <div style={{ marginTop: 1, marginBottom: 8, marginLeft: 100 }}>
                         <IconButton color="secondary" aria-label="edit" onClick={handleConfig}>
                           <SettingsIcon style={{ color: grey[500] }} />
                         </IconButton>
