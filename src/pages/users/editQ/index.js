@@ -9,7 +9,7 @@ import AppSidebar from "@/components/AppSideBarComprador"
 import AppHeader from "@/components/AppHeader"
 import AppFooter from "@/components/appFooter"
 
-export default function userDashboard() {
+export default function UserDashboard() {
     const router = useRouter()
     const [sessao, setSession] = useState(null)
 
@@ -33,4 +33,4 @@ export default function userDashboard() {
 
 }
 
-userDashboard.auth = true
+UserDashboard.auth = true

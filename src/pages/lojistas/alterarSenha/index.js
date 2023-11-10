@@ -14,7 +14,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Forbidden from '@/components/Forbidden';
 import { APIURL } from '@/lib/constants';
-export default function alterarSenha() {
+export default function AlterarSenha() {
     
     const router = useRouter();
     const [error, setError] = useState(null);
