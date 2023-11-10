@@ -35,7 +35,6 @@ export default function PerfilComprador() {
     setActiveTab(newValue);
   };
   const { id } = router.query;
-
   React.useEffect(() => {
     if (session && id) {
       fetch(`${APIURL}/api/avaliacao_comprador/?id=${id}`, {
@@ -74,7 +73,6 @@ export default function PerfilComprador() {
     }
   }, [id, session]);
 
-
   const handleFollow = async (idLojista) => {
     if (isFollowing !== idLojista) {
       //console.log("idLojista..:",idLojista," isFollowing..:",isFollowing)
@@ -105,7 +103,6 @@ export default function PerfilComprador() {
   const handleConfig=async() =>{
     router.push('/auth/user')
   }
-
 
   if (session) {
     if (session.user.usuario.id === comprador.id) {
