@@ -35,7 +35,7 @@ export default async function handler(req, res) {
           numero: user.numero,
           descricao: user.descricao,
         });
-        const id = novoLojista.id;
+        //const id = novoLojista.id;
 
         res.status(200).json({ name: 'erro J' });
         break;
