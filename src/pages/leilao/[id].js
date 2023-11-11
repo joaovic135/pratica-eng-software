@@ -169,7 +169,7 @@ function DetalhesLeilao() {
   }
   const handleListarLeiloes =()=>{
     setOpenModal(false);
-    router.push("/meus-lances.js")
+    router.push("/meus-lances")
   }
   if (!leilao) {
     return <div><Loading /></div>;
