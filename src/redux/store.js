@@ -16,7 +16,6 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   produtos: produtosSlice,
   carrinho: CarrinhoSlice,
-  historicos: historicoComprasSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

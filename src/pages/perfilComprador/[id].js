@@ -9,19 +9,19 @@ import Loading from '@/components/Loading';
 import Rating from '@mui/material/Rating';
 import Forbidden from '@/components/Forbidden';
 import AppFooter from '@/components/appFooter_Fixo'
-
+import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 export default function PerfilComprador() {
   const router = useRouter();
-  const HistoricosCompras = useSelector(state => state.historicos); 
-  console.log("HistoricosCompras..:",HistoricosCompras)
-  console.log(HistoricosCompras.historicoCompras[0].comprasUsuario.carrinhos[0])
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
   const [comprador, setComprador] = useState(true); //por enquanto nao funciona se for null
   const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
+  const [historico, setHistorico] = useState(null);
+  const [UserProdutos, setUserProdutos] = useState(null);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -36,6 +36,9 @@ export default function PerfilComprador() {
   
   // const historicoUsuario = HistoricosCompras.filter((historico) => historico.usuarioId === user.id)
   // console.log("historicoUsuario..:",historicoUsuario)
+
+  
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -75,6 +78,18 @@ export default function PerfilComprador() {
             .catch((error) => {
                 // Trate erros, por exemplo, redirecionando para uma página de erro.
             });
+            fetch(`${APIURL}/api/historico/?id=${id}`, {
+              method: 'GET',
+            })
+            .then((resp) => resp.json())
+            .then((json) => {
+              setHistorico(json.historico);
+              console.log("Historico..:",json.historico)
+            })
+            .catch((error) => {
+              // Trate erros, por exemplo, redirecionando para uma página de erro.
+            });
+          fetch
         }
     }, [id, session]);
 
@@ -106,7 +121,12 @@ export default function PerfilComprador() {
         window.location.reload();
     };
 
-
+    if (!comprador) {
+      return <div><Loading /></div>
+    }
+    const historicoOrdenado = historico && historico.sort((a, b) => {
+      return new Date(b.data) - new Date(a.data);
+    });
   if (session){
     if (session.user.usuario.id === comprador.id){
       return (
@@ -228,12 +248,44 @@ export default function PerfilComprador() {
               )}
               
               {activeTab === 2 && (
-                <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-                  <CardContent>
-                    <Typography variant="body1">Histórico de compras. Essa funcionalidade será implementada somente na sprint 6.</Typography>
-                    {}
-                  </CardContent>
-                </Card>
+                <Grid container justifyContent="center" spacing={2}>
+                  {historicoOrdenado.map((item) => (
+                    <Grid container justifyContent="center" key={item.id}>
+                        <Grid item xs={8} sm={6}>
+                          
+                            <Card style={{margin: 10, borderRadius: 16 }}>
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        Produto: {item.nomeProduto}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Preço: {item.preco}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Quantidade: {item.quantidade}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Data de compra: {format(new Date(item.createdAt), 'dd/MM/yyyy')}
+                                    </Typography>
+
+                                    <Button 
+                                        variant='contained' 
+                                        color='primary' 
+                                        onClick={() => router.push(`/perfilLojista/${item.idLojista}`)}
+                                    >Ver perfil do lojista
+                                    </Button>
+                                    <Button 
+                                        variant='outlined' 
+                                        color='primary' 
+                                        onClick={() => router.push(`/produto/pagina/${item.idProduto}`)}
+                                    >Ver produto
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                  ))}
+                </Grid>
               )}
     
             </Grid>

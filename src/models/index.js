@@ -43,6 +43,7 @@ const Avaliacoes = require('./avaliacoes')(sequelize, Sequelize); // Importe o m
 const Leiloes = require('./leilao')(sequelize, Sequelize); // Importe o modelo Leilao
 const ItemLeiloes = require('./itemleilao')(sequelize, Sequelize); // Importe o modelo ItemLeilao
 const Lances = require('./lance')(sequelize, Sequelize); // Importe o modelo Lances
+const Historico = require('./historico')(sequelize, Sequelize); // Importe o modelo Historico
 
 db.Lojista = Lojista;
 db.Usuario = Usuario;
@@ -51,7 +52,8 @@ db.Seguidores = Seguidores;
 db.Avaliacoes = Avaliacoes;
 db.Leiloes = Leiloes;
 db.ItemLeiloes = ItemLeiloes;
-db.Lances = Lances; 
+db.Lances = Lances;
+db.Historico = Historico;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -15,11 +15,23 @@ module.exports = {
       idProduto: {
         type: Sequelize.INTEGER
       },
-      quantidade: {
+      idLojista: {
         type: Sequelize.INTEGER
       },
-      total: {
+      nomeProduto: {
+        type: Sequelize.STRING
+      },
+      descricao: {
+        type: Sequelize.STRING
+      },
+      preco: {
         type: Sequelize.FLOAT
+      },
+      categoria: {
+        type: Sequelize.STRING
+      },
+      quantidade: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

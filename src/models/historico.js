@@ -16,8 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   Historico.init({
     idComprador: DataTypes.INTEGER,
     idProduto: DataTypes.INTEGER,
+    idLojista: DataTypes.INTEGER,
+    nomeProduto: DataTypes.STRING,
+    descricao: DataTypes.STRING,
+    preco: DataTypes.FLOAT,
+    categoria: DataTypes.STRING,
     quantidade: DataTypes.INTEGER,
-    total: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Historico',

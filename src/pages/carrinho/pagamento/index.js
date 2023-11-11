@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { persistor } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import AppAppBar from '@/components/appAppBar';
-import { adicionarCompraHistorico } from '@/redux/historicoComprasSlice';
 import { useDispatch } from 'react-redux';
 
 const Pagamento = () => {
@@ -15,10 +14,8 @@ const Pagamento = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const carrinho = useSelector(state => state.carrinho);
-    const historico = useSelector(state => state.historicos);
+    const [historico, setHistorico] = useState([]);
 
-    console.log("historico:",historico)
-    console.log("carrinho:",carrinho)
     const [sessao, setSession] = useState(null);
 
     const { data: session, status } = useSession({
@@ -32,13 +29,40 @@ const Pagamento = () => {
         if (session) {
             setSession(session.user.usuario);
         }
+        
     }
     , [session])
     
-    function criarHistorico() {
-        const compras = carrinho.carrinho;
-        const usuarioId = session.user.usuario.id;
-        dispatch(adicionarCompraHistorico({usuarioId, compras}));
+    const carrinhosItens = carrinho.carrinho.map((item) => {
+        return {
+            id: item.id,
+            idLojista: item.idLojista,
+            nomeProduto: item.nome,
+            descricao: item.descricao,
+            preco: item.preco,
+            categoria: item.categoria,
+            quantidade: item.quantidade,
+        }
+    });
+    
+    console.log(carrinhosItens)
+    
+    const idComprador = session.user.usuario.id;
+    console.log(idComprador)
+    
+    const criarHistorico = async () => {
+        const response = await fetch('/api/historico', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idComprador,
+                carrinhosItens,
+            }),
+        });
+        const data = await response.json();
+        setHistorico(data);
     }
 
     return (
