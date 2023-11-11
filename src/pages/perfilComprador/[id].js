@@ -12,13 +12,19 @@ import AppFooter from '@/components/appFooter_Fixo'
 import SettingsIcon from '@mui/icons-material/Settings';
 import IconButton from '@mui/material/IconButton';
 import { grey } from '@mui/material/colors';
+import { format } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 export default function PerfilComprador() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(0);
   const [lojistas, setLojistas] = useState(null);
   const [comprador, setComprador] = useState(null); //por enquanto nao funciona se for null
   const [avaliacoes_comprador, setAvaliacoes] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
+  const [historico, setHistorico] = useState(null);
+  const [UserProdutos, setUserProdutos] = useState(null);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -30,6 +36,11 @@ export default function PerfilComprador() {
   //console.log("Id user..:",id)
   //console.log("Id user session..:",session.user.usuario.id)
   //console.log("User..:",user)
+  
+  // const historicoUsuario = HistoricosCompras.filter((historico) => historico.usuarioId === user.id)
+  // console.log("historicoUsuario..:",historicoUsuario)
+
+  
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -70,6 +81,17 @@ export default function PerfilComprador() {
         .catch((error) => {
           // Trate erros, por exemplo, redirecionando para uma página de erro.
         });
+      fetch(`${APIURL}/api/historico/?id=${id}`, {
+        method: 'GET',
+      })
+        .then((resp) => resp.json())
+        .then((json) => {
+          setHistorico(json.historico);
+          console.log("Historico..:",json.historico)
+        })
+        .catch((error) => {
+          // Trate erros, por exemplo, redirecionando para uma página de erro.
+        });
     }
   }, [id, session]);
 
@@ -106,6 +128,11 @@ export default function PerfilComprador() {
   if (!comprador) {
     return <div><Loading /></div>
   }
+
+  const historicoOrdenado = historico && historico.sort((a, b) => {
+    return new Date(b.data) - new Date(a.data);
+  });
+
   if (session) {
     if (session.user.usuario.id === comprador.id) {
       return (
@@ -232,11 +259,44 @@ export default function PerfilComprador() {
               )}
 
               {activeTab === 2 && (
-                <Card style={{ maxWidth: 400, margin: '16px auto', borderRadius: 16 }}>
-                  <CardContent>
-                    <Typography variant="body1">Histórico de compras. Essa funcionalidade será implementada somente na sprint 6.</Typography>
-                  </CardContent>
-                </Card>
+                <Grid container justifyContent="center" spacing={2}>
+                  {historicoOrdenado.map((item) => (
+                    <Grid container justifyContent="center" key={item.id}>
+                        <Grid item xs={8} sm={6}>
+                          
+                            <Card style={{margin: 10, borderRadius: 16 }}>
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        Produto: {item.nomeProduto}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Preço: {item.preco}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Quantidade: {item.quantidade}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        Data de compra: {format(new Date(item.createdAt), 'dd/MM/yyyy')}
+                                    </Typography>
+
+                                    <Button 
+                                        variant='contained' 
+                                        color='primary' 
+                                        onClick={() => router.push(`/perfilLojista/${item.idLojista}`)}
+                                    >Ver perfil do lojista
+                                    </Button>
+                                    <Button 
+                                        variant='outlined' 
+                                        color='primary' 
+                                        onClick={() => router.push(`/produto/pagina/${item.idProduto}`)}
+                                    >Ver produto
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                  ))}
+                </Grid>
               )}
 
             </Grid>

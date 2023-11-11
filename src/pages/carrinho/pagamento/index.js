@@ -5,11 +5,17 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { persistor } from '@/redux/store';
+import { useSelector } from 'react-redux';
 import AppAppBar from '@/components/appAppBar';
+import { useDispatch } from 'react-redux';
 
 const Pagamento = () => {
     
     const router = useRouter();
+    const dispatch = useDispatch();
+    const carrinho = useSelector(state => state.carrinho);
+    const [historico, setHistorico] = useState([]);
+
     const [sessao, setSession] = useState(null);
 
     const { data: session, status } = useSession({
@@ -23,9 +29,42 @@ const Pagamento = () => {
         if (session) {
             setSession(session.user.usuario);
         }
+        
     }
     , [session])
     
+    const carrinhosItens = carrinho.carrinho.map((item) => {
+        return {
+            id: item.id,
+            idLojista: item.idLojista,
+            nomeProduto: item.nome,
+            descricao: item.descricao,
+            preco: item.preco,
+            categoria: item.categoria,
+            quantidade: item.quantidade,
+        }
+    });
+    
+    console.log(carrinhosItens)
+    
+    const idComprador = session.user.usuario.id;
+    console.log(idComprador)
+    
+    const criarHistorico = async () => {
+        const response = await fetch('/api/historico', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idComprador,
+                carrinhosItens,
+            }),
+        });
+        const data = await response.json();
+        setHistorico(data);
+    }
+
     return (
         <div>
             {session && <AppAppBar sessao={session.user.usuario} />}
@@ -77,6 +116,7 @@ const Pagamento = () => {
                         fullWidth
                         style={{ marginTop: '16px' }}
                         onClick={() => {
+                            criarHistorico()
                             persistor.purge()
                             router.push('/checkout');
                         }}

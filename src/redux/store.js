@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebarSlice';
 import produtosSlice from './produtosSlice';
 import CarrinhoSlice from './carrinhoSlice';
+import historicoComprasSlice from './historicoComprasSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -14,7 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   produtos: produtosSlice,
-  carrinho: CarrinhoSlice
+  carrinho: CarrinhoSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
