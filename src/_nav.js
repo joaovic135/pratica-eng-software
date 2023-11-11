@@ -60,6 +60,16 @@ const _nav = [
   },
   {
     component: CNavTitle,
+    name: 'Leiloes',
+  },
+  {
+    component: CNavItem,
+    name: 'Listar',
+    href: '/leilao/admin/listar',
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Informações Pessoais',
   },
   {
